@@ -377,7 +377,7 @@
     <footer class="bg-black py-8">
         <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center text-gray-400">
             <p>&copy; <span id="current-year"></span> NIRUSAKI. All rights reserved.</p>
-            <p class="text-sm mt-2">Inspired by प्रगति</p>
+            <p class="text-sm mt-2">Inspired by Netflix. Built with 🖤</p>
         </div>
     </footer>
 
@@ -463,26 +463,28 @@
 
 
             function triggerSound() {
+                console.log("Attempting to trigger sound..."); // Debug message
                 try {
-                    // Create the synth
-                    const thud = new Tone.MembraneSynth({
-                        octaves: 4,
-                        pitchDecay: 0.1
-                    }).toDestination();
-                    
-                    const chord = new Tone.PolySynth(Tone.Synth, {
-                        volume: -12,
-                        oscillator: { type: "sine" },
-                        envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.5 }
+                    // Create a "Player" for the hosted sound file
+                    const player = new Tone.Player({
+                        // FIX: Using a local relative path as requested
+                        url: "sound.mp3",
+                        autostart: true,
+                        onload: () => {
+                            console.log("Sound file loaded successfully and will play."); // Debug message
+                        },
+                        onerror: (e) => {
+                            console.error("Tone.Player Error: Could not load audio file.", e); // Error message
+                        }
                     }).toDestination();
 
-                    // Play the sound
-                    const now = Tone.now();
-                    // Schedule sound slightly after animation starts to ensure context is ready
-                    thud.triggerAttackRelease("C1", "1n", now + 0.05); // Small delay
-                    chord.triggerAttackRelease(["G3", "C4"], "1n", now + 0.20); // Small delay
+                    // Optional: clean up the player after it finishes
+                    player.onstop = () => {
+                        console.log("Playback finished, disposing player."); // Debug message
+                        player.dispose();
+                    };
                 } catch (e) {
-                    console.error("Error playing intro sound:", e);
+                    console.error("Error creating Tone.Player instance:", e); // Error message
                 }
             }
             
@@ -761,4 +763,7 @@
 
 </body>
 </html>
+
+
+
 
