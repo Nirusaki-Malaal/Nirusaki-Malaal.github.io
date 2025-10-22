@@ -154,13 +154,15 @@
             justify-content: center;
             align-items: center;
             transition: opacity 0.5s ease-out;
+            /* FIX 1: Added cursor-pointer */
+            cursor: pointer;
         }
         #loader-n {
             font-size: 15vw;
             font-weight: 900;
             color: #E50914;
             transform: scale(0.1);
-            animation: scale-up 1.5s forwards, fade-out-loader 1s 2s forwards;
+            /* FIX 1: Removed animation property. Will be triggered by JS. */
             opacity: 1;
         }
         @keyframes scale-up {
@@ -231,7 +233,8 @@
 <body class="bg-[#141414] text-white">
 
     <!-- Loader Screen -->
-    <div id="loader">
+    <!-- FIX 1: Added cursor-pointer -->
+    <div id="loader" class="cursor-pointer">
         <span id="loader-n">N</span>
     </div>
 
@@ -261,14 +264,19 @@
     <main>
 
         <!-- Hero Section -->
-        <section id="hero" class="h-screen flex items-center justify-center text-center bg-black" style="background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://placehold.co/1920x1080/1a1a1a/e0e0e0?text=Abstract+Code'); background-size: cover; background-position: center;">
-            <div class="px-4">
+        <!-- FIX 2: Replaced entire hero section for responsive background text -->
+        <section id="hero" class="relative h-screen flex items-center justify-center text-center bg-black" style="background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://placehold.co/1920x1080/1a1a1a/1a1a1a'); background-size: cover; background-position: center;">
+            <!-- Background Text Layer -->
+            <div class="absolute inset-0 flex items-center justify-center z-0 overflow-hidden" aria-hidden="true">
+                <span class="text-[20vw] md:text-[15vw] font-black text-white opacity-5 select-none">
+                    CODE
+                </span>
+            </div>
+            <!-- Foreground Content Layer -->
+            <div class="relative z-10 px-4">
                 <h2 class="text-5xl md:text-7xl font-extrabold mb-4">NIRUSAKI</h2>
                 <h3 class="text-2xl md:text-4xl text-gray-300 mb-8">Developer. Creator. Problem Solver.</h3>
-                <div class=""> <!-- Removed space-x-4 as only one button remains -->
-                    <!-- <a href="#projects" class="inline-block bg-netflix-red hover:bg-netflix-red-darker text-white font-bold py-3 px-8 rounded-md text-lg transition-all duration-300">
-                        View Projects
-                    </a> --> <!-- REMOVED THIS BUTTON -->
+                <div class="">
                     <a href="https://github.com/nirusaki-malaal" target="_blank" rel="noopener noreferrer" class="inline-block bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-md text-lg transition-all duration-300">
                         GitHub
                     </a>
@@ -299,7 +307,6 @@
                 <h2 class="text-2xl font-bold mb-6 text-center">Projects</h2>
                 <!-- This container will now hold a single button -->
                 <div id="projects-button-container" class="flex justify-center items-center py-8">
-                    <!-- FIX: Button is now enabled by default. API call happens on click. -->
                     <button id="show-projects-btn" 
                             class="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-lg text-2xl transition-all duration-300 shadow-lg transform hover:scale-105">
                         Projects
@@ -370,7 +377,7 @@
     <footer class="bg-black py-8">
         <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center text-gray-400">
             <p>&copy; <span id="current-year"></span> NIRUSAKI. All rights reserved.</p>
-            <p class="text-sm mt-2">Inspired by Netflix. Built with 🖤</p>
+            <p class="text-sm mt-2">Inspired by प्रगति</p>
         </div>
     </footer>
 
@@ -415,17 +422,42 @@
             // --- Loader & Sound Script ---
             const loader = document.getElementById('loader');
             const loaderN = document.getElementById('loader-n');
+
+            // FIX 1: Replaced old loader logic with a click-to-start experience
             
-            // Function to play sound
-            function playIntroSound() {
-                // FIX: Try to start context and play immediately, don't wait for promise
-                 if (typeof Tone !== 'undefined') {
-                    if (Tone.context.state !== 'running') {
-                        Tone.start().catch(e => console.warn("Tone.start() failed on initial try:", e)); // Try to start, don't wait
+            // Play sound and hide loader on the FIRST click anywhere on the page
+            function startExperience() {
+                // First, try to play the intro sound
+                playIntroSound();
+
+                // Then, start the fade-out animation on the 'N'
+                loaderN.style.animation = 'scale-up 1.5s forwards, fade-out-loader 1s 2s forwards';
+
+                // Hide the loader container after the animation is completely finished (3.5s total)
+                setTimeout(() => {
+                    if (loader) {
+                        loader.style.display = 'none';
                     }
-                    triggerSound(); // Trigger sound immediately
-                } else {
-                    console.warn("Tone.js not defined when playIntroSound was called.");
+                }, 3500); // 1.5s scale + 1s delay + 1s fade
+                
+                // Remove this event listener so it only runs once
+                document.body.removeEventListener('click', startExperience, { capture: true });
+            }
+            
+            // Listen for the first click on the entire body to start everything
+            document.body.addEventListener('click', startExperience, { capture: true });
+
+
+            // Function to play sound
+            async function playIntroSound() {
+                if (typeof Tone !== 'undefined') {
+                    try {
+                        // This now works because it's triggered by a user click
+                        await Tone.start(); 
+                        triggerSound();
+                    } catch (e) {
+                        console.error("Could not play intro sound:", e);
+                    }
                 }
             }
 
@@ -453,16 +485,8 @@
                     console.error("Error playing intro sound:", e);
                 }
             }
-
-            // Play sound slightly after DOM content loaded to give Tone.js a moment
-            setTimeout(playIntroSound, 50); // Small delay before trying to play
-
-            // Hide loader after animations
-            loaderN.addEventListener('animationend', (e) => {
-                if (e.animationName === 'fade-out-loader') {
-                    loader.style.display = 'none';
-                }
-            });
+            
+            // FIX 1: Removed old setTimeout and animationend listener
 
             // Set current year in footer
             document.getElementById('current-year').textContent = new Date().getFullYear();
@@ -486,11 +510,8 @@
 
         // --- GitHub API Fetch Script ---
 
-        // FIX: Remove the hardcoded project list
-        // const hardcodedProjects = [ ... ];
-
         // Store projects globally to be accessed by modal
-        let allProjects = []; // FIX: Use an empty array for caching, not the hardcoded list
+        let allProjects = []; 
 
         // Get modal elements
         const projectsModal = document.getElementById('projects-modal');
@@ -498,7 +519,7 @@
         const modalTitle = document.getElementById('modal-title');
         const modalBackBtn = document.getElementById('modal-back-btn');
         
-        // --- FIX: Setup the projects button ---
+        // --- Setup the projects button ---
         function setupProjectsButton() {
             const showProjectsBtn = document.getElementById('show-projects-btn');
             
@@ -507,7 +528,7 @@
             showProjectsBtn.addEventListener('click', onProjectsClick);
         }
 
-        // --- FIX: Handle the project button click (Revert to dynamic API call) ---
+        // --- Handle the project button click (Revert to dynamic API call) ---
         async function onProjectsClick() {
             // --- NEW: Play click sound on button press ---
             try {
@@ -619,14 +640,13 @@
             repos.forEach((repo, index) => {
                 const projectButtonHTML = `
                     <button 
-                       class="project-list-button block w-full text-left p-5 bg-zinc-800 hover:bg-zinc-700 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-[1.02]"
-                       style="animation-delay: ${index * 70}ms;"
-                       data-repo-name="${repo.name}"
+                        class="project-list-button block w-full text-left p-5 bg-zinc-800 hover:bg-zinc-700 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-[1.02]"
+                        style="animation-delay: ${index * 70}ms;"
+                        data-repo-name="${repo.name}"
                     >
                         <h4 class="text-xl font-bold text-white mb-2">${repo.name}</h4>
                         <div class="flex items-center text-sm text-zinc-400">
                             ${repo.language ? `<span class="flex items-center mr-4"><span class="w-3 h-3 ${getLanguageColor(repo.language)} rounded-full mr-1.5"></span> ${repo.language}</span>` : ''}
-                            <!-- FIX: Use correct API field names -->
                             <span class="flex items-center mr-4">${starIcon} ${repo.stargazers_count}</span>
                             <span class="flex items-center">${forkIcon} ${repo.forks_count}</span>
                         </div>
@@ -634,53 +654,8 @@
                 `;
                 modalContent.innerHTML += projectButtonHTML;
             });
-
-            // Play the "ta-dum" sound on modal open
-            try {
-                if (typeof Tone !== 'undefined' && Tone.context.state === 'running') {
-                     // REPLACED: Original "ta-dum" sound
-                     // const thud = new Tone.MembraneSynth({ octaves: 4, pitchDecay: 0.1 }).toDestination();
-                     // const chord = new Tone.PolySynth(Tone.Synth, { volume: -12, oscillator: { type: "sine" }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.5 } }).toDestination();
-                     // const now = Tone.now();
-                     // thud.triggerAttackRelease("C1", "1n", now);
-                     // chord.triggerAttackRelease(["G3", "C4"], "1n", now + 0.15);
-
-                     // NEW: Simple, satisfying click sound
-                     // MOVED this logic to onProjectsClick()
-                     /*
-                     const clickSynth = new Tone.Synth({
-                        oscillator: { type: 'sine' },
-                        envelope: { attack: 0.001, decay: 0.1, sustain: 0, release: 0.1 },
-                        volume: -10
-                     }).toDestination();
-                     clickSynth.triggerAttackRelease("C5", "8n", Tone.now());
-                     */
-
-                } else if (typeof Tone !== 'undefined') {
-                    // Fallback if context isn't running - try to start it.
-                    Tone.start().then(() => {
-                         // REPLACED: Original "ta-dum" sound
-                         // const thud = new Tone.MembraneSynth({ octaves: 4, pitchDecay: 0.1 }).toDestination();
-                         // const chord = new Tone.PolySynth(Tone.Synth, { volume: -12, oscillator: { type: "sine" }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.5 } }).toDestination();
-                         // const now = Tone.now();
-                         // thud.triggerAttackRelease("C1", "1n", now);
-                         // chord.triggerAttackRelease(["G3", "C4"], "1n", now + 0.15);
-
-                         // NEW: Simple, satisfying click sound
-                         // MOVED this logic to onProjectsClick()
-                         /*
-                         const clickSynth = new Tone.Synth({
-                            oscillator: { type: 'sine' },
-                            envelope: { attack: 0.001, decay: 0.1, sustain: 0, release: 0.1 },
-                            volume: -10
-                         }).toDestination();
-                         clickSynth.triggerAttackRelease("C5", "8n", Tone.now());
-                         */
-                    });
-                }
-            } catch (e) {
-                console.warn("Could not play sound on modal open:", e);
-            }
+            
+            // Sound logic was moved to onProjectsClick()
         }
 
         function closeProjectsModal() {
@@ -700,6 +675,21 @@
         async function handleProjectClick(event) {
             const button = event.target.closest('.project-list-button');
             if (!button) return; // Didn't click a project button
+
+            // --- FIX 3: ADD THIS SOUND LOGIC ---
+            try {
+                if (typeof Tone !== 'undefined') {
+                    const clickSynth = new Tone.Synth({
+                        oscillator: { type: 'sine' },
+                        envelope: { attack: 0.005, decay: 0.2, sustain: 0, release: 0.1 },
+                        volume: -15
+                    }).toDestination();
+                    clickSynth.triggerAttackRelease("A4", "16n", Tone.now());
+                }
+            } catch (e) {
+                console.warn("Could not play project click sound:", e);
+            }
+            // --- END OF NEW SOUND LOGIC ---
 
             const repoName = button.dataset.repoName;
             const username = 'nirusaki-malaal';
