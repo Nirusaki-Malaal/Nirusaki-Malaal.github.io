@@ -1,77 +1,757 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nirusaki Malaal - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Niru-flix Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <!-- Marked.js for README rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #141414; /* Netflix black */
+            color: #ffffff;
+        }
+
+        /* Netflix-style red */
+        .text-netflix-red {
+            color: #E50914;
+        }
+        .bg-netflix-red {
+            background-color: #E50914;
+        }
+        .bg-netflix-red-darker {
+            background-color: #B20710;
+        }
+
+        /* Custom scrollbar for project list */
+        .project-modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .project-modal-content::-webkit-scrollbar-track {
+            background: #2d2d2d;
+            border-radius: 10px;
+        }
+        .project-modal-content::-webkit-scrollbar-thumb {
+            background: #555;
+            border-radius: 10px;
+        }
+        .project-modal-content::-webkit-scrollbar-thumb:hover {
+            background: #777;
+        }
+
+        /* Glassmorphism effect for modal */
+        .glass-modal {
+            background: rgba(20, 20, 20, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Custom styles for rendered README */
+        .readme-content {
+            font-family: 'Inter', sans-serif;
+            color: #e0e0e0;
+            line-height: 1.7;
+        }
+        .readme-content h1, .readme-content h2, .readme-content h3 {
+            font-weight: 700;
+            color: #ffffff;
+            border-bottom: 1px solid #444;
+            padding-bottom: 8px;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        .readme-content h1 { font-size: 2.25rem; }
+        .readme-content h2 { font-size: 1.75rem; }
+        .readme-content h3 { font-size: 1.25rem; }
+        .readme-content p {
+            margin-bottom: 16px;
+        }
+        .readme-content a {
+            color: #3b82f6; /* Blue link */
+            text-decoration: none;
+        }
+        .readme-content a:hover {
+            text-decoration: underline;
+        }
+        .readme-content ul, .readme-content ol {
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+        .readme-content li {
+            margin-bottom: 8px;
+        }
+        .readme-content code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #2d2d2d;
+            color: #f1f1f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .readme-content pre {
+            background-color: #2d2d2d;
+            color: #f1f1f1;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 16px;
+        }
+        .readme-content pre code {
+            padding: 0;
+            background: none;
+            font-size: 0.85em;
+        }
+        .readme-content blockquote {
+            border-left: 4px solid #555;
+            padding-left: 16px;
+            margin: 0 0 16px;
+            color: #aaa;
+            font-style: italic;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 16px;
+            margin-bottom: 16px;
+        }
+        .readme-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+        }
+        .readme-content th, .readme-content td {
+            border: 1px solid #444;
+            padding: 8px 12px;
+        }
+        .readme-content th {
+            background-color: #333;
+        }
+        .readme-content tr:nth-child(even) {
+            background-color: #2d2d2d;
+        }
+
+        /* --- Loader Animation --- */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out;
+        }
+        #loader-n {
+            font-size: 15vw;
+            font-weight: 900;
+            color: #E50914;
+            transform: scale(0.1);
+            animation: scale-up 1.5s forwards, fade-out-loader 1s 2s forwards;
+            opacity: 1;
+        }
+        @keyframes scale-up {
+            from {
+                transform: scale(0.1);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        @keyframes fade-out-loader {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        /* Prevent body scroll when modal is open */
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        /* --- Project Modal Staggered Animation --- */
+        .project-list-button {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUpStaggered 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        @keyframes slideInUpStaggered {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* --- README Slide Animations --- */
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOutLeft {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(-100%); opacity: 0; }
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        
+        .slide-in-right { animation: slideInRight 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+        .slide-out-left { animation: slideOutLeft 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+        .slide-in-left { animation: slideInLeft 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+        .slide-out-right { animation: slideOutRight 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+    </style>
 </head>
-<body>
+<body class="bg-[#141414] text-white">
 
-    <header>
-        <div class="container">
-            <h1>Nirusaki Malaal</h1>
-            <p>Software Developer | Tech Enthusiast | Open Source Contributor</p>
-        </div>
-    </header>
-
-    <nav>
-        <a href="#about">About Me</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
-
-    <div class="container">
-
-        <section id="about" class="section">
-            <h2>About Me</h2>
-            <p style="text-align: center; max-width: 700px; margin: 0 auto;">
-                Hello! I'm Nirusaki Malaal, a passionate software developer with a love for creating innovative and impactful solutions. My journey in technology has been driven by a curiosity to learn and a desire to build things that make a difference. I specialize in [mention your skills or technologies, e.g., web development, machine learning, etc.] and I'm always eager to take on new challenges.
-            </p>
-        </section>
-
-        <section id="projects" class="section">
-            <h2>My Projects</h2>
-            <p style="text-align:center; margin-bottom: 30px;">Here are some of the projects I've been working on. You can find more on my <a href="https://www.github.com/nirusaki-malaal" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
-            
-            <div class="project-grid">
-                <div class="project-card">
-                    <h3>Project Name 1</h3>
-                    <p>A brief and engaging description of your project. Talk about the problem it solves and the technologies you used.</p>
-                    <a href="[Link to your GitHub repository for this project]" target="_blank" rel="noopener noreferrer">View on GitHub &rarr;</a>
-                </div>
-
-                <div class="project-card">
-                    <h3>Project Name 2</h3>
-                    <p>A brief and engaging description of your project. Talk about the problem it solves and the technologies you used.</p>
-                    <a href="[Link to your GitHub repository for this project]" target="_blank" rel="noopener noreferrer">View on GitHub &rarr;</a>
-                </div>
-
-                <div class="project-card">
-                    <h3>Project Name 3</h3>
-                    <p>A brief and engaging description of your project. Talk about the problem it solves and the technologies you used.</p>
-                    <a href="[Link to your GitHub repository for this project]" target="_blank" rel="noopener noreferrer">View on GitHub &rarr;</a>
-                </div>
-                 </div>
-        </section>
-
-        <section id="contact" class="section">
-            <h2>Get In Touch</h2>
-            <p>
-                I'm always open to discussing new projects, creative ideas, or opportunities.
-                <br>
-                Feel free to reach out to me!
-            </p>
-            <p style="margin-top: 20px;">
-                <a href="mailto:[your-email@example.com]">your-email@example.com</a>
-            </p>
-        </section>
-
+    <!-- Loader Screen -->
+    <div id="loader">
+        <span id="loader-n">N</span>
     </div>
 
-    <footer>
-        <p>&copy; 2025 Nirusaki Malaal. All Rights Reserved.</p>
+    <!-- Header -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <h1 class="text-3xl font-extrabold text-netflix-red">NIRUSAKI</h1>
+                </div>
+                <!-- Navigation Links -->
+                <div class="hidden sm:block">
+                    <div class="flex space-x-4">
+                        <a href="#hero" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#projects" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                        <a href="#skills" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Skills</a>
+                        <a href="#contact" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Hero Section -->
+        <section id="hero" class="h-screen flex items-center justify-center text-center bg-black" style="background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://placehold.co/1920x1080/1a1a1a/e0e0e0?text=Abstract+Code'); background-size: cover; background-position: center;">
+            <div class="px-4">
+                <h2 class="text-5xl md:text-7xl font-extrabold mb-4">NIRUSAKI</h2>
+                <h3 class="text-2xl md:text-4xl text-gray-300 mb-8">Developer. Creator. Problem Solver.</h3>
+                <div class=""> <!-- Removed space-x-4 as only one button remains -->
+                    <!-- <a href="#projects" class="inline-block bg-netflix-red hover:bg-netflix-red-darker text-white font-bold py-3 px-8 rounded-md text-lg transition-all duration-300">
+                        View Projects
+                    </a> --> <!-- REMOVED THIS BUTTON -->
+                    <a href="https://github.com/nirusaki-malaal" target="_blank" rel="noopener noreferrer" class="inline-block bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-md text-lg transition-all duration-300">
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Rows -->
+        <div class="py-24">
+
+            <!-- Row 0: About Me -->
+            <div id="about" class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-16">
+                <h2 class="text-3xl font-bold mb-6 text-center">About Me</h2>
+                <div class="max-w-3xl mx-auto text-center text-lg text-gray-300 space-y-4">
+                    <p>
+                        Hello! I'm Nirusaki, a passionate developer with a love for building efficient and innovative solutions.
+                        My journey in tech is driven by curiosity and a desire to solve real-world problems.
+                    </p>
+                    <p>
+                        From crafting smart Telegram bots to diving deep into systems with C++ and Linux, I enjoy the challenge of turning complex ideas into reality.
+                        This portfolio is a showcase of my work and my creative process.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Row 1: Projects -->
+            <div id="projects" class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-16">
+                <h2 class="text-2xl font-bold mb-6 text-center">Projects</h2>
+                <!-- This container will now hold a single button -->
+                <div id="projects-button-container" class="flex justify-center items-center py-8">
+                    <!-- FIX: Button is now enabled by default. API call happens on click. -->
+                    <button id="show-projects-btn" 
+                            class="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-lg text-2xl transition-all duration-300 shadow-lg transform hover:scale-105">
+                        Projects
+                    </button>
+                </div>
+            </div>
+
+            <!-- Row 2: Skills & Technologies -->
+            <div id="skills" class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-center">Skills & Technologies</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                    <!-- Skill Card 1: Python -->
+                    <div class="bg-zinc-800 p-6 rounded-lg shadow-lg flex flex-col items-center justify-center text-center transition-all duration-300 hover:bg-zinc-700 hover:scale-105">
+                        <svg class="w-16 h-16 mb-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        <h3 class="text-xl font-bold">Python</h3>
+                    </div>
+                    <!-- Skill Card 2: C++ -->
+                    <div class="bg-zinc-800 p-6 rounded-lg shadow-lg flex flex-col items-center justify-center text-center transition-all duration-300 hover:bg-zinc-700 hover:scale-105">
+                        <svg class="w-16 h-16 mb-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg> <!-- Placeholder icon -->
+                        <h3 class="text-xl font-bold">C++</h3>
+                    </div>
+                    <!-- Skill Card 3: Linux -->
+                    <div class="bg-zinc-800 p-6 rounded-lg shadow-lg flex flex-col items-center justify-center text-center transition-all duration-300 hover:bg-zinc-700 hover:scale-105">
+                        <svg class="w-16 h-16 mb-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> <!-- Placeholder icon -->
+                        <h3 class="text-xl font-bold">Linux</h3>
+                    </div>
+                    <!-- Skill Card 4: Telegram Bots -->
+                    <div class="bg-zinc-800 p-6 rounded-lg shadow-lg flex flex-col items-center justify-center text-center transition-all duration-300 hover:bg-zinc-700 hover:scale-105">
+                        <svg class="w-16 h-16 mb-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                        <h3 class="text-xl font-bold">Telegram Bots</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 3: Contact -->
+            <div id="contact" class="container mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-bold mb-6">Get In Touch</h2>
+                <p class="text-lg text-gray-300 mb-8">
+                    Interested in collaborating or just want to say hi? <br/> My inbox is always open.
+                </p>
+                <a href="mailto:nirusaki.malaal@gmail.com" class="inline-block bg-netflix-red hover:bg-netflix-red-darker text-white font-bold py-3 px-8 rounded-md text-lg transition-all duration-300">
+                    Email Me
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8">
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+            <p>&copy; <span id="current-year"></span> NIRUSAKI. All rights reserved.</p>
+            <p class="text-sm mt-2">Inspired by Netflix. Built with 🖤</p>
+        </div>
     </footer>
+
+    <!-- Project Modal -->
+    <div id="projects-modal" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4">
+        <!-- Modal Backdrop -->
+        <div class="fixed inset-0 bg-black/70 backdrop-blur-sm" onclick="closeProjectsModal()"></div>
+        
+        <!-- Modal Content -->
+        <div class="glass-modal relative w-full max-w-3xl h-[85vh] rounded-xl shadow-2xl flex flex-col overflow-hidden">
+            <!-- Modal Header -->
+            <div class="flex-shrink-0 flex items-center justify-between p-4 md:p-6 border-b border-zinc-700">
+                <!-- Back Button (for README view) -->
+                <button id="modal-back-btn" class="hidden text-zinc-300 hover:text-white transition-all">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                
+                <h3 id="modal-title" class="text-2xl font-bold text-white text-center flex-1">Projects</h3>
+                
+                <!-- Close Button -->
+                <button onclick="closeProjectsModal()" class="text-zinc-400 hover:text-white transition-all rounded-full p-1">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <!-- Project Content Area (Scrollable) -->
+            <div id="project-modal-content" class="project-modal-content flex-1 overflow-y-auto p-6 md:p-8 space-y-4">
+                <!-- Dynamic project "buttons" will be injected here -->
+                <!-- Or a loading spinner / error message -->
+                <!-- Or README content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Tone.js (at the end of body) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+    
+    <!-- Main JS Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Loader & Sound Script ---
+            const loader = document.getElementById('loader');
+            const loaderN = document.getElementById('loader-n');
+            
+            // Function to play sound
+            function playIntroSound() {
+                if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
+                    // Start the audio context on any user interaction
+                    Tone.start().then(() => {
+                        console.log("Audio context started.");
+                        triggerSound();
+                    }).catch(e => {
+                        console.warn("Tone.start() failed, will try again on click.", e);
+                    });
+                } else if (typeof Tone !== 'undefined') {
+                    triggerSound();
+                } else {
+                    console.warn("Tone.js not defined when playIntroSound was called.");
+                }
+            }
+
+            function triggerSound() {
+                try {
+                    // Create the synth
+                    const thud = new Tone.MembraneSynth({
+                        octaves: 4,
+                        pitchDecay: 0.1
+                    }).toDestination();
+                    
+                    const chord = new Tone.PolySynth(Tone.Synth, {
+                        volume: -12,
+                        oscillator: { type: "sine" },
+                        envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.5 }
+                    }).toDestination();
+
+                    // Play the sound
+                    const now = Tone.now();
+                    thud.triggerAttackRelease("C1", "1n", now);
+                    chord.triggerAttackRelease(["G3", "C4"], "1n", now + 0.15);
+                } catch (e) {
+                    console.error("Error playing intro sound:", e);
+                }
+            }
+
+            // Play sound as animation starts
+            playIntroSound();
+
+            // Hide loader after animations
+            loaderN.addEventListener('animationend', (e) => {
+                if (e.animationName === 'fade-out-loader') {
+                    loader.style.display = 'none';
+                }
+            });
+
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // --- Load GitHub Projects ---
+            // Setup the button listener
+            setupProjectsButton();
+        });
+
+        // --- Navbar Scroll Script ---
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
+                header.style.backgroundColor = 'rgba(20, 20, 20, 0.9)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.backgroundColor = 'transparent';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // --- GitHub API Fetch Script ---
+
+        // FIX: Remove the hardcoded project list
+        // const hardcodedProjects = [ ... ];
+
+        // Store projects globally to be accessed by modal
+        let allProjects = []; // FIX: Use an empty array for caching, not the hardcoded list
+
+        // Get modal elements
+        const projectsModal = document.getElementById('projects-modal');
+        const modalContent = document.getElementById('project-modal-content');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBackBtn = document.getElementById('modal-back-btn');
+        
+        // --- FIX: Setup the projects button ---
+        function setupProjectsButton() {
+            const showProjectsBtn = document.getElementById('show-projects-btn');
+            
+            // Button is styled as active in HTML.
+            // We just add the click listener.
+            showProjectsBtn.addEventListener('click', onProjectsClick);
+        }
+
+        // --- FIX: Handle the project button click (Revert to dynamic API call) ---
+        async function onProjectsClick() {
+            // --- NEW: Play click sound on button press ---
+            try {
+                if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
+                    // Try to start the audio context if it's not already running
+                    await Tone.start();
+                    console.log("Audio context started on click.");
+                }
+                
+                if (typeof Tone !== 'undefined') {
+                    // Play the simple click sound
+                    const clickSynth = new Tone.Synth({
+                        oscillator: { type: 'sine' },
+                        envelope: { attack: 0.001, decay: 0.1, sustain: 0, release: 0.1 },
+                        volume: -10
+                    }).toDestination();
+                    clickSynth.triggerAttackRelease("C5", "8n", Tone.now());
+                }
+            } catch (e) {
+                console.warn("Could not play click sound:", e);
+            }
+            // --- END NEW SOUND LOGIC ---
+
+            // 1. Open the modal immediately
+            projectsModal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+
+            // 2. Check if projects are already cached
+            if (allProjects.length > 0) {
+                populateProjectList(allProjects); // Show cached list
+                return;
+            }
+
+            // 3. If not cached, show loading state *inside* modal
+            modalTitle.textContent = 'Loading Projects...';
+            modalBackBtn.classList.add('hidden');
+            modalContent.innerHTML = `
+                <div class="flex justify-center items-center h-full p-16">
+                    <svg class="animate-spin -ml-1 mr-3 h-10 w-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span class="text-xl text-zinc-300">Fetching projects...</span>
+                </div>
+            `;
+            
+            // 4. Try to fetch projects
+            const username = 'nirusaki-malaal';
+            const repoListUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc&per_page=10`;
+
+            try {
+                const repoListResponse = await fetch(repoListUrl);
+                if (!repoListResponse.ok) {
+                    throw new Error(`GitHub API (list) responded with ${repoListResponse.status}`);
+                }
+                const repos = await repoListResponse.json();
+
+                if (repos.length === 0) {
+                    modalTitle.textContent = 'Projects';
+                    modalContent.innerHTML = `<p class="text-center text-zinc-300">No projects found.</p>`;
+                    return;
+                }
+
+                allProjects = repos; // Cache the result
+                populateProjectList(repos); // Populate the modal
+
+            } catch (error) {
+                console.error('Failed to load GitHub projects:', error);
+                // 5. Show error *inside* modal
+                modalTitle.textContent = 'Error';
+                modalContent.innerHTML = `
+                    <div class="text-center p-8">
+                        <h3 class="text-2xl font-bold text-red-500 mb-4">Error Loading Projects</h3>
+                        <p class="text-zinc-300">Failed to fetch projects from GitHub. This is likely due to the GitHub API rate limit (Error 403) on this server.</p>
+                        <p class="text-zinc-400 mt-2">Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Helper function to get common language colors (simplified)
+        function getLanguageColor(language) {
+            const colors = {
+                'Python': 'bg-blue-500',
+                'JavaScript': 'bg-yellow-500',
+                'C++': 'bg-blue-700',
+                'HTML': 'bg-orange-500',
+                'CSS': 'bg-blue-400',
+                'TypeScript': 'bg-blue-600',
+                'Shell': 'bg-green-400',
+            };
+            return colors[language] || 'bg-gray-500';
+        }
+
+        // --- Project Modal Functions ---
+        
+        // This function now *only* populates content, it doesn't open/close.
+        function populateProjectList(repos) {
+            // Reset modal to project list view
+            modalTitle.textContent = 'Projects';
+            modalBackBtn.classList.add('hidden');
+            modalContent.innerHTML = ''; // Clear previous content (spinner or error)
+
+            // Simple SVG icons for stats
+            const starIcon = `<svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.61L7.327.668A.75.75 0 018 .25z"></path></svg>`;
+            const forkIcon = `<svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zM10.75 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm-3.75 9.5a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"></path></svg>`;
+
+            // Populate the list
+            repos.forEach((repo, index) => {
+                const projectButtonHTML = `
+                    <button 
+                       class="project-list-button block w-full text-left p-5 bg-zinc-800 hover:bg-zinc-700 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-[1.02]"
+                       style="animation-delay: ${index * 70}ms;"
+                       data-repo-name="${repo.name}"
+                    >
+                        <h4 class="text-xl font-bold text-white mb-2">${repo.name}</h4>
+                        <div class="flex items-center text-sm text-zinc-400">
+                            ${repo.language ? `<span class="flex items-center mr-4"><span class="w-3 h-3 ${getLanguageColor(repo.language)} rounded-full mr-1.5"></span> ${repo.language}</span>` : ''}
+                            <!-- FIX: Use correct API field names -->
+                            <span class="flex items-center mr-4">${starIcon} ${repo.stargazers_count}</span>
+                            <span class="flex items-center">${forkIcon} ${repo.forks_count}</span>
+                        </div>
+                    </button>
+                `;
+                modalContent.innerHTML += projectButtonHTML;
+            });
+
+            // Play the "ta-dum" sound on modal open
+            try {
+                if (typeof Tone !== 'undefined' && Tone.context.state === 'running') {
+                     // REPLACED: Original "ta-dum" sound
+                     // const thud = new Tone.MembraneSynth({ octaves: 4, pitchDecay: 0.1 }).toDestination();
+                     // const chord = new Tone.PolySynth(Tone.Synth, { volume: -12, oscillator: { type: "sine" }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.5 } }).toDestination();
+                     // const now = Tone.now();
+                     // thud.triggerAttackRelease("C1", "1n", now);
+                     // chord.triggerAttackRelease(["G3", "C4"], "1n", now + 0.15);
+
+                     // NEW: Simple, satisfying click sound
+                     // MOVED this logic to onProjectsClick()
+                     /*
+                     const clickSynth = new Tone.Synth({
+                        oscillator: { type: 'sine' },
+                        envelope: { attack: 0.001, decay: 0.1, sustain: 0, release: 0.1 },
+                        volume: -10
+                     }).toDestination();
+                     clickSynth.triggerAttackRelease("C5", "8n", Tone.now());
+                     */
+
+                } else if (typeof Tone !== 'undefined') {
+                    // Fallback if context isn't running - try to start it.
+                    Tone.start().then(() => {
+                         // REPLACED: Original "ta-dum" sound
+                         // const thud = new Tone.MembraneSynth({ octaves: 4, pitchDecay: 0.1 }).toDestination();
+                         // const chord = new Tone.PolySynth(Tone.Synth, { volume: -12, oscillator: { type: "sine" }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.5 } }).toDestination();
+                         // const now = Tone.now();
+                         // thud.triggerAttackRelease("C1", "1n", now);
+                         // chord.triggerAttackRelease(["G3", "C4"], "1n", now + 0.15);
+
+                         // NEW: Simple, satisfying click sound
+                         // MOVED this logic to onProjectsClick()
+                         /*
+                         const clickSynth = new Tone.Synth({
+                            oscillator: { type: 'sine' },
+                            envelope: { attack: 0.001, decay: 0.1, sustain: 0, release: 0.1 },
+                            volume: -10
+                         }).toDestination();
+                         clickSynth.triggerAttackRelease("C5", "8n", Tone.now());
+                         */
+                    });
+                }
+            } catch (e) {
+                console.warn("Could not play sound on modal open:", e);
+            }
+        }
+
+        function closeProjectsModal() {
+            projectsModal.classList.add('hidden');
+            document.body.classList.remove('modal-open');
+            
+            // Reset modal to default state
+            setTimeout(() => {
+                modalTitle.textContent = 'Projects';
+                modalBackBtn.classList.add('hidden');
+                modalContent.innerHTML = ''; // Clear content
+                modalContent.classList.remove('readme-content');
+            }, 300); // Wait for fade-out
+        }
+
+        // --- Handle Clicks INSIDE the modal ---
+        async function handleProjectClick(event) {
+            const button = event.target.closest('.project-list-button');
+            if (!button) return; // Didn't click a project button
+
+            const repoName = button.dataset.repoName;
+            const username = 'nirusaki-malaal';
+            // Use GitHub API to get README content
+            const readmeUrl = `https://api.github.com/repos/${username}/${repoName}/readme`;
+            const repoUrl = `https://github.com/${username}/${repoName}`;
+
+            // Show loading state
+            modalTitle.textContent = "Loading README...";
+            modalContent.innerHTML = `
+                <div class="flex justify-center items-center h-full p-16">
+                    <svg class="animate-spin -ml-1 mr-3 h-10 w-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </div>
+            `;
+
+            try {
+                const response = await fetch(readmeUrl, {
+                    headers: { 'Accept': 'application/vnd.github.v3.raw' }
+                });
+
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        throw new Error('README not found (404)');
+                    } else {
+                        throw new Error(`API error: ${response.status}`);
+                    }
+                }
+
+                const readmeMarkdown = await response.text();
+                
+                // --- Dummy README Check ---
+                if (readmeMarkdown.length < 150) {
+                    throw new Error('Dummy README file (too short)');
+                }
+
+                // --- Success: Show README ---
+                const readmeHtml = marked.parse(readmeMarkdown);
+                
+                modalTitle.textContent = repoName;
+                modalBackBtn.classList.remove('hidden');
+                
+                // Animate out the spinner, animate in the content
+                modalContent.innerHTML = ''; // Clear spinner
+                modalContent.classList.add('readme-content', 'slide-in-right');
+                modalContent.innerHTML = readmeHtml;
+                // Scroll to top of new content
+                modalContent.scrollTop = 0;
+
+            } catch (error) {
+                // --- Failure: Redirect to GitHub ---
+                console.warn(`Failed to fetch or parse README for ${repoName}: ${error.message}`);
+                window.open(repoUrl, '_blank');
+                closeProjectsModal();
+            }
+        }
+        
+        // Add event listeners
+        modalContent.addEventListener('click', handleProjectClick);
+        // Add click listener for the back button
+        modalBackBtn.addEventListener('click', () => {
+            modalContent.classList.remove('readme-content', 'slide-in-right');
+            populateProjectList(allProjects); 
+        });
+        
+    </script>
 
 </body>
 </html>
