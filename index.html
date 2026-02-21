@@ -15,11 +15,14 @@
     <link rel="alternate" href="https://nirusaki-malaal.github.io/" hreflang="en-in">
     
     <!-- Primary SEO -->
-    <title>Nirusaki (ニルサキ) | Python Developer, Automation Engineer & Linux Enthusiast Portfolio</title>
-    <meta name="description" content="Portfolio of Nirusaki (ニルサキ), a Python developer and automation engineer specializing in Telegram bots, web scraping, video encoding pipelines, and Arch Linux utilities. View 13+ open source projects on GitHub.">
-    <meta name="keywords" content="Nirusaki, ニルサキ, Python developer portfolio, automation engineer, Telegram bot developer, Arch Linux, Flask developer, MongoDB, web scraping, video encoder, GitHub portfolio, C++ developer, JavaScript developer, Pyrogram, Ubuntu server, open source contributor">
+    <title>Nirusaki Portfolio</title>
+    <meta name="description" content="Nirusaki Portfolio showcases Nirusaki's Python, automation, and open-source projects including Telegram bots, web tools, and Linux utilities.">
+    <meta name="keywords" content="Nirusaki, nirusaki portfolio, ニルサキ, Python developer portfolio, automation engineer, Telegram bot developer, Arch Linux, Flask developer, MongoDB, web scraping, video encoder, GitHub portfolio, C++ developer, JavaScript developer, Pyrogram, Ubuntu server, open source contributor">
     <meta name="author" content="Nirusaki">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+    <meta name="theme-color" content="#050505">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="language" content="English">
     
     <!-- Dublin Core Metadata -->
@@ -34,7 +37,7 @@
     <meta property="og:profile:last_name" content="Malaal">
     <meta property="og:profile:username" content="nirusaki-malaal">
     <meta property="og:url" content="https://nirusaki-malaal.github.io/">
-    <meta property="og:title" content="Nirusaki | Python Developer & Code Shinobi">
+    <meta property="og:title" content="Nirusaki Portfolio">
     <meta property="og:description" content="Digital ninja specializing in Python automation, Telegram bots (Pyrogram), video encoding pipelines, and Arch Linux utilities. 13+ repositories of developer tools.">
     <meta property="og:image" content="https://avatars.githubusercontent.com/u/213580728?v=4&s=1200">
     <meta property="og:image:width" content="1200">
@@ -44,7 +47,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@nirusaki">
-    <meta name="twitter:title" content="Nirusaki | Python Developer & Automation Engineer">
+    <meta name="twitter:title" content="Nirusaki Portfolio">
     <meta name="twitter:description" content="Code shinobi crafting Python automation tools, Telegram bots, and Linux utilities. View portfolio of video encoders, web scrapers, and developer tools.">
     <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/213580728?v=4&s=1200">
     
@@ -163,6 +166,38 @@
     }
     </script>
 
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Nirusaki Portfolio",
+      "url": "https://nirusaki-malaal.github.io/",
+      "description": "Official portfolio website of Nirusaki featuring software projects, technical skills, and development work.",
+      "inLanguage": "en"
+    }
+    </script>
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Nirusaki Project Case Studies",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"video-encoder","url":"https://nirusaki-malaal.github.io/projects/video-encoder.html"},
+        {"@type":"ListItem","position":2,"name":"nith-results-website","url":"https://nirusaki-malaal.github.io/projects/nith-results.html"},
+        {"@type":"ListItem","position":3,"name":"Auto-Rename","url":"https://nirusaki-malaal.github.io/projects/auto-rename.html"},
+        {"@type":"ListItem","position":4,"name":"gdrive-uploader-bot","url":"https://nirusaki-malaal.github.io/projects/gdrive-bot.html"},
+        {"@type":"ListItem","position":5,"name":"auto-airing-animes","url":"https://nirusaki-malaal.github.io/projects/airing-anime.html"},
+        {"@type":"ListItem","position":6,"name":"Music-Name-Parser","url":"https://nirusaki-malaal.github.io/projects/music-parser.html"},
+        {"@type":"ListItem","position":7,"name":"image-compressor-website","url":"https://nirusaki-malaal.github.io/projects/image-compressor.html"},
+        {"@type":"ListItem","position":8,"name":"DSA","url":"https://nirusaki-malaal.github.io/projects/dsa.html"},
+        {"@type":"ListItem","position":9,"name":"template-bot","url":"https://nirusaki-malaal.github.io/projects/template-bot.html"}
+      ]
+    }
+    </script>
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Rajdhani:wght@300;500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     
@@ -198,146 +233,8 @@
         }
     </script>
     
-    <style>
-        body {
-            background-color: #050505;
-            color: #ffffff;
-            overflow-x: hidden;
-            cursor: none;
-        }
-        
-        .cursor-dot, .cursor-outline {
-            position: fixed;
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: 9999;
-            pointer-events: none;
-        }
-        
-        .cursor-dot { width: 5px; height: 5px; background-color: #00f5ff; }
-        .cursor-outline {
-            width: 30px; height: 30px;
-            border: 2px solid rgba(0, 245, 255, 0.5);
-            transition: all 0.2s ease;
-        }
-        .cursor-outline.hover {
-            width: 50px; height: 50px;
-            background-color: rgba(255, 0, 110, 0.1);
-            border-color: #ff006e;
-        }
-        
-        .glitch-text { position: relative; }
-        .glitch-text::before, .glitch-text::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-        }
-        .glitch-text::before {
-            left: 2px;
-            text-shadow: -2px 0 #ff006e;
-            animation: glitch-anim 5s infinite linear alternate-reverse;
-        }
-        .glitch-text::after {
-            left: -2px;
-            text-shadow: -2px 0 #00f5ff;
-            animation: glitch-anim2 5s infinite linear alternate-reverse;
-        }
-        @keyframes glitch-anim {
-            0% { clip: rect(31px, 9999px, 94px, 0); }
-            20% { clip: rect(78px, 9999px, 23px, 0); }
-            100% { clip: rect(67px, 9999px, 89px, 0); }
-        }
-        @keyframes glitch-anim2 {
-            0% { clip: rect(65px, 9999px, 99px, 0); }
-            100% { clip: rect(12px, 9999px, 67px, 0); }
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, #00f5ff 0%, #b026ff 50%, #ff006e 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        .glass-card:hover {
-            border-color: rgba(0, 245, 255, 0.5);
-            box-shadow: 0 0 30px rgba(0, 245, 255, 0.2);
-            transform: translateY(-5px);
-        }
-        
-        .scanline {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.1) 50%);
-            background-size: 100% 4px;
-            pointer-events: none;
-            z-index: 9998;
-            opacity: 0.3;
-        }
-        
-        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #00f5ff, #ff006e); border-radius: 5px; }
-        
-        .neon-btn {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-        .neon-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: 0.5s;
-        }
-        .neon-btn:hover::before { left: 100%; }
-        .neon-btn:hover {
-            box-shadow: 0 0 20px rgba(0, 245, 255, 0.6);
-            text-shadow: 0 0 10px rgba(0, 245, 255, 0.8);
-        }
-        
-        .project-card { transition: all 0.3s ease; }
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.1);
-        }
-        
-        .skip-to-content {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: #00f5ff;
-            color: black;
-            padding: 8px;
-            text-decoration: none;
-            z-index: 100;
-        }
-        .skip-to-content:focus { top: 0; }
-        
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+
 </head>
 
 <body class="font-body antialiased selection:bg-neon-pink selection:text-white">
@@ -492,7 +389,7 @@
                         <h2 id="projects-heading" class="font-display text-4xl md:text-6xl font-bold mb-2">PROJECTS <span class="text-neon-cyan">//</span></h2>
                         <div class="font-jp text-gray-500 text-sm tracking-widest">実際のプロジェクト</div>
                     </div>
-                    <a href="https://github.com/nirusaki-malaal?tab=repositories" target="_blank" rel="noopener noreferrer author" class="mt-6 md:mt-0 text-neon-pink hover:text-white transition-colors flex items-center gap-2">View All <span class="text-xl">→</span></a>
+                    <a href="/projects/" rel="author" class="mt-6 md:mt-0 text-neon-pink hover:text-white transition-colors flex items-center gap-2">View All <span class="text-xl">→</span></a>
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid" role="list">
@@ -514,264 +411,6 @@
         </div>
     </footer>
 
-    <script>
-        // ALL 9 PROJECTS FROM GITHUB - FULLY RESTORED
-        const githubProjects = [
-            {
-                id: "video-encoder",
-                name: "video-encoder",
-                description: "Queue Based Encoder Saves Data in a Mongo DB database works even after restart can be run even from a linux live environment",
-                language: "Python",
-                stars: 3,
-                updated: "2025-12-31",
-                homepage: "",
-                html_url: "https://github.com/Nirusaki-Malaal/video-encoder",
-                color: "neon-pink",
-                gradient: "linear-gradient(135deg, #ff006e 0%, #8338ec 100%)"
-            },
-            {
-                id: "nith-results",
-                name: "nith-results-website",
-                description: "NITH Results Portal - Student result checking system with modern UI deployed on Vercel",
-                language: "JavaScript",
-                stars: 0,
-                forks: 0,
-                updated: "2026-01-28",
-                homepage: "https://result-nith-black.vercel.app/",
-                html_url: "https://github.com/Nirusaki-Malaal/nith-results-website",
-                color: "neon-cyan",
-                gradient: "linear-gradient(135deg, #00f5ff 0%, #b026ff 100%)"
-            },
-            {
-                id: "auto-rename",
-                name: "Auto-Rename",
-                description: "Automatically renames entertainment content with proper syntax and formatting",
-                language: "Python",
-                stars: 1,
-                forks: 0,
-                updated: "2025-10-22",
-                homepage: null,
-                html_url: "https://github.com/Nirusaki-Malaal/Auto-Rename",
-                color: "neon-purple",
-                gradient: "linear-gradient(135deg, #b026ff 0%, #ff006e 100%)"
-            },
-            {
-                id: "gdrive-bot",
-                name: "gdrive-uploader-bot",
-                description: "Uploads Files From Telegram To Google Drive seamlessly with progress tracking",
-                language: "Python",
-                stars: 1,
-                forks: 0,
-                updated: "2025-10-22",
-                homepage: null,
-                html_url: "https://github.com/Nirusaki-Malaal/gdrive-uploader-bot",
-                color: "neon-cyan",
-                gradient: "linear-gradient(135deg, #00f5ff 0%, #3a86ff 100%)"
-            },
-            {
-                id: "airing-anime",
-                name: "auto-airing-animes",
-                description: "Automated tracker for currently airing anime series with smart notifications",
-                language: "Python",
-                stars: 1,
-                forks: 0,
-                updated: "2026-01-04",
-                homepage: null,
-                html_url: "https://github.com/Nirusaki-Malaal/auto-airing-animes",
-                color: "neon-pink",
-                gradient: "linear-gradient(135deg, #ff006e 0%, #fb5607 100%)"
-            },
-            {
-                id: "music-parser",
-                name: "Music-Name-Parser",
-                description: "Parses and organizes music file metadata automatically with regex patterns",
-                language: "Python",
-                stars: 0,
-                forks: 0,
-                updated: "2026-01-16",
-                homepage: null,
-                html_url: "https://github.com/Nirusaki-Malaal/Music-Name-Parser",
-                color: "neon-purple",
-                gradient: "linear-gradient(135deg, #8338ec 0%, #00f5ff 100%)"
-            },
-            {
-                id: "image-compressor",
-                name: "image-compressor-website",
-                description: "Web-based image compression tool with client-side processing capabilities",
-                language: "CSS",
-                stars: 0,
-                forks: 0,
-                updated: "2026-01-21",
-                homepage: null,
-                html_url: "https://github.com/Nirusaki-Malaal/image-compressor-website",
-                color: "neon-cyan",
-                gradient: "linear-gradient(135deg, #3a86ff 0%, #00f5ff 100%)"
-            },
-            {
-                id: "dsa",
-                name: "DSA",
-                description: "Data Structures & Algorithms practice repository - C++ implementations for NITH",
-                language: "C++",
-                stars: 1,
-                forks: 0,
-                updated: "2026-01-09",
-                homepage: null,
-                html_url: "https://github.com/Nirusaki-Malaal/DSA",
-                color: "neon-pink",
-                gradient: "linear-gradient(135deg, #ff006e 0%, #3a86ff 100%)"
-            },
-            {
-                id: "template-bot",
-                name: "template-bot",
-                description: "Starter template for building Telegram bots with Python and Pyrogram framework",
-                language: "Python",
-                stars: 0,
-                forks: 0,
-                updated: "2026-01-01",
-                homepage: null,
-                html_url: "https://github.com/Nirusaki-Malaal/template-bot",
-                color: "neon-purple",
-                gradient: "linear-gradient(135deg, #b026ff 0%, #ff006e 100%)"
-            }
-        ];
-
-        const langColors = {
-            'Python': 'text-yellow-400 border-yellow-400',
-            'JavaScript': 'text-yellow-300 border-yellow-300',
-            'C++': 'text-blue-600 border-blue-600',
-            'C': 'text-gray-400 border-gray-400',
-            'HTML': 'text-orange-500 border-orange-500',
-            'CSS': 'text-blue-500 border-blue-500',
-            'Java': 'text-orange-400 border-orange-400'
-        };
-
-        const projectsGrid = document.getElementById('projects-grid');
-        
-        githubProjects.forEach((project, index) => {
-            const card = document.createElement('article');
-            card.className = 'project-card glass-card group cursor-pointer hover-target flex flex-col h-full';
-            card.setAttribute('role', 'listitem');
-            card.setAttribute('aria-label', `${project.name} - ${project.description}`);
-            card.setAttribute('itemscope', '');
-            card.setAttribute('itemtype', 'https://schema.org/SoftwareSourceCode');
-            card.setAttribute('itemprop', 'itemListElement');
-            
-            const langClass = langColors[project.language] || 'text-gray-500 border-gray-500';
-            
-            card.innerHTML = `
-                <meta itemprop="name" content="${project.name}">
-                <meta itemprop="description" content="${project.description}">
-                <meta itemprop="programmingLanguage" content="${project.language}">
-                <meta itemprop="codeRepository" content="${project.html_url}">
-                <meta itemprop="dateModified" content="${project.updated}">
-                <meta itemprop="position" content="${index + 1}">
-                ${project.stars > 0 ? `<div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating" class="hidden"><meta itemprop="ratingValue" content="5"><meta itemprop="reviewCount" content="${project.stars}"></div>` : ''}
-                
-                <div class="h-2 w-full" style="background: ${project.gradient};"></div>
-                <div class="p-6 flex-1 flex flex-col">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="font-display text-xl font-bold group-hover:text-${project.color} transition-colors line-clamp-1">${project.name}</h3>
-                        ${project.homepage ? `<a href="${project.homepage}" target="_blank" rel="noopener" class="text-xs text-neon-cyan border border-neon-cyan px-2 py-1 rounded hover:bg-neon-cyan hover:text-black transition-all" onclick="event.stopPropagation();">LIVE ↗</a>` : ''}
-                    </div>
-                    <p class="text-gray-400 text-sm mb-4 line-clamp-2 flex-1">${project.description}</p>
-                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/10">
-                        <div class="flex items-center gap-3">
-                            <span class="text-xs px-2 py-1 border rounded ${langClass}">${project.language}</span>
-                            ${project.stars > 0 ? `<span class="text-xs text-gray-400 flex items-center gap-1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>${project.stars}</span>` : ''}
-                        </div>
-                        <time class="text-xs text-gray-500 font-mono" datetime="${project.updated}">${new Date(project.updated).toLocaleDateString()}</time>
-                    </div>
-                </div>
-                <a href="${project.html_url}" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-10" aria-label="View ${project.name} on GitHub"></a>
-            `;
-            projectsGrid.appendChild(card);
-        });
-
-        // Three.js Background
-        const canvas = document.getElementById('bg-canvas');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        
-        const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 1500;
-        const posArray = new Float32Array(particlesCount * 3);
-        for(let i = 0; i < particlesCount * 3; i++) posArray[i] = (Math.random() - 0.5) * 50;
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        
-        const particlesMaterial = new THREE.PointsMaterial({ size: 0.02, color: 0x00f5ff, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending });
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particlesMesh);
-        camera.position.z = 5;
-        
-        let mouseX = 0, mouseY = 0;
-        document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-            
-            const cursorDot = document.querySelector('.cursor-dot');
-            const cursorOutline = document.querySelector('.cursor-outline');
-            cursorDot.style.left = `${event.clientX}px`;
-            cursorDot.style.top = `${event.clientY}px`;
-            cursorOutline.animate({ left: `${event.clientX}px`, top: `${event.clientY}px` }, { duration: 500, fill: "forwards" });
-        });
-        
-        document.querySelectorAll('.hover-target').forEach(el => {
-            el.addEventListener('mouseenter', () => document.querySelector('.cursor-outline').classList.add('hover'));
-            el.addEventListener('mouseleave', () => document.querySelector('.cursor-outline').classList.remove('hover'));
-        });
-        
-        let rafId;
-        function animate() {
-            rafId = requestAnimationFrame(animate);
-            particlesMesh.rotation.x += 0.0005 + mouseY * 0.0005;
-            particlesMesh.rotation.y += 0.0005 + mouseX * 0.0005;
-            renderer.render(scene, camera);
-        }
-        animate();
-        
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-        
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) cancelAnimationFrame(rafId);
-            else animate();
-        });
-        
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.utils.toArray('section, article').forEach((section) => {
-            gsap.from(section.children, {
-                scrollTrigger: { trigger: section, start: 'top 85%', toggleActions: 'play none none reverse' },
-                y: 50, opacity: 0, duration: 1, stagger: 0.2, ease: 'power3.out'
-            });
-        });
-        
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const isHidden = menu.classList.contains('hidden');
-            if (isHidden) {
-                menu.classList.remove('hidden');
-                menu.classList.add('flex');
-                document.body.style.overflow = 'hidden';
-            } else {
-                menu.classList.remove('flex');
-                menu.classList.add('hidden');
-                document.body.style.overflow = '';
-            }
-        }
-        
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-    </script>
+    <script src="script.js" defer></script>
 </body>
 </html>
