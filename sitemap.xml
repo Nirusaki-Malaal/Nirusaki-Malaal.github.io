@@ -1,14 +1,57 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://nirusaki-malaal.github.io/</loc></url>
-  <url><loc>https://nirusaki-malaal.github.io/projects/</loc></url>
-  <url><loc>https://nirusaki-malaal.github.io/projects/video-encoder.html</loc></url>
-  <url><loc>https://nirusaki-malaal.github.io/projects/nith-results.html</loc></url>
-  <url><loc>https://nirusaki-malaal.github.io/projects/auto-rename.html</loc></url>
-  <url><loc>https://nirusaki-malaal.github.io/projects/gdrive-bot.html</loc></url>
-  <url><loc>https://nirusaki-malaal.github.io/projects/airing-anime.html</loc></url>
-  <url><loc>https://nirusaki-malaal.github.io/projects/music-parser.html</loc></url>
-  <url><loc>https://nirusaki-malaal.github.io/projects/image-compressor.html</loc></url>
-  <url><loc>https://nirusaki-malaal.github.io/projects/dsa.html</loc></url>
-  <url><loc>https://nirusaki-malaal.github.io/projects/template-bot.html</loc></url>
+<urlset xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+<loc>https://nirusaki.me/</loc>
+<lastmod>2026-02-21T06:43:37+00:00</lastmod>
+<priority>1.00</priority>
+</url>
+<url>
+<loc>https://nirusaki.me/projects/</loc>
+<lastmod>2026-02-21T06:43:37+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://nirusaki.me/projects/video-encoder.html</loc>
+<lastmod>2026-02-21T06:43:37+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://nirusaki.me/projects/nith-results.html</loc>
+<lastmod>2026-02-21T06:43:37+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://nirusaki.me/projects/auto-rename.html</loc>
+<lastmod>2026-02-21T06:43:37+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://nirusaki.me/projects/gdrive-bot.html</loc>
+<lastmod>2026-02-21T06:43:37+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://nirusaki.me/projects/airing-anime.html</loc>
+<lastmod>2026-02-21T06:43:37+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://nirusaki.me/projects/music-parser.html</loc>
+<lastmod>2026-02-21T06:43:37+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://nirusaki.me/projects/image-compressor.html</loc>
+<lastmod>2026-02-21T06:43:37+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://nirusaki.me/projects/dsa.html</loc>
+<lastmod>2026-02-21T06:43:37+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://nirusaki.me/projects/template-bot.html</loc>
+<lastmod>2026-02-21T06:43:37+00:00</lastmod>
+<priority>0.64</priority>
+</url>
 </urlset>
