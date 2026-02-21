@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nirusaki-malaal.github.io/sitemap.xml
