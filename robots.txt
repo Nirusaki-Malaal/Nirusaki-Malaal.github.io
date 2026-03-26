@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nirusaki-malaal.github.io/sitemap.xml
+Sitemap: https://nirusaki.me/sitemap.xml

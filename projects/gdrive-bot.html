@@ -1,36 +1,217 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>gdrive-uploader-bot | Nirusaki Portfolio</title>
-<meta name="description" content="gdrive-uploader-bot case study by Nirusaki: architecture, tech stack, documentation notes, and implementation highlights.">
-<meta name="keywords" content="Nirusaki, gdrive-uploader-bot, Python, project documentation, case study">
-<link rel="canonical" href="https://nirusaki-malaal.github.io/projects/gdrive-bot.html">
-<meta name="robots" content="index,follow">
-<meta property="og:title" content="gdrive-uploader-bot - Nirusaki Portfolio">
-<meta property="og:description" content="Telegram-to-Google-Drive uploader bot with progress updates and automation features.">
-<meta property="og:url" content="https://nirusaki-malaal.github.io/projects/gdrive-bot.html">
-<meta property="og:image" content="https://opengraph.githubassets.com/1/Nirusaki-Malaal/gdrive-uploader-bot">
-<link rel="stylesheet" href="/styles.css"><script src="https://cdn.tailwindcss.com"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"gdrive-uploader-bot","codeRepository":"https://github.com/Nirusaki-Malaal/gdrive-uploader-bot","programmingLanguage":"Python","url":"https://nirusaki-malaal.github.io/projects/gdrive-bot.html","description":"Telegram-to-Google-Drive uploader bot with progress updates and automation features."}</script>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="canonical" href="https://nirusaki.me/projects/gdrive-bot.html">
+    <link rel="alternate" href="https://nirusaki.me/projects/gdrive-bot.html" hreflang="x-default">
+    <link rel="alternate" href="https://nirusaki.me/projects/gdrive-bot.html" hreflang="en">
+
+    <title>gdrive-uploader-bot | Nirusaki Portfolio</title>
+    <meta name="description" content="gdrive-uploader-bot case study by Nirusaki: architecture, tech stack, documentation notes, and implementation highlights.">
+    <meta name="keywords" content="Nirusaki, gdrive-uploader-bot, Python, project documentation, case study">
+    <meta name="author" content="Nirusaki">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+    <meta name="theme-color" content="#050505">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="language" content="English">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Nirusaki Portfolio">
+    <meta property="og:title" content="gdrive-uploader-bot - Nirusaki Portfolio">
+    <meta property="og:description" content="Telegram-to-Google-Drive uploader bot with progress updates and automation features.">
+    <meta property="og:url" content="https://nirusaki.me/projects/gdrive-bot.html">
+    <meta property="og:image" content="https://opengraph.githubassets.com/1/Nirusaki-Malaal/gdrive-uploader-bot">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@nirusaki">
+    <meta name="twitter:title" content="gdrive-uploader-bot - Nirusaki Portfolio">
+    <meta name="twitter:description" content="Telegram-to-Google-Drive uploader bot with progress updates and automation features.">
+    <meta name="twitter:image" content="https://opengraph.githubassets.com/1/Nirusaki-Malaal/gdrive-uploader-bot">
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://avatars.githubusercontent.com">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://avatars.githubusercontent.com/u/213580728?v=4&s=180">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://avatars.githubusercontent.com/u/213580728?v=4&s=32">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://avatars.githubusercontent.com/u/213580728?v=4&s=16">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Rajdhani:wght@300;500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Syncopate', 'sans-serif'],
+                        'body': ['Rajdhani', 'sans-serif'],
+                        'jp': ['Noto Sans JP', 'sans-serif'],
+                    },
+                    colors: {
+                        'neon-pink': '#ff006e',
+                        'neon-cyan': '#00f5ff',
+                        'neon-purple': '#b026ff',
+                        'deep-black': '#050505',
+                        'arch-blue': '#1793d1',
+                        'ubuntu-orange': '#e95420',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <link rel="stylesheet" href="/styles.css">
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"gdrive-uploader-bot","codeRepository":"https://github.com/Nirusaki-Malaal/gdrive-uploader-bot","programmingLanguage":"Python","url":"https://nirusaki.me/projects/gdrive-bot.html","description":"Telegram-to-Google-Drive uploader bot with progress updates and automation features."}
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nirusaki.me/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Projects",
+          "item": "https://nirusaki.me/projects/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "gdrive-uploader-bot",
+          "item": "https://nirusaki.me/projects/gdrive-bot.html"
+        }
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": "https://nirusaki.me/#person",
+      "name": "Nirusaki",
+      "alternateName": "ニルサキ",
+      "url": "https://nirusaki.me/",
+      "sameAs": ["https://github.com/nirusaki-malaal"],
+      "jobTitle": ["Python Developer", "Automation Engineer"],
+      "description": "Digital ninja specializing in Python automation, Telegram bot development, and Linux utilities.",
+      "image": "https://avatars.githubusercontent.com/u/213580728?v=4"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://nirusaki.me/#website",
+      "name": "Nirusaki Portfolio",
+      "url": "https://nirusaki.me/"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "gdrive-uploader-bot - Nirusaki Portfolio",
+      "url": "https://nirusaki.me/projects/gdrive-bot.html",
+      "description": "Telegram-to-Google-Drive uploader bot with progress updates and automation features.",
+      "inLanguage": "en"
+    }
+    </script>
 </head>
-<body class="font-body antialiased bg-deep-black text-white">
-<nav class="w-full px-6 py-4"><div class="max-w-6xl mx-auto flex gap-6 items-center"><a href="/" class="text-sm font-bold tracking-widest hover:text-neon-cyan transition-colors">HOME</a>
-<a href="/projects/" class="text-sm font-bold tracking-widest text-neon-cyan">PROJECTS</a>
-<a href="https://github.com/nirusaki-malaal" target="_blank" rel="noopener noreferrer" class="neon-btn px-4 py-2 border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-black transition-all">GITHUB</a></div></nav>
-<main class="project-hero">
-<section class="max-w-6xl mx-auto px-6 py-16">
-<a href="/projects/" class="text-neon-cyan">← Back to all projects</a>
-<h1 class="font-display text-5xl mt-4 mb-3">gdrive-uploader-bot</h1>
-<p class="text-gray-300 mb-6 max-w-3xl">Telegram-to-Google-Drive uploader bot with progress updates and automation features.</p>
-<div class="flex flex-wrap gap-3 mb-8"><span class="stack-chip px-3 py-1 rounded-full text-sm">Python</span> <span class="stack-chip px-3 py-1 rounded-full text-sm">Pyrogram</span> <span class="stack-chip px-3 py-1 rounded-full text-sm">Google Drive API</span> <span class="stack-chip px-3 py-1 rounded-full text-sm">Telegram Bot API</span></div>
-<div class="grid lg:grid-cols-2 gap-8 items-start">
-<article class="glass-card rounded-xl p-6"><h2 class="font-display text-2xl mb-4">Code Documentation</h2><ul class="doc-list"><li>• Receive files from Telegram chats and channels.</li><li>• Upload files into configured Google Drive folders.</li><li>• Display progress updates and completion states.</li><li>• Supports automation-focused media workflows.</li></ul>
-<p class="mt-4 text-gray-400">Last updated: <time datetime="2025-10-22">2025-10-22</time></p>
-<div class="mt-6 flex gap-4"><a href="https://github.com/Nirusaki-Malaal/gdrive-uploader-bot" target="_blank" rel="noopener noreferrer" class="neon-btn px-4 py-2 border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-black">View Source</a></div>
-</article>
-<article class="glass-card rounded-xl p-6"><h2 class="font-display text-2xl mb-4">Project Visual</h2>
-<img src="https://opengraph.githubassets.com/1/Nirusaki-Malaal/gdrive-uploader-bot" alt="gdrive-uploader-bot GitHub repository preview image" class="rounded-lg w-full border border-white/10">
-<p class="text-gray-400 mt-3">Repository preview image sourced from GitHub Open Graph.</p>
-</article>
-</div>
-</section></main></body></html>
+
+<body class="font-body antialiased selection:bg-neon-pink selection:text-white bg-deep-black text-white">
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+    <div class="cursor-dot hidden md:block" role="presentation"></div>
+    <div class="cursor-outline hidden md:block" role="presentation"></div>
+    <div class="scanline" role="presentation"></div>
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 mix-blend-difference" role="navigation" aria-label="Main navigation">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="/" class="font-display font-bold text-2xl tracking-widest text-white hover-target">
+                NIRU<span class="text-neon-cyan">/</span>SAKI
+            </a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="/#about" class="text-sm font-bold tracking-widest hover:text-neon-cyan transition-colors hover-target">ABOUT</a>
+                <a href="/#arsenal" class="text-sm font-bold tracking-widest hover:text-neon-cyan transition-colors hover-target">ARSENAL</a>
+                <a href="/projects/" class="text-sm font-bold tracking-widest text-neon-cyan hover-target">PROJECTS</a>
+                <a href="https://github.com/nirusaki-malaal" target="_blank" rel="noopener noreferrer author me" class="neon-btn px-6 py-2 border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-black transition-all hover-target">GITHUB</a>
+            </div>
+            <button class="md:hidden text-white hover-target" onclick="toggleMenu()" aria-label="Toggle mobile menu">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-black/95 z-40 hidden flex-col items-center justify-center space-y-8 backdrop-blur-xl" role="dialog" aria-label="Mobile menu">
+        <button class="absolute top-6 right-6 text-white hover-target" onclick="toggleMenu()"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+        <a href="/#about" onclick="toggleMenu()" class="text-3xl font-display font-bold hover:text-neon-cyan hover-target">ABOUT</a>
+        <a href="/#arsenal" onclick="toggleMenu()" class="text-3xl font-display font-bold hover:text-neon-cyan hover-target">ARSENAL</a>
+        <a href="/projects/" onclick="toggleMenu()" class="text-3xl font-display font-bold text-neon-cyan hover-target">PROJECTS</a>
+    </div>
+
+    <main id="main-content" class="project-hero pt-32 pb-16" role="main">
+        <section class="max-w-6xl mx-auto px-6">
+            <a href="/projects/" class="text-neon-cyan hover-target flex items-center gap-2 mb-8"><span>←</span> Back to all projects</a>
+            <div class="font-jp text-neon-pink tracking-[0.5em] text-sm mb-2 animate-pulse-slow">実際のプロジェクト</div>
+            <h1 class="font-display font-bold text-5xl md:text-7xl mb-6 leading-none tracking-tighter">
+                <span class="glitch-text block" data-text="gdrive-uploader-bot">gdrive-uploader-bot</span>
+            </h1>
+            <p class="text-gray-300 mb-6 max-w-3xl">Telegram-to-Google-Drive uploader bot with progress updates and automation features.</p>
+            <div class="flex flex-wrap gap-3 mb-8"><span class="stack-chip px-3 py-1 rounded-full text-sm">Python</span> <span class="stack-chip px-3 py-1 rounded-full text-sm">Telegram</span> <span class="stack-chip px-3 py-1 rounded-full text-sm">Google Drive API</span></div>
+            <div class="grid lg:grid-cols-2 gap-8 items-start">
+                <article class="glass-card rounded-xl p-6"><h2 class="font-display text-2xl mb-4">Code Documentation</h2><ul class="doc-list"><li>• Uploads files from Telegram chats to Google Drive.</li><li>• Shows live progress during transfers.</li><li>• Automates folder organization and storage.</li><li>• Handles large file uploads reliably.</li></ul>
+                <p class="mt-4 text-gray-400">Last updated: <time datetime="2025-10-22">2025-10-22</time></p>
+                <div class="mt-6 flex gap-4"><a href="https://github.com/Nirusaki-Malaal/gdrive-uploader-bot" target="_blank" rel="noopener noreferrer" class="neon-btn px-4 py-2 border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-black">View Source</a></div>
+                </article>
+                <article class="glass-card rounded-xl p-6"><h2 class="font-display text-2xl mb-4">Project Visual</h2>
+                <img src="https://opengraph.githubassets.com/1/Nirusaki-Malaal/gdrive-uploader-bot" alt="gdrive-uploader-bot GitHub repository preview image" class="rounded-lg w-full border border-white/10">
+                <p class="text-gray-400 mt-3">Repository preview image sourced from GitHub Open Graph.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="relative py-20 px-6 bg-gradient-to-t from-black to-transparent" role="contentinfo">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="font-display text-5xl md:text-7xl font-bold mb-8 glitch-text hover-target" data-text="LET'S CONNECT">LET'S CONNECT</h2>
+            <div class="flex justify-center gap-6 mb-12">
+                <a href="https://github.com/nirusaki-malaal" target="_blank" rel="noopener noreferrer author me" class="w-14 h-14 border border-white/20 flex items-center justify-center hover:border-neon-cyan hover:text-neon-cyan hover:scale-110 transition-all hover-target" aria-label="GitHub">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+            </div>
+            <p class="font-jp text-gray-600 text-sm tracking-widest">&copy; 2026 <span class="text-white">NIRUSAKI // ニルサキ</span> • CRAFTED WITH CHAOS & CAFFEINE ON <span class="text-arch-blue">ARCH</span></p>
+        </div>
+    </footer>
+
+    <script src="/script.js" defer></script>
+</body>
+</html>

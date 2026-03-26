@@ -2,6 +2,9 @@
             background-color: #050505;
             color: #ffffff;
             overflow-x: hidden;
+        }
+
+        body.has-custom-cursor {
             cursor: none;
         }
         
