@@ -1,0 +1,70 @@
+---
+layout: default
+---
+
+<article class="post-content project-hero pt-32 pb-16">
+    <section class="max-w-4xl mx-auto px-6">
+        <!-- Back Link -->
+        <a href="/blogs/" class="inline-flex items-center gap-2 text-neon-cyan hover:text-white transition-colors mb-8 group">
+            <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            ← Back to blogs
+        </a>
+
+        <!-- Tags -->
+        {% if page.tags.size > 0 %}
+        <div class="flex flex-wrap gap-2 mb-6">
+            {% for tag in page.tags %}
+            <span class="border border-neon-cyan/30 text-neon-cyan rounded-full px-3 py-1 text-xs">{{ tag }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Title -->
+        <h1 class="font-display font-bold text-4xl md:text-6xl tracking-tighter mb-6">{{ page.title }}</h1>
+
+        <!-- Meta -->
+        <div class="flex items-center gap-4 text-gray-500 text-sm mb-8">
+            <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
+            <span class="text-white/20">•</span>
+            <span>{% assign words = content | number_of_words %}{{ words | divided_by: 200 | plus: 1 }} min read</span>
+        </div>
+
+        <!-- Gradient Divider -->
+        <div class="h-px bg-gradient-to-r from-neon-cyan to-neon-pink mb-12"></div>
+
+        <!-- Content -->
+        <div class="prose-content">
+            {{ content }}
+        </div>
+
+        <!-- Bottom Gradient Divider -->
+        <div class="h-px bg-gradient-to-r from-neon-cyan to-neon-pink mt-12 mb-12"></div>
+
+        <!-- Prev/Next Navigation -->
+        <nav class="flex justify-between items-center" aria-label="Post navigation">
+            {% if page.previous %}
+            <a href="{{ page.previous.url }}" class="group flex items-center gap-2 text-gray-400 hover:text-neon-cyan transition-colors">
+                <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                <div>
+                    <div class="text-xs uppercase tracking-widest text-gray-600">Previous</div>
+                    <div class="font-bold">{{ page.previous.title }}</div>
+                </div>
+            </a>
+            {% else %}
+            <div></div>
+            {% endif %}
+
+            {% if page.next %}
+            <a href="{{ page.next.url }}" class="group flex items-center gap-2 text-gray-400 hover:text-neon-pink transition-colors text-right">
+                <div>
+                    <div class="text-xs uppercase tracking-widest text-gray-600">Next</div>
+                    <div class="font-bold">{{ page.next.title }}</div>
+                </div>
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+            {% else %}
+            <div></div>
+            {% endif %}
+        </nav>
+    </section>
+</article>

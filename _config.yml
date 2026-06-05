@@ -1,0 +1,28 @@
+title: Nirusaki Portfolio
+description: "Nirusaki Portfolio showcases Nirusaki's Python, automation, and open-source projects including Telegram bots, web tools, and Linux utilities."
+url: "https://nirusaki.me"
+baseurl: ""
+author: Nirusaki
+email: nirusakimalaal@gmail.com
+github_username: Nirusaki-Malaal
+
+permalink: /blogs/:year/:month/:day/:title/
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - node_modules
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
