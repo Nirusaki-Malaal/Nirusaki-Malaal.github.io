@@ -11,6 +11,8 @@
 <meta name="author" content="{{ site.author }}">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#050505">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+{% feed_meta %}
 
 <!-- Open Graph -->
 <meta property="og:type" content="{{ page.og_type | default: 'website' }}">

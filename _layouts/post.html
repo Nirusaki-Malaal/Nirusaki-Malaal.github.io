@@ -1,6 +1,31 @@
 ---
 layout: default
----
+<!-- Schema.org Article JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ page.title | escape }}",
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "description": "{{ page.description | default: site.description | escape }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ site.author | default: 'Nirusaki' }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.title }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://avatars.githubusercontent.com/u/213580728?v=4"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page.url | absolute_url }}"
+  }
+}
+</script>
 
 <article class="post-content project-hero pt-32 pb-16">
     <section class="max-w-4xl mx-auto px-6">
