@@ -79,6 +79,14 @@ body.has-custom-cursor {
     transform: translateY(-5px);
 }
 
+/* ===== GLASS PANEL (Flat version of Glass Card) ===== */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
 /* ===== SCANLINE OVERLAY ===== */
 .scanline {
     position: fixed;
@@ -246,7 +254,15 @@ body.has-custom-cursor {
     color: #d1d5db;
     font-size: 1.125rem;
     line-height: 1.8;
-    max-width: 72ch;
+    max-width: 90ch;
+}
+
+@media (min-width: 1536px) {
+    .prose-content {
+        font-size: 1.25rem;
+        line-height: 1.85;
+        max-width: 100ch;
+    }
 }
 
 .prose-content h1 {
@@ -284,14 +300,16 @@ body.has-custom-cursor {
 }
 
 .prose-content a {
-    color: #00f5ff;
+    color: #e5e7eb;
     text-decoration: underline;
-    text-underline-offset: 3px;
-    transition: color 0.2s;
+    text-underline-offset: 4px;
+    text-decoration-color: rgba(255, 255, 255, 0.3);
+    transition: all 0.2s;
 }
 
 .prose-content a:hover {
-    color: #ff006e;
+    color: #ffffff;
+    text-decoration-color: rgba(255, 255, 255, 0.8);
 }
 
 .prose-content strong {
@@ -323,7 +341,7 @@ body.has-custom-cursor {
     content: '▹';
     position: absolute;
     left: 0;
-    color: #00f5ff;
+    color: #9ca3af;
 }
 
 .prose-content ol {
@@ -335,14 +353,14 @@ body.has-custom-cursor {
 }
 
 .prose-content ol li::marker {
-    color: #00f5ff;
+    color: #9ca3af;
 }
 
 .prose-content blockquote {
-    border-left: 3px solid #b026ff;
+    border-left: 3px solid rgba(255, 255, 255, 0.20);
     padding: 1rem 1.5rem;
     margin: 1.5rem 0;
-    background: rgba(176, 38, 255, 0.05);
+    background: rgba(255, 255, 255, 0.02);
     font-style: italic;
     color: #9ca3af;
 }
@@ -351,9 +369,9 @@ body.has-custom-cursor {
     margin-bottom: 0;
 }
 
-.prose-content code {
-    background: rgba(0, 245, 255, 0.1);
-    color: #00f5ff;
+.prose-content :not(pre) > code {
+    background: rgba(255, 255, 255, 0.08);
+    color: #e5e7eb;
     padding: 0.15rem 0.4rem;
     border-radius: 0.25rem;
     font-size: 0.9em;
@@ -371,12 +389,13 @@ body.has-custom-cursor {
 }
 
 .prose-content pre code {
-    background: none;
+    background: none !important;
     color: #e5e7eb;
     padding: 0;
     border-radius: 0;
     font-size: 0.875rem;
     line-height: 1.6;
+    font-family: 'Fira Code', 'Courier New', monospace;
 }
 
 .prose-content img {
@@ -416,10 +435,15 @@ body.has-custom-cursor {
 
 /* ===== BLOG POST CARDS ===== */
 .blog-post-card {
+    background: rgba(5, 5, 5, 0.48);
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
     transition: all 0.3s ease;
 }
 
 .blog-post-card:hover {
+    border-color: rgba(0, 245, 255, 0.5);
+    box-shadow: 0 20px 60px rgba(0, 245, 255, 0.12);
     transform: translateY(-3px);
 }
 
@@ -509,3 +533,149 @@ body.has-custom-cursor {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+/* ===== ROUGE SYNTAX HIGHLIGHTING (One Dark / VS Code inspired) ===== */
+div.highlight { background: transparent !important; }
+.highlight { background: rgba(0, 0, 0, 0.6) !important; color: #abb2bf !important; }
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .cp { color: #7f848e !important; font-style: italic !important; } /* Comments & Preprocessor */
+.highlight .k, .highlight .kd, .highlight .kp, .highlight .kr, .highlight .kt, .highlight .ow { color: #e06c75 !important; font-weight: normal !important; } /* Keywords & Types */
+.highlight .nf, .highlight .na, .highlight .nb, .highlight .nc, .highlight .no, .highlight .ni, .highlight .nl { color: #61afef !important; } /* Functions */
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .sh, .highlight .sr, .highlight .ss { color: #e5c07b !important; } /* Strings */
+.highlight .m, .highlight .mi, .highlight .mf, .highlight .mo, .highlight .mh, .highlight .mb, .highlight .mx { color: #d19a66 !important; } /* Numbers */
+.highlight .o { color: #abb2bf !important; } /* Operators */
+.highlight .p { color: #abb2bf !important; } /* Punctuation */
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi { color: #abb2bf !important; } /* Variables */
+.highlight .nd { color: #61afef !important; } /* Decorators */
+.highlight .gd { color: #ef4444 !important; } /* Generic Deleted */
+.highlight .gi { color: #98c379 !important; } /* Generic Inserted */
+.highlight .gh { color: #ffffff !important; font-weight: bold !important; } /* Generic Heading */
+
+/* ===== SOLID BACKGROUND & STYLE OVERRIDES FOR BLOG SECTION ===== */
+body.blog-page-bg,
+body.blog-page-bg .project-hero {
+    background: #1d1e20 !important;
+    background-color: #1d1e20 !important;
+}
+
+body.blog-page-bg #bg-canvas {
+    display: none !important;
+}
+
+/* Navbar background in blog section */
+body.blog-page-bg nav.fixed {
+    background: rgba(29, 30, 32, 0.85) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(12px) !important;
+}
+
+/* Sidebar background in blog section */
+body.blog-page-bg #sidebar {
+    background: rgba(20, 21, 23, 0.98) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Glass cards & panels in blog section (cards, search input container) */
+body.blog-page-bg .glass-card,
+body.blog-page-bg .glass-panel {
+    background: rgba(15, 16, 17, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+body.blog-page-bg .glass-card:hover {
+    border-color: rgba(0, 245, 255, 0.4) !important;
+    box-shadow: 0 10px 30px rgba(0, 245, 255, 0.1) !important;
+}
+
+/* Search modal overlay and content */
+body.blog-page-bg #search-modal {
+    background-color: rgba(15, 16, 17, 0.8) !important;
+}
+
+body.blog-page-bg #search-modal .glass-panel,
+body.blog-page-bg #search-modal .glass-card {
+    background: #1d1e20 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Code blocks and pre elements in blog post */
+body.blog-page-bg .prose-content pre {
+    background: #2d3139 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 0.5rem;
+    padding: 1.5rem !important;
+}
+
+body.blog-page-bg .prose-content pre code {
+    color: #abb2bf !important;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Copy Code Button */
+.copy-code-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #abb2bf;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.copy-code-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    opacity: 1;
+}
+
+.copy-code-btn.copied {
+    background: rgba(0, 245, 255, 0.1);
+    border-color: rgba(0, 245, 255, 0.2);
+    color: #00f5ff;
+    opacity: 1;
+}
+
+body.blog-page-bg .prose-content :not(pre) > code {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
+}
+
+/* Blockquotes in blog post */
+body.blog-page-bg .prose-content blockquote {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border-left: 3px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Scrollbar track in blog section */
+body.blog-page-bg::-webkit-scrollbar-track {
+    background: #1d1e20 !important;
+}
+
+/* Hide custom cursor in blog section */
+body.blog-page-bg .cursor-dot,
+body.blog-page-bg .cursor-outline {
+    display: none !important;
+}
+
+/* Custom selection styling for all elements on blog pages */
+body.blog-page-bg ::selection {
+    background: rgba(0, 245, 255, 0.25) !important;
+    color: #ffffff !important;
+}
+
+body.blog-page-bg ::-moz-selection {
+    background: rgba(0, 245, 255, 0.25) !important;
+    color: #ffffff !important;
+}
+
+

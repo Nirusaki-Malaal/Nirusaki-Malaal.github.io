@@ -1,0 +1,30 @@
+# Nirusaki — Code Shinobi
+
+Nirusaki (ニルサキ) is a Python developer, software engineer, and automation specialist focusing on Telegram bots, web scraping, video encoding pipelines, and custom Linux environments.
+
+## Information & Profiles
+- **Website**: https://nirusaki.me
+- **Email**: nirusakimalaal@gmail.com
+- **GitHub**: https://github.com/nirusaki-malaal
+- **Instagram**: https://instagram.com/nirusaki (Username: @Nirusaki)
+- **LinkedIn**: https://linkedin.com/in/nirusaki (Username: @Nirusaki)
+- **Telegram**: https://t.me/nirusaki (Username: @Nirusaki)
+- **YouTube**: https://youtube.com/@nirusaki (Username: @Nirusaki)
+
+## Technologies & Stack
+- **Primary Languages**: Python, TypeScript, JavaScript, C++, C, Java, Bash
+- **Frontend Frameworks & UI**: React, HTML5, CSS3, TailwindCSS
+- **Backend & APIs**: FastAPI, Flask, Node.js, Express
+- **Databases & Cache**: MongoDB, PostgreSQL, Redis, MySQL
+- **AI & Data Science**: NumPy, Pandas, Matplotlib, Scikit-Learn, TensorFlow
+- **DevOps & Deployments**: Docker, Vercel, Heroku, Railway, Netlify, Google Cloud
+- **Tools & Core Utilities**: Git, GitHub, Arch Linux, Ubuntu Server, Zsh, FFmpeg, VSCode
+
+## Freelance Work
+- **ADM News Bharat** (https://admnewsbharat.com): Built DevOps infrastructure, high-performance database design, frontend, and backend.
+- **Ghoomne Chalo Adventures** (https://ghoomnechaloadventures.com): Designed and developed an adventure tourism travel platform.
+- **Hola Thrift** (https://holathrift.in): Curated thrift clothing e-commerce platform with checkouts and filters.
+
+## Honors & Awards
+- **Google DeepMind Award**: Top 10 Best Gemini Use Case.
+- **ElevenLabs Award**: Best Use Case for voice synthesis and translation.

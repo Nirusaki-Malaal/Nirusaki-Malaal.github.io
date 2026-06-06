@@ -1,36 +1,42 @@
+<!-- Floating Sidebar Toggle Button (Always Fixed) -->
+<button id="sidebar-toggle" class="fixed top-[10px] sm:top-[12px] left-4 sm:left-6 z-[51] text-white hover:text-white hover:border-white/10 p-2.5 bg-[#1d1e20]/60 border border-white/5 backdrop-blur-md rounded-md transition-all duration-300 flex items-center justify-center hover-target" aria-label="Toggle sidebar">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8M4 18h16"/></svg>
+</button>
+
 <!-- Navigation -->
-<nav class="fixed top-0 w-full z-50 px-6 py-4 mix-blend-difference" role="navigation" aria-label="Main navigation">
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
-        <!-- Left: Sidebar Toggle -->
-        <div class="flex items-center gap-4">
-            <button id="sidebar-toggle" class="text-white hover-target" aria-label="Toggle sidebar">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8M4 18h16"/></svg>
-            </button>
-            <a href="{{ '/' | relative_url }}" class="font-display font-bold text-2xl tracking-widest text-white hover-target">
+{% assign is_blog = false %}
+{% if page.layout == 'post' or page.url contains '/blogs/' %}
+    {% assign is_blog = true %}
+{% endif %}
+<nav class="fixed top-0 w-full z-50 px-4 sm:px-6 py-4 {% if is_blog %}bg-[#1d1e20]/90 border-b border-white/5 backdrop-blur-md{% else %}mix-blend-difference{% endif %} transition-all duration-300" role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto flex justify-between items-center gap-4">
+        <!-- Left: Logo -->
+        <div class="flex items-center shrink-0 min-w-0 pl-14 sm:pl-16">
+            <a href="{{ '/' | relative_url }}" class="font-display font-bold text-xl sm:text-2xl tracking-widest text-white hover-target whitespace-nowrap">
                 NIRU<span class="text-neon-cyan">/</span>SAKI
             </a>
         </div>
 
         <!-- Desktop Nav -->
-        <div class="hidden md:flex space-x-8 items-center">
-            <a href="{{ '/#about' | relative_url }}" class="text-sm font-bold tracking-widest hover:text-neon-cyan transition-colors hover-target">ABOUT</a>
-            <a href="{{ '/#arsenal' | relative_url }}" class="text-sm font-bold tracking-widest hover:text-neon-cyan transition-colors hover-target">ARSENAL</a>
-            <a href="{{ '/#projects' | relative_url }}" class="text-sm font-bold tracking-widest hover:text-neon-cyan transition-colors hover-target">PROJECTS</a>
-            <a href="{{ '/blogs/' | relative_url }}" class="text-sm font-bold tracking-widest hover:text-neon-cyan transition-colors hover-target">BLOGS</a>
-            <button id="search-toggle" class="text-white hover:text-neon-cyan transition-colors hover-target" aria-label="Open search">
+        <div class="hidden lg:flex items-center justify-end gap-5 xl:gap-8 min-w-0">
+            <a href="{{ '/#about' | relative_url }}" class="text-sm font-bold tracking-[0.18em] xl:tracking-widest hover:text-neon-cyan transition-colors hover-target whitespace-nowrap">ABOUT</a>
+            <a href="{{ '/#arsenal' | relative_url }}" class="text-sm font-bold tracking-[0.18em] xl:tracking-widest hover:text-neon-cyan transition-colors hover-target whitespace-nowrap">ARSENAL</a>
+            <a href="{{ '/#projects' | relative_url }}" class="text-sm font-bold tracking-[0.18em] xl:tracking-widest hover:text-neon-cyan transition-colors hover-target whitespace-nowrap">PROJECTS</a>
+            <a href="{{ '/blogs/' | relative_url }}" class="text-sm font-bold tracking-[0.18em] xl:tracking-widest hover:text-neon-cyan transition-colors hover-target whitespace-nowrap">BLOGS</a>
+            <button id="search-toggle" class="text-white hover:text-neon-cyan transition-colors hover-target shrink-0" aria-label="Open search">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             </button>
-            <a href="https://github.com/nirusaki-malaal" target="_blank" rel="noopener noreferrer author me" class="neon-btn px-6 py-2 border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-black transition-all hover-target">
+            <a href="https://github.com/nirusaki-malaal" target="_blank" rel="noopener noreferrer author me" class="neon-btn px-4 xl:px-6 py-2 border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-black transition-all hover-target whitespace-nowrap">
                 GITHUB
             </a>
         </div>
 
         <!-- Mobile Controls -->
-        <div class="md:hidden flex items-center gap-4">
+        <div class="lg:hidden flex items-center gap-4 shrink-0">
             <button id="search-toggle-mobile" class="text-white hover-target" aria-label="Open search">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             </button>
-            <button class="text-white hover-target" onclick="toggleMenu()" aria-label="Toggle mobile menu">
+            <button class="text-white hover-target {% if is_blog %}hidden{% endif %}" onclick="toggleMenu()" aria-label="Toggle mobile menu">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
         </div>
@@ -38,7 +44,7 @@
 </nav>
 
 <!-- Mobile Menu -->
-<div id="mobile-menu" class="fixed inset-0 bg-black/95 z-40 hidden flex-col items-center justify-center space-y-8 backdrop-blur-xl" role="dialog" aria-label="Mobile menu">
+<div id="mobile-menu" class="fixed inset-0 bg-black/95 z-[60] hidden flex-col items-center justify-center space-y-8 backdrop-blur-xl" role="dialog" aria-label="Mobile menu">
     <button class="absolute top-6 right-6 text-white" onclick="toggleMenu()">
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
     </button>
@@ -49,8 +55,8 @@
 </div>
 
 <!-- Search Modal -->
-<div id="search-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/80 backdrop-blur-sm">
-    <div class="glass-card w-full max-w-2xl mx-4 p-6">
+<div id="search-modal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/80 backdrop-blur-sm">
+    <div class="glass-panel w-full max-w-2xl mx-4 p-6">
         <div class="flex items-center justify-between mb-4">
             <h3 class="font-display text-lg font-bold tracking-widest text-neon-cyan">SEARCH</h3>
             <button id="search-close" class="text-gray-400 hover:text-white transition-colors" aria-label="Close search">

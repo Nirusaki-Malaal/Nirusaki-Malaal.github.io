@@ -1,0 +1,10 @@
+1.) start a live reload server
+2.) fix navbar responsivness in pc
+3.) fix the jekyll blogs section completely broken
+4.) ensure visual consistency
+5.) make the content large on wider/big screens , remove lets connect from blogs
+6.) fix the navbar responsivness dude
+5.) ensure dynamic seo 
+6.) ensure that LLM can scrape my data
+7.) use better icons for railway , ubuntu, ffmpeg and zsh
+8.) in freelance add admnewsbharat ghoomnechaloadventures.com holathrift.in

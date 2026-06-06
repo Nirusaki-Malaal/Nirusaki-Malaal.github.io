@@ -38,7 +38,7 @@ Lists have custom bullet points matching our terminal/ninja theme.
 ### Unordered Lists (Custom Chevron Bullets)
 
 * Python automation pipelines
-* Telegram API integrations using Pyrogram
+* Telegram API integrations
 * Linux configurations and scripts
   * Nested item with custom indentation
   * Nested item 2
