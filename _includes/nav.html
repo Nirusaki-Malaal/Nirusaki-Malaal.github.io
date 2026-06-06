@@ -6,17 +6,17 @@
             <button id="sidebar-toggle" class="text-white hover-target" aria-label="Toggle sidebar">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8M4 18h16"/></svg>
             </button>
-            <a href="/" class="font-display font-bold text-2xl tracking-widest text-white hover-target">
+            <a href="{{ '/' | relative_url }}" class="font-display font-bold text-2xl tracking-widest text-white hover-target">
                 NIRU<span class="text-neon-cyan">/</span>SAKI
             </a>
         </div>
 
         <!-- Desktop Nav -->
         <div class="hidden md:flex space-x-8 items-center">
-            <a href="/#about" class="text-sm font-bold tracking-widest hover:text-neon-cyan transition-colors hover-target">ABOUT</a>
-            <a href="/#arsenal" class="text-sm font-bold tracking-widest hover:text-neon-cyan transition-colors hover-target">ARSENAL</a>
-            <a href="/#projects" class="text-sm font-bold tracking-widest hover:text-neon-cyan transition-colors hover-target">PROJECTS</a>
-            <a href="/blogs/" class="text-sm font-bold tracking-widest hover:text-neon-cyan transition-colors hover-target">BLOGS</a>
+            <a href="{{ '/#about' | relative_url }}" class="text-sm font-bold tracking-widest hover:text-neon-cyan transition-colors hover-target">ABOUT</a>
+            <a href="{{ '/#arsenal' | relative_url }}" class="text-sm font-bold tracking-widest hover:text-neon-cyan transition-colors hover-target">ARSENAL</a>
+            <a href="{{ '/#projects' | relative_url }}" class="text-sm font-bold tracking-widest hover:text-neon-cyan transition-colors hover-target">PROJECTS</a>
+            <a href="{{ '/blogs/' | relative_url }}" class="text-sm font-bold tracking-widest hover:text-neon-cyan transition-colors hover-target">BLOGS</a>
             <button id="search-toggle" class="text-white hover:text-neon-cyan transition-colors hover-target" aria-label="Open search">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             </button>
@@ -42,10 +42,10 @@
     <button class="absolute top-6 right-6 text-white" onclick="toggleMenu()">
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
     </button>
-    <a href="/#about" onclick="toggleMenu()" class="text-3xl font-display font-bold hover:text-neon-cyan">ABOUT</a>
-    <a href="/#arsenal" onclick="toggleMenu()" class="text-3xl font-display font-bold hover:text-neon-cyan">ARSENAL</a>
-    <a href="/#projects" onclick="toggleMenu()" class="text-3xl font-display font-bold hover:text-neon-cyan">PROJECTS</a>
-    <a href="/blogs/" onclick="toggleMenu()" class="text-3xl font-display font-bold hover:text-neon-cyan">BLOGS</a>
+    <a href="{{ '/#about' | relative_url }}" onclick="toggleMenu()" class="text-3xl font-display font-bold hover:text-neon-cyan">ABOUT</a>
+    <a href="{{ '/#arsenal' | relative_url }}" onclick="toggleMenu()" class="text-3xl font-display font-bold hover:text-neon-cyan">ARSENAL</a>
+    <a href="{{ '/#projects' | relative_url }}" onclick="toggleMenu()" class="text-3xl font-display font-bold hover:text-neon-cyan">PROJECTS</a>
+    <a href="{{ '/blogs/' | relative_url }}" onclick="toggleMenu()" class="text-3xl font-display font-bold hover:text-neon-cyan">BLOGS</a>
 </div>
 
 <!-- Search Modal -->

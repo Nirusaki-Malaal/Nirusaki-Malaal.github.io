@@ -100,7 +100,7 @@ og_type: profile
         <p class="text-gray-400 text-lg mb-8 font-light max-w-2xl mx-auto mt-12">Automating the boring stuff. Encoding the impossible. Building bots, tools, and utilities that run in the shadows of Linux.</p>
         <div class="mt-12 flex flex-col md:flex-row gap-6 justify-center items-center">
             <a href="#projects" class="neon-btn px-8 py-4 bg-neon-cyan/10 border border-neon-cyan text-neon-cyan font-bold tracking-widest hover:bg-neon-cyan hover:text-black transition-all">VIEW PROJECTS</a>
-            <a href="/blogs/" class="neon-btn px-8 py-4 bg-neon-pink/10 border border-neon-pink text-neon-pink font-bold tracking-widest hover:bg-neon-pink hover:text-black transition-all">VIEW BLOG</a>
+            <a href="{{ '/blogs/' | relative_url }}" class="neon-btn px-8 py-4 bg-neon-pink/10 border border-neon-pink text-neon-pink font-bold tracking-widest hover:bg-neon-pink hover:text-black transition-all">VIEW BLOG</a>
             <a href="https://github.com/nirusaki-malaal" target="_blank" rel="noopener noreferrer" class="px-8 py-4 border border-white/20 text-white hover:border-neon-purple hover:text-neon-purple transition-all flex items-center gap-2"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GITHUB</a>
         </div>
         <div class="mt-20 grid grid-cols-3 gap-8 max-w-lg mx-auto">
@@ -150,13 +150,13 @@ og_type: profile
         <div class="mb-12">
             <h3 class="text-neon-cyan font-bold tracking-widest mb-6 flex items-center justify-center gap-2"><span class="w-8 h-[2px] bg-neon-cyan"></span>LANGUAGES<span class="w-8 h-[2px] bg-neon-cyan"></span></h3>
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
-                <div class="glass-card p-4 text-center hover:border-yellow-400/50"><div class="text-3xl mb-2">🐍</div><div class="font-bold text-yellow-400">Python</div><div class="text-xs text-gray-500">Primary</div></div>
-                <div class="glass-card p-4 text-center hover:border-blue-500/50"><div class="text-3xl mb-2">🔷</div><div class="font-bold text-blue-500">TypeScript</div><div class="text-xs text-gray-500">Typed JS</div></div>
-                <div class="glass-card p-4 text-center hover:border-yellow-300/50"><div class="text-3xl mb-2">📜</div><div class="font-bold text-yellow-300">JavaScript</div><div class="text-xs text-gray-500">Web</div></div>
-                <div class="glass-card p-4 text-center hover:border-blue-600/50"><div class="text-3xl mb-2">⚡</div><div class="font-bold text-blue-600">C++</div><div class="text-xs text-gray-500">Systems</div></div>
-                <div class="glass-card p-4 text-center hover:border-gray-400/50"><div class="text-3xl mb-2">🔧</div><div class="font-bold text-gray-300">C</div><div class="text-xs text-gray-500">Low Level</div></div>
-                <div class="glass-card p-4 text-center hover:border-orange-400/50"><div class="text-3xl mb-2">☕</div><div class="font-bold text-orange-400">Java</div><div class="text-xs text-gray-500">OOP</div></div>
-                <div class="glass-card p-4 text-center hover:border-green-400/50"><div class="text-3xl mb-2">💻</div><div class="font-bold text-green-400">Bash</div><div class="text-xs text-gray-500">Shell</div></div>
+                <div class="glass-card p-4 text-center hover:border-yellow-400/50"><i class="devicon-python-plain text-yellow-400 text-4xl mb-2 block"></i><div class="font-bold text-yellow-400">Python</div><div class="text-xs text-gray-500">Primary</div></div>
+                <div class="glass-card p-4 text-center hover:border-blue-500/50"><i class="devicon-typescript-plain text-blue-500 text-4xl mb-2 block"></i><div class="font-bold text-blue-500">TypeScript</div><div class="text-xs text-gray-500">Typed JS</div></div>
+                <div class="glass-card p-4 text-center hover:border-yellow-300/50"><i class="devicon-javascript-plain text-yellow-300 text-4xl mb-2 block"></i><div class="font-bold text-yellow-300">JavaScript</div><div class="text-xs text-gray-500">Web</div></div>
+                <div class="glass-card p-4 text-center hover:border-blue-600/50"><i class="devicon-cplusplus-plain text-blue-600 text-4xl mb-2 block"></i><div class="font-bold text-blue-600">C++</div><div class="text-xs text-gray-500">Systems</div></div>
+                <div class="glass-card p-4 text-center hover:border-gray-400/50"><i class="devicon-c-plain text-gray-300 text-4xl mb-2 block"></i><div class="font-bold text-gray-300">C</div><div class="text-xs text-gray-500">Low Level</div></div>
+                <div class="glass-card p-4 text-center hover:border-orange-400/50"><i class="devicon-java-plain text-orange-400 text-4xl mb-2 block"></i><div class="font-bold text-orange-400">Java</div><div class="text-xs text-gray-500">OOP</div></div>
+                <div class="glass-card p-4 text-center hover:border-green-400/50"><i class="devicon-bash-plain text-green-400 text-4xl mb-2 block"></i><div class="font-bold text-green-400">Bash</div><div class="text-xs text-gray-500">Shell</div></div>
             </div>
         </div>
 
@@ -164,10 +164,10 @@ og_type: profile
         <div class="mb-12">
             <h3 class="text-neon-pink font-bold tracking-widest mb-6 flex items-center justify-center gap-2"><span class="w-8 h-[2px] bg-neon-pink"></span>FRONTEND<span class="w-8 h-[2px] bg-neon-pink"></span></h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="glass-card p-4 text-center hover:border-cyan-400/50"><div class="text-3xl mb-2">⚛️</div><div class="font-bold text-cyan-400">React</div><div class="text-xs text-gray-500">UI Library</div></div>
-                <div class="glass-card p-4 text-center hover:border-orange-500/50"><div class="text-3xl mb-2">📄</div><div class="font-bold text-orange-500">HTML5</div><div class="text-xs text-gray-500">Markup</div></div>
-                <div class="glass-card p-4 text-center hover:border-blue-500/50"><div class="text-3xl mb-2">🎨</div><div class="font-bold text-blue-500">CSS3</div><div class="text-xs text-gray-500">Styling</div></div>
-                <div class="glass-card p-4 text-center hover:border-sky-400/50"><div class="text-3xl mb-2">🌊</div><div class="font-bold text-sky-400">Tailwind</div><div class="text-xs text-gray-500">Utility CSS</div></div>
+                <div class="glass-card p-4 text-center hover:border-cyan-400/50"><i class="devicon-react-original text-cyan-400 text-4xl mb-2 block"></i><div class="font-bold text-cyan-400">React</div><div class="text-xs text-gray-500">UI Library</div></div>
+                <div class="glass-card p-4 text-center hover:border-orange-500/50"><i class="devicon-html5-plain text-orange-500 text-4xl mb-2 block"></i><div class="font-bold text-orange-500">HTML5</div><div class="text-xs text-gray-500">Markup</div></div>
+                <div class="glass-card p-4 text-center hover:border-blue-500/50"><i class="devicon-css3-plain text-blue-500 text-4xl mb-2 block"></i><div class="font-bold text-blue-500">CSS3</div><div class="text-xs text-gray-500">Styling</div></div>
+                <div class="glass-card p-4 text-center hover:border-sky-400/50"><i class="devicon-tailwindcss-original text-sky-400 text-4xl mb-2 block"></i><div class="font-bold text-sky-400">Tailwind</div><div class="text-xs text-gray-500">Utility CSS</div></div>
             </div>
         </div>
 
@@ -175,10 +175,10 @@ og_type: profile
         <div class="mb-12">
             <h3 class="text-neon-purple font-bold tracking-widest mb-6 flex items-center justify-center gap-2"><span class="w-8 h-[2px] bg-neon-purple"></span>BACKEND & APIs<span class="w-8 h-[2px] bg-neon-purple"></span></h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="glass-card p-4 text-center hover:border-green-500/50"><div class="text-3xl mb-2">⚡</div><div class="font-bold text-green-500">FastAPI</div><div class="text-xs text-gray-500">Async API</div></div>
-                <div class="glass-card p-4 text-center hover:border-blue-400/50"><div class="text-3xl mb-2">🌶️</div><div class="font-bold text-blue-400">Flask</div><div class="text-xs text-gray-500">Backend</div></div>
-                <div class="glass-card p-4 text-center hover:border-green-400/50"><div class="text-3xl mb-2">📦</div><div class="font-bold text-green-400">Node.js</div><div class="text-xs text-gray-500">Runtime</div></div>
-                <div class="glass-card p-4 text-center hover:border-gray-300/50"><div class="text-3xl mb-2">🚀</div><div class="font-bold text-gray-300">Express</div><div class="text-xs text-gray-500">Framework</div></div>
+                <div class="glass-card p-4 text-center hover:border-green-500/50"><i class="devicon-fastapi-plain text-green-500 text-4xl mb-2 block"></i><div class="font-bold text-green-500">FastAPI</div><div class="text-xs text-gray-500">Async API</div></div>
+                <div class="glass-card p-4 text-center hover:border-blue-400/50"><i class="devicon-flask-original text-blue-400 text-4xl mb-2 block"></i><div class="font-bold text-blue-400">Flask</div><div class="text-xs text-gray-500">Backend</div></div>
+                <div class="glass-card p-4 text-center hover:border-green-400/50"><i class="devicon-nodejs-plain text-green-400 text-4xl mb-2 block"></i><div class="font-bold text-green-400">Node.js</div><div class="text-xs text-gray-500">Runtime</div></div>
+                <div class="glass-card p-4 text-center hover:border-gray-300/50"><i class="devicon-express-original text-gray-300 text-4xl mb-2 block"></i><div class="font-bold text-gray-300">Express</div><div class="text-xs text-gray-500">Framework</div></div>
             </div>
         </div>
 
@@ -186,10 +186,10 @@ og_type: profile
         <div class="mb-12">
             <h3 class="text-green-500 font-bold tracking-widest mb-6 flex items-center justify-center gap-2"><span class="w-8 h-[2px] bg-green-500"></span>DATABASES<span class="w-8 h-[2px] bg-green-500"></span></h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="glass-card p-4 text-center hover:border-green-500/50"><div class="text-3xl mb-2">🍃</div><div class="font-bold text-green-500">MongoDB</div><div class="text-xs text-gray-500">NoSQL</div></div>
-                <div class="glass-card p-4 text-center hover:border-blue-400/50"><div class="text-3xl mb-2">🐘</div><div class="font-bold text-blue-400">PostgreSQL</div><div class="text-xs text-gray-500">Relational</div></div>
-                <div class="glass-card p-4 text-center hover:border-red-500/50"><div class="text-3xl mb-2">🔴</div><div class="font-bold text-red-500">Redis</div><div class="text-xs text-gray-500">Cache</div></div>
-                <div class="glass-card p-4 text-center hover:border-blue-500/50"><div class="text-3xl mb-2">🐬</div><div class="font-bold text-blue-500">MySQL</div><div class="text-xs text-gray-500">RDBMS</div></div>
+                <div class="glass-card p-4 text-center hover:border-green-500/50"><i class="devicon-mongodb-plain text-green-500 text-4xl mb-2 block"></i><div class="font-bold text-green-500">MongoDB</div><div class="text-xs text-gray-500">NoSQL</div></div>
+                <div class="glass-card p-4 text-center hover:border-blue-400/50"><i class="devicon-postgresql-plain text-blue-400 text-4xl mb-2 block"></i><div class="font-bold text-blue-400">PostgreSQL</div><div class="text-xs text-gray-500">Relational</div></div>
+                <div class="glass-card p-4 text-center hover:border-red-500/50"><i class="devicon-redis-plain text-red-500 text-4xl mb-2 block"></i><div class="font-bold text-red-500">Redis</div><div class="text-xs text-gray-500">Cache</div></div>
+                <div class="glass-card p-4 text-center hover:border-blue-500/50"><i class="devicon-mysql-plain text-blue-500 text-4xl mb-2 block"></i><div class="font-bold text-blue-500">MySQL</div><div class="text-xs text-gray-500">RDBMS</div></div>
             </div>
         </div>
 
@@ -197,11 +197,14 @@ og_type: profile
         <div class="mb-12">
             <h3 class="text-orange-400 font-bold tracking-widest mb-6 flex items-center justify-center gap-2"><span class="w-8 h-[2px] bg-orange-400"></span>AI / ML<span class="w-8 h-[2px] bg-orange-400"></span></h3>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-                <div class="glass-card p-4 text-center hover:border-blue-400/50"><div class="text-3xl mb-2">🔢</div><div class="font-bold text-blue-400">NumPy</div><div class="text-xs text-gray-500">Numerical</div></div>
-                <div class="glass-card p-4 text-center hover:border-purple-400/50"><div class="text-3xl mb-2">🐼</div><div class="font-bold text-purple-400">Pandas</div><div class="text-xs text-gray-500">Data</div></div>
-                <div class="glass-card p-4 text-center hover:border-orange-400/50"><div class="text-3xl mb-2">📊</div><div class="font-bold text-orange-400">Matplotlib</div><div class="text-xs text-gray-500">Plotting</div></div>
-                <div class="glass-card p-4 text-center hover:border-orange-500/50"><div class="text-3xl mb-2">🔬</div><div class="font-bold text-orange-500">Scikit-Learn</div><div class="text-xs text-gray-500">ML</div></div>
-                <div class="glass-card p-4 text-center hover:border-orange-400/50"><div class="text-3xl mb-2">🧠</div><div class="font-bold text-orange-400">TensorFlow</div><div class="text-xs text-gray-500">Deep Learning</div></div>
+                <div class="glass-card p-4 text-center hover:border-blue-400/50"><i class="devicon-numpy-plain text-blue-400 text-4xl mb-2 block"></i><div class="font-bold text-blue-400">NumPy</div><div class="text-xs text-gray-500">Numerical</div></div>
+                <div class="glass-card p-4 text-center hover:border-purple-400/50"><i class="devicon-pandas-plain text-purple-400 text-4xl mb-2 block"></i><div class="font-bold text-purple-400">Pandas</div><div class="text-xs text-gray-500">Data</div></div>
+                <div class="glass-card p-4 text-center hover:border-orange-400/50">
+                    <svg class="w-10 h-10 mx-auto mb-2 block text-orange-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    <div class="font-bold text-orange-400">Matplotlib</div><div class="text-xs text-gray-500">Plotting</div>
+                </div>
+                <div class="glass-card p-4 text-center hover:border-orange-500/50"><i class="devicon-scikitlearn-plain text-orange-500 text-4xl mb-2 block"></i><div class="font-bold text-orange-500">Scikit-Learn</div><div class="text-xs text-gray-500">ML</div></div>
+                <div class="glass-card p-4 text-center hover:border-orange-400/50"><i class="devicon-tensorflow-line text-orange-400 text-4xl mb-2 block"></i><div class="font-bold text-orange-400">TensorFlow</div><div class="text-xs text-gray-500">Deep Learning</div></div>
             </div>
         </div>
 
@@ -209,12 +212,15 @@ og_type: profile
         <div class="mb-12">
             <h3 class="text-sky-400 font-bold tracking-widest mb-6 flex items-center justify-center gap-2"><span class="w-8 h-[2px] bg-sky-400"></span>DEVOPS & INFRASTRUCTURE<span class="w-8 h-[2px] bg-sky-400"></span></h3>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-                <div class="glass-card p-4 text-center hover:border-blue-500/50"><div class="text-3xl mb-2">🐳</div><div class="font-bold text-blue-500">Docker</div><div class="text-xs text-gray-500">Containers</div></div>
-                <div class="glass-card p-4 text-center hover:border-white/50"><div class="text-3xl mb-2">▲</div><div class="font-bold text-white">Vercel</div><div class="text-xs text-gray-500">Deploy</div></div>
-                <div class="glass-card p-4 text-center hover:border-purple-500/50"><div class="text-3xl mb-2">🟣</div><div class="font-bold text-purple-500">Heroku</div><div class="text-xs text-gray-500">PaaS</div></div>
-                <div class="glass-card p-4 text-center hover:border-purple-400/50"><div class="text-3xl mb-2">🚂</div><div class="font-bold text-purple-400">Railway</div><div class="text-xs text-gray-500">Deploy</div></div>
-                <div class="glass-card p-4 text-center hover:border-green-400/50"><div class="text-3xl mb-2">💚</div><div class="font-bold text-green-400">Netlify</div><div class="text-xs text-gray-500">JAMstack</div></div>
-                <div class="glass-card p-4 text-center hover:border-blue-400/50"><div class="text-3xl mb-2">☁️</div><div class="font-bold text-blue-400">GCloud</div><div class="text-xs text-gray-500">Cloud</div></div>
+                <div class="glass-card p-4 text-center hover:border-blue-500/50"><i class="devicon-docker-plain text-blue-500 text-4xl mb-2 block"></i><div class="font-bold text-blue-500">Docker</div><div class="text-xs text-gray-500">Containers</div></div>
+                <div class="glass-card p-4 text-center hover:border-white/50"><i class="devicon-vercel-original text-white text-4xl mb-2 block"></i><div class="font-bold text-white">Vercel</div><div class="text-xs text-gray-500">Deploy</div></div>
+                <div class="glass-card p-4 text-center hover:border-purple-500/50"><i class="devicon-heroku-original text-purple-500 text-4xl mb-2 block"></i><div class="font-bold text-purple-500">Heroku</div><div class="text-xs text-gray-500">PaaS</div></div>
+                <div class="glass-card p-4 text-center hover:border-purple-400/50">
+                    <svg class="w-10 h-10 mx-auto mb-2 block text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                    <div class="font-bold text-purple-400">Railway</div><div class="text-xs text-gray-500">Deploy</div>
+                </div>
+                <div class="glass-card p-4 text-center hover:border-green-400/50"><i class="devicon-netlify-plain text-green-400 text-4xl mb-2 block"></i><div class="font-bold text-green-400">Netlify</div><div class="text-xs text-gray-500">JAMstack</div></div>
+                <div class="glass-card p-4 text-center hover:border-blue-400/50"><i class="devicon-googlecloud-plain text-blue-400 text-4xl mb-2 block"></i><div class="font-bold text-blue-400">GCloud</div><div class="text-xs text-gray-500">Cloud</div></div>
             </div>
         </div>
 
@@ -222,14 +228,17 @@ og_type: profile
         <div>
             <h3 class="text-arch-blue font-bold tracking-widest mb-6 flex items-center justify-center gap-2"><span class="w-8 h-[2px] bg-arch-blue"></span>TOOLS & ENVIRONMENT<span class="w-8 h-[2px] bg-arch-blue"></span></h3>
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
-                <div class="glass-card p-4 text-center hover:border-orange-600/50"><div class="text-3xl mb-2">🔀</div><div class="font-bold text-orange-600">Git</div><div class="text-xs text-gray-500">VCS</div></div>
-                <div class="glass-card p-4 text-center hover:border-white/50"><div class="text-3xl mb-2">🐙</div><div class="font-bold text-white">GitHub</div><div class="text-xs text-gray-500">Platform</div></div>
-                <div class="glass-card p-4 text-center hover:border-arch-blue/50"><div class="text-3xl mb-2">🏔️</div><div class="font-bold text-arch-blue">Arch Linux</div><div class="text-xs text-gray-500">Primary OS</div></div>
-                <div class="glass-card p-4 text-center hover:border-ubuntu-orange/50"><div class="text-3xl mb-2">🎯</div><div class="font-bold text-ubuntu-orange">Ubuntu</div><div class="text-xs text-gray-500">Server</div></div>
-                <div class="glass-card p-4 text-center hover:border-green-400/50"><div class="text-3xl mb-2">🐚</div><div class="font-bold text-green-400">ZSH</div><div class="text-xs text-gray-500">Shell</div></div>
-                <div class="glass-card p-4 text-center hover:border-green-500/50"><div class="text-3xl mb-2">🎬</div><div class="font-bold text-green-500">FFmpeg</div><div class="text-xs text-gray-500">Media</div></div>
-                <div class="glass-card p-4 text-center hover:border-blue-300/50"><div class="text-3xl mb-2">✈️</div><div class="font-bold text-blue-300">Pyrogram</div><div class="text-xs text-gray-500">Telegram</div></div>
-                <div class="glass-card p-4 text-center hover:border-neon-cyan/50"><div class="text-3xl mb-2">📡</div><div class="font-bold text-neon-cyan">VSCode</div><div class="text-xs text-gray-500">Editor</div></div>
+                <div class="glass-card p-4 text-center hover:border-orange-600/50"><i class="devicon-git-plain text-orange-600 text-4xl mb-2 block"></i><div class="font-bold text-orange-600">Git</div><div class="text-xs text-gray-500">VCS</div></div>
+                <div class="glass-card p-4 text-center hover:border-white/50"><i class="devicon-github-original text-white text-4xl mb-2 block"></i><div class="font-bold text-white">GitHub</div><div class="text-xs text-gray-500">Platform</div></div>
+                <div class="glass-card p-4 text-center hover:border-arch-blue/50"><i class="devicon-archlinux-plain text-arch-blue text-4xl mb-2 block"></i><div class="font-bold text-arch-blue">Arch Linux</div><div class="text-xs text-gray-500">Primary OS</div></div>
+                <div class="glass-card p-4 text-center hover:border-ubuntu-orange/50"><i class="devicon-ubuntu-plain text-ubuntu-orange text-4xl mb-2 block"></i><div class="font-bold text-ubuntu-orange">Ubuntu</div><div class="text-xs text-gray-500">Server</div></div>
+                <div class="glass-card p-4 text-center hover:border-green-400/50"><i class="devicon-bash-plain text-green-400 text-4xl mb-2 block"></i><div class="font-bold text-green-400">ZSH</div><div class="text-xs text-gray-500">Shell</div></div>
+                <div class="glass-card p-4 text-center hover:border-green-500/50">
+                    <svg class="w-10 h-10 mx-auto mb-2 block text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+                    <div class="font-bold text-green-500">FFmpeg</div><div class="text-xs text-gray-500">Media</div>
+                </div>
+                <div class="glass-card p-4 text-center hover:border-blue-300/50"><i class="devicon-telegram-plain text-blue-300 text-4xl mb-2 block"></i><div class="font-bold text-blue-300">Pyrogram</div><div class="text-xs text-gray-500">Telegram</div></div>
+                <div class="glass-card p-4 text-center hover:border-neon-cyan/50"><i class="devicon-vscode-plain text-neon-cyan text-4xl mb-2 block"></i><div class="font-bold text-neon-cyan">VSCode</div><div class="text-xs text-gray-500">Editor</div></div>
             </div>
         </div>
     </div>
