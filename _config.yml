@@ -8,6 +8,9 @@ github_username: Nirusaki-Malaal
 
 permalink: /blogs/:year/:month/:day/:title/
 
+timezone: Asia/Kolkata
+
+
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
