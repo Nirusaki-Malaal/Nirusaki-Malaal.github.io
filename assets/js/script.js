@@ -227,7 +227,7 @@ function renderProjectCards(repos) {
         const themeClass = neonColor.replace('neon-', '') + '-neon';
 
         const card = document.createElement('article');
-        card.className = `anime-card shrink-0 snap-start flex flex-col justify-between p-6 h-[420px] w-[340px] md:w-[400px] cursor-pointer group hover-target ${themeClass}`;
+        card.className = `anime-card shrink-0 snap-center flex flex-col justify-between p-6 h-[420px] cursor-pointer group hover-target ${themeClass}`;
         card.setAttribute('role', 'listitem');
         card.setAttribute('aria-label', `${details.name} - ${details.description}`);
 
@@ -306,8 +306,8 @@ function openModal(projectKey, repoData) {
 
     body.innerHTML = `
         <div>
-            <div class="text-[10px] text-neon-cyan font-mono tracking-[0.3em] uppercase mb-1">PROJECT CORE MATRIX</div>
-            <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-2">${details.name}</h2>
+            <div class="text-[9px] sm:text-[10px] text-neon-cyan font-mono tracking-[0.3em] uppercase mb-1">PROJECT CORE MATRIX</div>
+            <h2 class="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">${details.name}</h2>
             <div class="font-jp text-xs text-gray-500 tracking-widest uppercase mb-4">${details.jpLang}</div>
             <div class="flex flex-wrap gap-4 items-center text-xs text-gray-400 font-mono">
                 ${starsHtml}
@@ -325,7 +325,7 @@ function openModal(projectKey, repoData) {
 
         <div class="space-y-4">
             <h4 class="font-display text-sm font-bold tracking-wider text-neon-pink">UNDER THE HOOD</h4>
-            <ul class="space-y-3 text-gray-300 text-sm">
+            <ul class="space-y-3 text-gray-300 text-xs sm:text-sm">
                 ${details.bullets.map(bullet => `
                     <li class="flex gap-2.5 items-start">
                         <span class="text-neon-cyan select-none mt-0.5">⚡</span>
@@ -335,10 +335,10 @@ function openModal(projectKey, repoData) {
             </ul>
         </div>
 
-        <div class="flex flex-wrap gap-4 pt-6 border-t border-white/5">
-            <a href="${githubUrl}" target="_blank" rel="noopener noreferrer" class="neon-btn px-6 py-3 border border-neon-cyan text-neon-cyan font-bold tracking-widest text-xs hover:bg-neon-cyan hover:text-black transition-all">VIEW REPOSITORY ↗</a>
-            ${homepage ? `<a href="${homepage}" target="_blank" rel="noopener" class="neon-btn px-6 py-3 border border-neon-pink text-neon-pink font-bold tracking-widest text-xs hover:bg-neon-pink hover:text-black transition-all">LAUNCH APP ↗</a>` : ''}
-            <button onclick="closeModal()" class="px-6 py-3 border border-white/10 text-gray-400 font-bold tracking-widest text-xs hover:text-white hover:border-white transition-all ml-auto">CLOSE</button>
+        <div class="flex flex-col sm:flex-row gap-3 pt-6 border-t border-white/5 w-full">
+            <a href="${githubUrl}" target="_blank" rel="noopener noreferrer" class="neon-btn w-full sm:w-auto text-center px-6 py-3 border border-neon-cyan text-neon-cyan font-bold tracking-widest text-xs hover:bg-neon-cyan hover:text-black transition-all">VIEW REPOSITORY ↗</a>
+            ${homepage ? `<a href="${homepage}" target="_blank" rel="noopener" class="neon-btn w-full sm:w-auto text-center px-6 py-3 border border-neon-pink text-neon-pink font-bold tracking-widest text-xs hover:bg-neon-pink hover:text-black transition-all">LAUNCH APP ↗</a>` : ''}
+            <button onclick="closeModal()" class="neon-btn w-full sm:w-auto sm:ml-auto text-center px-6 py-3 border border-white/10 text-gray-400 font-bold tracking-widest text-xs hover:text-white hover:border-white transition-all">CLOSE</button>
         </div>
     `;
 
