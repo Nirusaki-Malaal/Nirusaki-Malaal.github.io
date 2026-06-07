@@ -88,33 +88,33 @@ function renderProjectCards(repos) {
             <!-- Ghibli Style Visual Frames -->
             <div class="ghibli-card-frame"></div>
             <div class="ghibli-card-leaf">
-                <svg class="w-6 h-6 text-emerald-700/40" fill="currentColor" viewBox="0 0 24 24"><path d="M17 8C8 8 4 14 4 20C9 20 13 14 13 8H17M2 22C2 22 2.5 17 5 13C7.5 9 12 7 12 7S11 11 9.5 13.5C8 16 5 22 5 22H2z"/></svg>
+                <svg class="w-6 h-6 text-[#5b8c5a]/45" fill="currentColor" viewBox="0 0 24 24"><path d="M17 8C8 8 4 14 4 20C9 20 13 14 13 8H17M2 22C2 22 2.5 17 5 13C7.5 9 12 7 12 7S11 11 9.5 13.5C8 16 5 22 5 22H2z"/></svg>
             </div>
             
             <!-- Card Header -->
-            <div class="flex justify-between items-center text-[11px] text-[#8b7e66] font-mono tracking-wider relative z-10">
+            <div class="flex justify-between items-center text-[11px] text-[#a89d89] font-mono tracking-wider relative z-10">
                 <span class="font-bold">POSTCARD // 0${(index + 1).toString().slice(-2)}</span>
-                <span class="flex items-center gap-1.5 font-sans"><span class="w-2 h-2 rounded-full bg-[#5b8c5a] animate-pulse"></span>ACTIVE</span>
+                <span class="flex items-center gap-1.5 font-sans"><span class="w-2 h-2 rounded-full bg-[#7cb37a] animate-pulse"></span>ACTIVE</span>
             </div>
 
             <!-- Content Area -->
-            <div class="flex-1 flex flex-col justify-center my-6 relative z-10 text-[#423d38]">
+            <div class="flex-1 flex flex-col justify-center my-6 relative z-10 text-[#c2b9aa]">
                 <div class="mb-3">
-                    <h3 class="font-display text-2xl font-bold text-[#2b2724] group-hover:text-[#d9745b] transition-colors line-clamp-1">${repo.name}</h3>
+                    <h3 class="font-display text-2xl font-bold text-[#f4f0e6] group-hover:text-[#e09176] transition-colors line-clamp-1">${repo.name}</h3>
                     <div class="flex items-center gap-2 mt-1">
-                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#f0eadd] text-[#5b8c5a] font-semibold">${lang}</span>
-                        <span class="text-[10px] text-[#a8997f] font-jp font-semibold">${jpLang}</span>
+                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#1a231f] text-[#7cb37a] font-semibold">${lang}</span>
+                        <span class="text-[10px] text-[#a89d89] font-jp font-semibold">${jpLang}</span>
                     </div>
                 </div>
-                <p class="text-[#696156] text-sm font-sans leading-relaxed line-clamp-4">${repo.description || 'No description provided. A quiet mystery remains.'}</p>
+                <p class="text-[#a89f92] text-sm font-sans leading-relaxed line-clamp-4">${repo.description || 'No description provided. A quiet mystery remains.'}</p>
             </div>
 
             <!-- Card Footer -->
-            <div class="relative z-10 pt-4 border-t border-[#e8e2d5] mt-auto">
-                <div class="flex justify-between items-center mb-4 text-[11px] text-[#8b7e66] font-mono">
+            <div class="relative z-10 pt-4 border-t border-[#1c2420] mt-auto">
+                <div class="flex justify-between items-center mb-4 text-[11px] text-[#a89d89] font-mono">
                     <div class="flex items-center gap-3">
                         ${repo.stargazers_count > 0 ? `<span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-[#e6a15c]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>${repo.stargazers_count}</span>` : ''}
-                        ${repo.forks_count > 0 ? `<span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-[#5b8c5a]" fill="currentColor" viewBox="0 0 20 20"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47A3 3 0 1015 16V8z"/></svg>${repo.forks_count}</span>` : ''}
+                        ${repo.forks_count > 0 ? `<span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-[#7cb37a]" fill="currentColor" viewBox="0 0 20 20"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47A3 3 0 1015 16V8z"/></svg>${repo.forks_count}</span>` : ''}
                     </div>
                     <span>${new Date(repo.updated_at).toLocaleDateString(undefined, {month: 'short', day: 'numeric', year: 'numeric'})}</span>
                 </div>

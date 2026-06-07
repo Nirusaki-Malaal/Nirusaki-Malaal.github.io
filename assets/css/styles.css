@@ -678,16 +678,16 @@ body.blog-page-bg ::-moz-selection {
     color: #ffffff !important;
 }
 
-/* ===== PROJECTS STACKED DECK & GHIBLI CARDS ===== */
+/* ===== PROJECTS STACKED DECK & GHIBLI CARDS (DARK GHIBLI THEME) ===== */
 .projects-stacked-deck {
     display: flex;
     overflow-x: auto;
     padding: 3rem 1.5rem 5rem 1.5rem;
-    gap: 0; /* Let margins handle the overlapping stack */
+    gap: 0; /* Overlapping stack */
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
-    scrollbar-color: #2b5c43 rgba(0, 0, 0, 0.05);
+    scrollbar-color: #5b8c5a rgba(255, 255, 255, 0.05);
 }
 
 .projects-stacked-deck::-webkit-scrollbar {
@@ -695,32 +695,32 @@ body.blog-page-bg ::-moz-selection {
 }
 
 .projects-stacked-deck::-webkit-scrollbar-track {
-    background: rgba(250, 246, 237, 0.1);
+    background: rgba(15, 19, 17, 0.4);
     border-radius: 4px;
 }
 
 .projects-stacked-deck::-webkit-scrollbar-thumb {
-    background: #2b5c43;
+    background: #234c37;
     border-radius: 4px;
 }
 
-/* Ghibli post-card style */
+/* Ghibli post-card style (Dark Forest/Starry Night) */
 .ghibli-card {
-    background: #fdfbf7;
+    background: #0d110f; /* Deep cozy dark forest charcoal */
     background-image: 
-        radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0),
-        radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 0);
+        radial-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 0),
+        radial-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 0);
     background-size: 8px 8px;
     background-position: 0 0, 4px 4px;
-    border: 2px solid #e5dec9;
+    border: 2px solid #1c2420; /* Dark moss border */
     border-radius: 24px;
-    box-shadow: 0 10px 25px rgba(43, 92, 67, 0.06), 0 2px 5px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(43, 92, 67, 0.05);
     width: 320px;
     height: 440px;
     padding: 1.75rem;
-    margin-right: -110px; /* Force cards to overlap stack-style */
+    margin-right: -110px; /* Overlap stacking */
     position: relative;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform-origin: bottom center;
     z-index: 1;
     display: flex;
@@ -729,18 +729,18 @@ body.blog-page-bg ::-moz-selection {
     overflow: hidden;
 }
 
-/* Dynamic fan rotation angles for stacked card look */
-.ghibli-card:nth-child(5n+1) { transform: rotate(-3.5deg) translateY(6px); }
-.ghibli-card:nth-child(5n+2) { transform: rotate(-1.5deg) translateY(-2px); }
-.ghibli-card:nth-child(5n+3) { transform: rotate(1deg) translateY(4px); }
-.ghibli-card:nth-child(5n+4) { transform: rotate(2.5deg) translateY(-1px); }
-.ghibli-card:nth-child(5n)   { transform: rotate(-2.5deg) translateY(3px); }
+/* Dynamic fan rotation angles */
+.ghibli-card:nth-child(5n+1) { transform: rotate(-3deg) translateY(6px); }
+.ghibli-card:nth-child(5n+2) { transform: rotate(-1deg) translateY(-2px); }
+.ghibli-card:nth-child(5n+3) { transform: rotate(1.5deg) translateY(4px); }
+.ghibli-card:nth-child(5n+4) { transform: rotate(2deg) translateY(-1px); }
+.ghibli-card:nth-child(5n)   { transform: rotate(-2deg) translateY(3px); }
 
 /* Ghibli Inner Border Frame */
 .ghibli-card-frame {
     position: absolute;
     inset: 8px;
-    border: 1px dashed rgba(139, 126, 102, 0.25);
+    border: 1px dashed rgba(197, 168, 128, 0.15); /* Muted gold dash */
     border-radius: 18px;
     pointer-events: none;
     z-index: 1;
@@ -762,71 +762,63 @@ body.blog-page-bg ::-moz-selection {
     50% { transform: rotate(12deg); }
 }
 
-/* Hover state: Card pops out of stack, straightens, and shines */
+/* Hover state: Card pops out of stack and straightens (No push animation to eliminate layout glitches) */
 .ghibli-card:hover {
     transform: translateY(-40px) rotate(0deg) scale(1.06) !important;
     z-index: 30 !important;
-    border-color: #d9745b; /* Terra-cotta highlight */
-    box-shadow: 0 25px 40px rgba(139, 94, 60, 0.15), 0 10px 15px rgba(0, 0, 0, 0.05);
+    border-color: #c5a880; /* Earthy gold highlight */
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.75), 0 0 25px rgba(197, 168, 128, 0.08);
 }
 
-/* Push subsequent cards right slightly to clear focus */
-.ghibli-card:hover ~ .ghibli-card {
-    transform: translateX(85px) rotate(3deg);
-}
-
-/* Ghibli Custom Buttons */
+/* Ghibli Dark Custom Buttons */
 .ghibli-btn {
-    background: #2b5c43; /* Forest green */
-    color: #fdfbf7 !important;
+    background: #1b3c2b; /* Muted forest green */
+    color: #e8e4dc !important;
     border-radius: 12px;
     border: 1px solid #234c37;
-    box-shadow: 0 4px 10px rgba(43, 92, 67, 0.12);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     text-decoration: none !important;
 }
 .ghibli-btn:hover {
-    background: #357253;
+    background: #25543d;
+    border-color: #2b5c43;
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(43, 92, 67, 0.2);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
 .ghibli-btn-secondary {
-    background: #d9745b; /* Terra-cotta */
-    color: #fdfbf7 !important;
+    background: #9d4e36; /* Muted terra-cotta */
+    color: #e8e4dc !important;
     border-radius: 12px;
-    border: 1px solid #c0634c;
-    box-shadow: 0 4px 10px rgba(217, 116, 91, 0.12);
+    border: 1px solid #b55a3f;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     text-decoration: none !important;
 }
 .ghibli-btn-secondary:hover {
-    background: #e2856e;
+    background: #b55a3f;
+    border-color: #ca6e52;
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(217, 116, 91, 0.2);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
 /* Clean text shadows and colors inside Ghibli card */
 .ghibli-card h3 {
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
-/* Scroll indicator adjustments */
-#carousel-prev shadow-md, #carousel-next shadow-md {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Make sure skeleton shimmers in warm tones */
+/* Make sure skeleton shimmers in dark moss tones */
 .ghibli-card.skeleton-card {
-    background: #faf6ee;
-    border-color: #e5dec9;
+    background: #0d110f;
+    border-color: #1c2420;
 }
 @keyframes ghibli-shimmer {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
 }
 .ghibli-card.skeleton-card .bg-\[\#e5dec9\] {
-    background: linear-gradient(90deg, #e5dec9 25%, #ebd7be 50%, #e5dec9 75%);
+    background: linear-gradient(90deg, #1c2420 25%, #2a3630 50%, #1c2420 75%);
     background-size: 200% 100%;
     animation: ghibli-shimmer 1.8s infinite;
 }
