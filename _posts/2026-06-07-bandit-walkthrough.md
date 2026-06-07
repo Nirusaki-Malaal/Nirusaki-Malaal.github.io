@@ -2,7 +2,7 @@
 layout: post
 title: "Cracking OverTheWire: Bandit Walkthrough (0 to 15)"
 description: "A sick speedrun walkthrough of OverTheWire Bandit wargame covering levels 0 through 15."
-tags: [Security, CTF, OverTheWire, Bandit, Linux, Bash]
+tags: [Cyber Security, CTF, OverTheWire, Bandit, Linux, Bash, Ethical Hacking, Penetration Testing]
 ---
 
 What is good hackers! Today we are diving into the OverTheWire Bandit wargame. We are doing a full speedrun of the first 15 levels. I cranked this out in record time so you do not have to struggle. Let's get right into the terminal and crack some passwords! 💻🔥
