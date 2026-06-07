@@ -393,9 +393,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             })
             .catch(err => {
-                    </div>
-                `;
+                console.error('Failed to fetch repos, using local fallback:', err);
+                renderProjectCards(null);
+
+                const prevBtn = document.getElementById('carousel-prev');
+                const nextBtn = document.getElementById('carousel-next');
+                if (prevBtn && nextBtn) {
+                    prevBtn.addEventListener('click', () => {
+                        grid.scrollBy({ left: -400, behavior: 'smooth' });
+                    });
+                    nextBtn.addEventListener('click', () => {
+                        grid.scrollBy({ left: 400, behavior: 'smooth' });
+                    });
+                }
             });
+
+        // Initialize modal close listeners
+        const modalClose = document.getElementById('project-modal-close');
+        if (modalClose) {
+            modalClose.addEventListener('click', closeModal);
+        }
+
+        const projectModal = document.getElementById('project-modal');
+        if (projectModal) {
+            projectModal.addEventListener('click', (e) => {
+                if (e.target === projectModal) closeModal();
+            });
+        }
+
+        // Close project modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const projModal = document.getElementById('project-modal');
+                if (projModal && !projModal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            }
+        });
     }
 });
 
