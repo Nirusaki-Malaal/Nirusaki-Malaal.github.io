@@ -50,18 +50,150 @@ async function fetchGitHubRepos() {
     return filtered;
 }
 
-const jpLangs = {
-    'Python': 'パイソン',
-    'JavaScript': 'ジャバスクリプト',
-    'TypeScript': 'タイプスクリプト',
-    'C++': 'シープラスプラス',
-    'C': 'シー言語',
-    'HTML': 'エイチティーエムエル',
-    'CSS': 'シーエスエス',
-    'Java': 'ジャバ',
-    'Shell': 'シェル',
-    'Jupyter Notebook': 'ノートブック',
-    'Unknown': '不明'
+const targetRepos = [
+    "video-encoder",
+    "auto-airing-animes",
+    "learning-ml",
+    "Learning-DL",
+    "gdrive-uploader-bot",
+    "shingaku",
+    "AetherScan",
+    "JefferyEpsteinRag",
+    "image-compressor-website",
+    "nith-results-website"
+];
+
+const projectDetails = {
+    "video-encoder": {
+        name: "Video Encoder Bot",
+        lang: "Python",
+        jpLang: "動画エンコーダボット",
+        github_url: "https://github.com/Nirusaki-Malaal/video-encoder",
+        homepage: "",
+        description: "A persistent, queue-based Telegram video encoder bot powered by FFmpeg commands and database queue recovery.",
+        bullets: [
+            "<strong>Persistent Encoding Queue</strong>: Maintains an active queue in a MongoDB database, allowing encoding processes to automatically resume and continue working even after a server crash or reboot.",
+            "<strong>Admin Terminal Integration</strong>: Features remote execution commands directly through Telegram, including active bash shell access and Python <code>eval</code> utilities.",
+            "<strong>Dockerized Deployments</strong>: Packaged for Docker environments with full settings configuration handled via <code>config.env</code>."
+        ]
+    },
+    "auto-airing-animes": {
+        name: "Auto Airing Animes",
+        lang: "Python",
+        jpLang: "アニメ自動配信ボット",
+        github_url: "https://github.com/Nirusaki-Malaal/auto-airing-animes",
+        homepage: "",
+        description: "An automated RSS-triggered anime downloader and encoder bot that uploads content directly to Telegram channels.",
+        bullets: [
+            "<strong>Automated RSS Ingestion</strong>: Periodically parses anime release feeds, allowing users to search (<code>/find</code>), view feeds (<code>/rss</code>), and fetch torrents by feed index (<code>/tor &lt;number&gt;</code>).",
+            "<strong>Automated Encoding & Upload</strong>: Integrates media pipelines to convert and upload episodes directly to a main channel (Seireitei) and sub-channels (Rukongai).",
+            "<strong>Filesystem Self-Healing</strong>: Includes automated commands (<code>/renew</code>) to clear temporary cache directories and <code>/clear</code> to purge active queues."
+        ]
+    },
+    "learning-ml": {
+        name: "Learning ML from Scratch",
+        lang: "Python",
+        jpLang: "機械学習ゼロから",
+        github_url: "https://github.com/Nirusaki-Malaal/learning-ml",
+        homepage: "",
+        description: "A mathematics-first Machine Learning library building standard models completely from scratch using NumPy.",
+        bullets: [
+            "<strong>Math-First Implementations</strong>: Implements regression (Linear, Locally Weighted LWLR), classification (Logistic, Softmax), and clustering from scratch without scikit-learn.",
+            "<strong>Real-World Inner Projects</strong>: Integrates models into functional testbeds, such as a Weather Predictor (2013-2024 local data), SMS Spam Filter (with custom TF-IDF), and a handwritten Digit Reader web app.",
+            "<strong>Vectorized Computations</strong>: Heavy focus on mathematical vectorization to achieve high execution speed using NumPy arrays."
+        ]
+    },
+    "learning-dl": {
+        name: "Learning DL from Scratch",
+        lang: "Python",
+        jpLang: "ディープラーニングゼロから",
+        github_url: "https://github.com/Nirusaki-Malaal/Learning-DL",
+        homepage: "",
+        description: "Custom neural network layers and training models built from scratch without PyTorch or TensorFlow.",
+        bullets: [
+            "<strong>Custom Network Architecture</strong>: Implements feedforward networks, custom activation functions (sigmoid, softmax), backpropagation, and loss functions from scratch.",
+            "<strong>Weights Serialization</strong>: Saves trained model parameters (weights/biases) to local <code>model.npz</code> files for instant reload and inference.",
+            "<strong>Logistic Regression Foundations</strong>: Features foundational classification architectures built entirely on NumPy vector mathematics."
+        ]
+    },
+    "gdrive-uploader-bot": {
+        name: "GDrive Uploader Bot",
+        lang: "Python",
+        jpLang: "グーグルドライブアップローダー",
+        github_url: "https://github.com/Nirusaki-Malaal/gdrive-uploader-bot",
+        homepage: "",
+        description: "A queue-driven Telegram bot that uploads media streams to personal or Team Google Drives with HTML landing pages.",
+        bullets: [
+            "<strong>Multi-User OAuth Storage</strong>: Manages individual Google Drive OAuth tokens and Team Drive settings, storing credentials securely inside MongoDB.",
+            "<strong>Queue-Based Uploading</strong>: Leverages Pyrogram to handle concurrent uploads of large Telegram documents and videos with active progress visual status bars.",
+            "<strong>Automated HTML Generation</strong>: Features a <code>/html2</code> flow that parses a Google Drive folder and generates a clean, styled HTML season/episode landing page."
+        ]
+    },
+    "shingaku": {
+        name: "Shingaku",
+        lang: "Python",
+        jpLang: "学習プラットフォーム",
+        github_url: "https://github.com/Nirusaki-Malaal/shingaku",
+        homepage: "",
+        description: "An AI-driven academic learning management platform featuring automated PDF parsing, web examination, and blockchain validation.",
+        bullets: [
+            "<strong>PDF to CBT Generator</strong>: Parses study PDFs, extracting text and images to auto-generate interactive Computer-Based Tests (CBTs) and flashcards using Google Gemini API.",
+            "<strong>Web3 Blockchain Integrity</strong>: Generates cryptographic hashes of exam questions and student responses, storing them on-chain using Web3 to guarantee exam integrity and block tampering.",
+            "<strong>Secure User Architecture</strong>: Features password hashing, SMTP-driven OTP verification for registration/deletion, and dynamic pixel-art avatar generation."
+        ]
+    },
+    "aetherscan": {
+        name: "AetherScan Diagnostics",
+        lang: "JavaScript",
+        jpLang: "ネットワークスキャナ",
+        github_url: "https://github.com/Nirusaki-Malaal/AetherScan",
+        homepage: "",
+        description: "A Firefox tactical diagnostics extension connecting browser popup controls to local Nmap scan scripts.",
+        bullets: [
+            "<strong>Native Messaging Bridge</strong>: Uses browser Native Messaging APIs to trigger a background Python daemon (<code>host.py</code>) which interfaces with the system's local Nmap binary.",
+            "<strong>HUD Sonar Interface</strong>: Renders an animated radar-sonar scanning wave overlay, diagnostic log feeds, and active ports tables dynamically.",
+            "<strong>Report Database</strong>: Compiles raw scan telemetry reports into copyable JSON format and maintains local diagnostic logs with cache reloading."
+        ]
+    },
+    "jefferyepsteinrag": {
+        name: "Epstein Federal RAG",
+        lang: "Python",
+        jpLang: "法的大規模言語モデル",
+        github_url: "https://github.com/Nirusaki-Malaal/JefferyEpsteinRag",
+        homepage: "",
+        description: "A legal records search engine featuring a Windows 7 Aero Glass UI that crawls federal Epstein files and online databases.",
+        bullets: [
+            "<strong>Federal Bot Gate Bypass</strong>: Reverse-engineered the U.S. government media server's Queue-It and bot blocks. Bypassed selenium checks entirely by injecting the cookie header <code>'justiceGovAgeVerified': 'true'</code>.",
+            "<strong>Draggable Aero Glass Desktop</strong>: Recreated the classic Windows 7 UI, featuring glassmorphism, draggable windows, desktop shortcuts, taskbar Start orb, and functional sidebar gadgets.",
+            "<strong>Multi-Provider LLM RAG</strong>: Searches court PDFs (scanned FBI records, flight logs, witness reports) and live web links simultaneously. Users configure Gemini, Groq, or local Ollama directly in the Start Menu control panel."
+        ]
+    },
+    "image-compressor-website": {
+        name: "Image Compressor",
+        lang: "Python",
+        jpLang: "画像圧縮ウェブサイト",
+        github_url: "https://github.com/Nirusaki-Malaal/image-compressor-website",
+        homepage: "",
+        description: "A local, lightweight image compressor that optimizes JPEG, PNG, and WebP assets without external API limits.",
+        bullets: [
+            "<strong>Local Optimization Engine</strong>: Compresses and resizes images on the local host, bypassing the need for cloud uploads or third-party image compression APIs.",
+            "<strong>Multi-Format Processing</strong>: Handles common image formats including JPEG, PNG, and WebP, optimizing sizes with minimal visual quality degradation.",
+            "<strong>Simple Frontend & API</strong>: A clean drag-and-drop web UI connected to a fast Flask API for instant file conversion and download."
+        ]
+    },
+    "nith-results-website": {
+        name: "NITH Academic Portal",
+        lang: "Python",
+        jpLang: "学術ポータル",
+        github_url: "https://github.com/Nirusaki-Malaal/nith-results-website",
+        homepage: "https://result-nith-black.vercel.app/",
+        description: "A fast, modern portal simplifying Roll Number results lookup for NIT Hamirpur students.",
+        bullets: [
+            "<strong>Instant Results Lookup</strong>: Bypasses slow legacy university portals, fetching semester-wise grades, SGPAs, and CGPAs instantly.",
+            "<strong>Vercel Optimized Deployment</strong>: Deployed as serverless functions on Vercel for fast loading times and global availability.",
+            "<strong>Clean Responsive Layout</strong>: Tailored UI/UX featuring visual breakdowns of academic metrics across desktop and mobile screens."
+        ]
+    }
 };
 
 function renderProjectCards(repos) {
@@ -73,64 +205,171 @@ function renderProjectCards(repos) {
 
     // Update repo count in hero
     const repoCount = document.getElementById('repo-count');
-    if (repoCount) repoCount.textContent = repos.length;
+    if (repoCount) repoCount.textContent = '10';
 
-    repos.forEach((repo, index) => {
-        const lang = repo.language || 'Unknown';
-        const jpLang = jpLangs[lang] || lang;
+    // Map fetched repo stats to target repos in the correct order
+    const renderedRepos = targetRepos.map(targetName => {
+        const key = targetName.toLowerCase();
+        const repoData = repos ? repos.find(r => r.name.toLowerCase() === key) : null;
+        return {
+            key: key,
+            repoData: repoData
+        };
+    });
+
+    renderedRepos.forEach((item, index) => {
+        const details = projectDetails[item.key];
+        if (!details) return;
+
+        const lang = item.repoData ? (item.repoData.language || details.lang) : details.lang;
+        const jpLang = details.jpLang;
+        const neonColor = neonColors[index % neonColors.length];
+        const themeClass = neonColor.replace('neon-', '') + '-neon';
 
         const card = document.createElement('article');
-        card.className = `ghibli-card shrink-0 cursor-pointer group flex flex-col justify-between`;
+        card.className = `anime-card shrink-0 snap-start flex flex-col justify-between p-6 h-[420px] w-[340px] md:w-[400px] cursor-pointer group hover-target ${themeClass}`;
         card.setAttribute('role', 'listitem');
-        card.setAttribute('aria-label', `${repo.name} - ${repo.description || 'No description'}`);
+        card.setAttribute('aria-label', `${details.name} - ${details.description}`);
 
         card.innerHTML = `
-            <!-- Ghibli Style Visual Frames -->
-            <div class="ghibli-card-frame"></div>
-            <div class="ghibli-card-leaf">
-                <svg class="w-6 h-6 text-[#5b8c5a]/45" fill="currentColor" viewBox="0 0 24 24"><path d="M17 8C8 8 4 14 4 20C9 20 13 14 13 8H17M2 22C2 22 2.5 17 5 13C7.5 9 12 7 12 7S11 11 9.5 13.5C8 16 5 22 5 22H2z"/></svg>
-            </div>
-            
-            <!-- Card Header -->
-            <div class="flex justify-between items-center text-[11px] text-[#a89d89] font-mono tracking-wider relative z-10">
-                <span class="font-bold">POSTCARD // 0${(index + 1).toString().slice(-2)}</span>
-                <span class="flex items-center gap-1.5 font-sans"><span class="w-2 h-2 rounded-full bg-[#7cb37a] animate-pulse"></span>ACTIVE</span>
+            <!-- Anime/Cyberpunk Visual Overlays -->
+            <div class="anime-card-grid"></div>
+            <div class="anime-card-hologram"></div>
+            <div class="anime-card-corner-top"></div>
+            <div class="anime-card-corner-bottom"></div>
+            <div class="anime-card-scanline-bar"></div>
+
+            <!-- Card HUD Header -->
+            <div class="flex justify-between items-center text-[10px] text-gray-500 font-mono tracking-widest relative z-10">
+                <span>SYSTEM CARD // 0${(index + 1).toString().slice(-2)}</span>
+                <span class="text-neon-cyan flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-neon-cyan animate-pulse"></span>ACTIVE</span>
             </div>
 
-            <!-- Content Area -->
-            <div class="flex-1 flex flex-col justify-center my-6 relative z-10 text-[#c2b9aa]">
-                <div class="mb-3">
-                    <h3 class="font-display text-2xl font-bold text-[#f4f0e6] group-hover:text-[#e09176] transition-colors line-clamp-1">${repo.name}</h3>
+            <!-- Main Content Container -->
+            <div class="flex-1 flex flex-col justify-center my-4 relative z-10">
+                <!-- Project Name -->
+                <div class="mb-2">
+                    <h3 class="font-display text-2xl font-bold text-white group-hover:text-white transition-colors line-clamp-1">${details.name}</h3>
+                    <!-- Language tag (English / Japanese) -->
                     <div class="flex items-center gap-2 mt-1">
-                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#1a231f] text-[#7cb37a] font-semibold">${lang}</span>
-                        <span class="text-[10px] text-[#a89d89] font-jp font-semibold">${jpLang}</span>
+                        <span class="text-[10px] tracking-wider text-neon-cyan font-mono">${lang}</span>
+                        <span class="text-[9px] text-gray-500 font-jp tracking-wider">${jpLang}</span>
                     </div>
                 </div>
-                <p class="text-[#a89f92] text-sm font-sans leading-relaxed line-clamp-4">${repo.description || 'No description provided. A quiet mystery remains.'}</p>
+
+                <!-- Description -->
+                <p class="text-gray-400 text-sm line-clamp-3 mb-4">${details.description}</p>
             </div>
 
-            <!-- Card Footer -->
-            <div class="relative z-10 pt-4 border-t border-[#1c2420] mt-auto">
-                <div class="flex justify-between items-center mb-4 text-[11px] text-[#a89d89] font-mono">
+            <!-- Card Footer details -->
+            <div class="relative z-10 pt-4 border-t border-white/5 mt-auto">
+                <div class="flex justify-between items-center text-xs text-gray-500 font-mono">
                     <div class="flex items-center gap-3">
-                        ${repo.stargazers_count > 0 ? `<span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-[#e6a15c]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>${repo.stargazers_count}</span>` : ''}
-                        ${repo.forks_count > 0 ? `<span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-[#7cb37a]" fill="currentColor" viewBox="0 0 20 20"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47A3 3 0 1015 16V8z"/></svg>${repo.forks_count}</span>` : ''}
+                        ${item.repoData && item.repoData.stargazers_count > 0 ? `<span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>${item.repoData.stargazers_count}</span>` : ''}
+                        ${item.repoData && item.repoData.forks_count > 0 ? `<span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7a3 3 0 100-6 3 3 0 000 6zM8 7v7a4 4 0 00.275 1.48L5.414 18M17 17v-4a4 4 0 00-.275-1.48L19.586 14M16 7a3 3 0 100-6 3 3 0 000 6z"/></svg>${item.repoData.forks_count}</span>` : ''}
                     </div>
-                    <span>${new Date(repo.updated_at).toLocaleDateString(undefined, {month: 'short', day: 'numeric', year: 'numeric'})}</span>
-                </div>
-                
-                <div class="flex items-center gap-3">
-                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="ghibli-btn flex-1 text-center text-xs uppercase tracking-widest py-2.5 font-bold" onclick="event.stopPropagation();">GitHub</a>
-                    ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" rel="noopener" class="ghibli-btn-secondary flex-1 text-center text-xs uppercase tracking-widest py-2.5 font-bold" onclick="event.stopPropagation();">Launch</a>` : ''}
+                    <span>${item.repoData ? new Date(item.repoData.updated_at).toLocaleDateString(undefined, {month: 'short', year: 'numeric'}) : 'Active'}</span>
                 </div>
             </div>
         `;
 
-        // Click card to go to GitHub
-        card.addEventListener('click', () => window.open(repo.html_url, '_blank'));
+        // Card mouse follow glow effect
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+
+        // Open modal on click
+        card.addEventListener('click', () => {
+            openModal(item.key, item.repoData);
+        });
 
         grid.appendChild(card);
     });
+}
+
+function openModal(projectKey, repoData) {
+    const modal = document.getElementById('project-modal');
+    const body = document.getElementById('project-modal-body');
+    const details = projectDetails[projectKey];
+    if (!modal || !body || !details) return;
+
+    const starsHtml = repoData && repoData.stargazers_count > 0 ? `<span class="flex items-center gap-1"><svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>${repoData.stargazers_count} Stars</span>` : '';
+    const forksHtml = repoData && repoData.forks_count > 0 ? `<span class="flex items-center gap-1"><svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7a3 3 0 100-6 3 3 0 000 6zM8 7v7a4 4 0 00.275 1.48L5.414 18M17 17v-4a4 4 0 00-.275-1.48L19.586 14M16 7a3 3 0 100-6 3 3 0 000 6z"/></svg>${repoData.forks_count} Forks</span>` : '';
+    const dateHtml = repoData ? `<time class="text-xs text-gray-500 font-mono">Updated: ${new Date(repoData.updated_at).toLocaleDateString()}</time>` : '';
+
+    const githubUrl = details.github_url || (repoData ? repoData.html_url : '');
+    const homepage = details.homepage || (repoData ? repoData.homepage : '');
+
+    body.innerHTML = `
+        <div>
+            <div class="text-[10px] text-neon-cyan font-mono tracking-[0.3em] uppercase mb-1">PROJECT CORE MATRIX</div>
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-2">${details.name}</h2>
+            <div class="font-jp text-xs text-gray-500 tracking-widest uppercase mb-4">${details.jpLang}</div>
+            <div class="flex flex-wrap gap-4 items-center text-xs text-gray-400 font-mono">
+                ${starsHtml}
+                ${forksHtml}
+                ${dateHtml}
+            </div>
+        </div>
+
+        <div class="h-px bg-gradient-to-r from-neon-cyan to-transparent"></div>
+
+        <div class="space-y-4">
+            <h4 class="font-display text-sm font-bold tracking-wider text-neon-pink">TECHNICAL BLUEPRINT</h4>
+            <p class="text-gray-300 text-sm leading-relaxed">${details.description}</p>
+        </div>
+
+        <div class="space-y-4">
+            <h4 class="font-display text-sm font-bold tracking-wider text-neon-pink">UNDER THE HOOD</h4>
+            <ul class="space-y-3 text-gray-300 text-sm">
+                ${details.bullets.map(bullet => `
+                    <li class="flex gap-2.5 items-start">
+                        <span class="text-neon-cyan select-none mt-0.5">⚡</span>
+                        <span>${bullet}</span>
+                    </li>
+                `).join('')}
+            </ul>
+        </div>
+
+        <div class="flex flex-wrap gap-4 pt-6 border-t border-white/5">
+            <a href="${githubUrl}" target="_blank" rel="noopener noreferrer" class="neon-btn px-6 py-3 border border-neon-cyan text-neon-cyan font-bold tracking-widest text-xs hover:bg-neon-cyan hover:text-black transition-all">VIEW REPOSITORY ↗</a>
+            ${homepage ? `<a href="${homepage}" target="_blank" rel="noopener" class="neon-btn px-6 py-3 border border-neon-pink text-neon-pink font-bold tracking-widest text-xs hover:bg-neon-pink hover:text-black transition-all">LAUNCH APP ↗</a>` : ''}
+            <button onclick="closeModal()" class="px-6 py-3 border border-white/10 text-gray-400 font-bold tracking-widest text-xs hover:text-white hover:border-white transition-all ml-auto">CLOSE</button>
+        </div>
+    `;
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    
+    if (window.gsap) {
+        gsap.to(modal, { opacity: 1, duration: 0.3 });
+        gsap.from('#project-modal-content', { scale: 0.9, opacity: 0, y: 20, duration: 0.3, ease: 'power2.out' });
+    } else {
+        modal.style.opacity = '1';
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('project-modal');
+    if (!modal) return;
+    
+    if (window.gsap) {
+        gsap.to(modal, { opacity: 0, duration: 0.2, onComplete: () => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }});
+    } else {
+        modal.style.opacity = '0';
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+    }
 }
 
 // Load projects on DOM ready
@@ -146,19 +385,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const nextBtn = document.getElementById('carousel-next');
                 if (prevBtn && nextBtn) {
                     prevBtn.addEventListener('click', () => {
-                        grid.scrollBy({ left: -260, behavior: 'smooth' }); // Scroll by approximately one card width offset
+                        grid.scrollBy({ left: -400, behavior: 'smooth' });
                     });
                     nextBtn.addEventListener('click', () => {
-                        grid.scrollBy({ left: 260, behavior: 'smooth' });
+                        grid.scrollBy({ left: 400, behavior: 'smooth' });
                     });
                 }
             })
             .catch(err => {
-                console.error('Failed to fetch repos:', err);
-                grid.innerHTML = `
-                    <div class="w-full ghibli-card p-8 text-center shrink-0 flex flex-col justify-center">
-                        <p class="text-[#696156] mb-4">Failed to load projects from GitHub.</p>
-                        <a href="https://github.com/${GITHUB_USERNAME}" target="_blank" rel="noopener" class="text-[#d9745b] hover:underline font-bold">View on GitHub →</a>
                     </div>
                 `;
             });
