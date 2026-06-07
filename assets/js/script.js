@@ -78,70 +78,53 @@ function renderProjectCards(repos) {
     repos.forEach((repo, index) => {
         const lang = repo.language || 'Unknown';
         const jpLang = jpLangs[lang] || lang;
-        const colors = langColors[lang] || defaultLang;
-        const neonColor = neonColors[index % neonColors.length];
-        const themeClass = neonColor.replace('neon-', '') + '-neon';
 
         const card = document.createElement('article');
-        card.className = `anime-card shrink-0 snap-start flex flex-col justify-between p-6 h-[420px] w-[340px] md:w-[400px] cursor-pointer group hover-target ${themeClass}`;
+        card.className = `ghibli-card shrink-0 cursor-pointer group flex flex-col justify-between`;
         card.setAttribute('role', 'listitem');
         card.setAttribute('aria-label', `${repo.name} - ${repo.description || 'No description'}`);
 
         card.innerHTML = `
-            <!-- Anime/Cyberpunk Visual Overlays -->
-            <div class="anime-card-grid"></div>
-            <div class="anime-card-hologram"></div>
-            <div class="anime-card-corner-top"></div>
-            <div class="anime-card-corner-bottom"></div>
-            <div class="anime-card-scanline-bar"></div>
-
-            <!-- Card HUD Header -->
-            <div class="flex justify-between items-center text-[10px] text-gray-500 font-mono tracking-widest relative z-10">
-                <span>SYSTEM CARD // 0${(index + 1).toString().slice(-2)}</span>
-                <span class="text-neon-cyan flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-neon-cyan animate-pulse"></span>ACTIVE</span>
+            <!-- Ghibli Style Visual Frames -->
+            <div class="ghibli-card-frame"></div>
+            <div class="ghibli-card-leaf">
+                <svg class="w-6 h-6 text-emerald-700/40" fill="currentColor" viewBox="0 0 24 24"><path d="M17 8C8 8 4 14 4 20C9 20 13 14 13 8H17M2 22C2 22 2.5 17 5 13C7.5 9 12 7 12 7S11 11 9.5 13.5C8 16 5 22 5 22H2z"/></svg>
+            </div>
+            
+            <!-- Card Header -->
+            <div class="flex justify-between items-center text-[11px] text-[#8b7e66] font-mono tracking-wider relative z-10">
+                <span class="font-bold">POSTCARD // 0${(index + 1).toString().slice(-2)}</span>
+                <span class="flex items-center gap-1.5 font-sans"><span class="w-2 h-2 rounded-full bg-[#5b8c5a] animate-pulse"></span>ACTIVE</span>
             </div>
 
-            <!-- Main Content Container -->
-            <div class="flex-1 flex flex-col justify-center my-4 relative z-10">
-                <!-- Project Name -->
-                <div class="mb-2">
-                    <h3 class="font-display text-2xl font-bold text-white group-hover:text-white transition-colors line-clamp-1">${repo.name}</h3>
-                    <!-- Language tag (English / Japanese) -->
+            <!-- Content Area -->
+            <div class="flex-1 flex flex-col justify-center my-6 relative z-10 text-[#423d38]">
+                <div class="mb-3">
+                    <h3 class="font-display text-2xl font-bold text-[#2b2724] group-hover:text-[#d9745b] transition-colors line-clamp-1">${repo.name}</h3>
                     <div class="flex items-center gap-2 mt-1">
-                        <span class="text-[10px] tracking-wider text-neon-cyan font-mono">${lang}</span>
-                        <span class="text-[9px] text-gray-500 font-jp tracking-wider">${jpLang}</span>
+                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#f0eadd] text-[#5b8c5a] font-semibold">${lang}</span>
+                        <span class="text-[10px] text-[#a8997f] font-jp font-semibold">${jpLang}</span>
                     </div>
                 </div>
-
-                <!-- Description -->
-                <p class="text-gray-400 text-sm line-clamp-3 mb-4">${repo.description || 'System lacks description. No database entry found.'}</p>
+                <p class="text-[#696156] text-sm font-sans leading-relaxed line-clamp-4">${repo.description || 'No description provided. A quiet mystery remains.'}</p>
             </div>
 
-            <!-- Card Footer details and buttons -->
-            <div class="relative z-10 pt-4 border-t border-white/5 mt-auto">
-                <div class="flex justify-between items-center mb-4 text-xs text-gray-500 font-mono">
+            <!-- Card Footer -->
+            <div class="relative z-10 pt-4 border-t border-[#e8e2d5] mt-auto">
+                <div class="flex justify-between items-center mb-4 text-[11px] text-[#8b7e66] font-mono">
                     <div class="flex items-center gap-3">
-                        ${repo.stargazers_count > 0 ? `<span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>${repo.stargazers_count}</span>` : ''}
-                        ${repo.forks_count > 0 ? `<span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7a3 3 0 100-6 3 3 0 000 6zM8 7v7a4 4 0 00.275 1.48L5.414 18M17 17v-4a4 4 0 00-.275-1.48L19.586 14M16 7a3 3 0 100-6 3 3 0 000 6z"/></svg>${repo.forks_count}</span>` : ''}
+                        ${repo.stargazers_count > 0 ? `<span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-[#e6a15c]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>${repo.stargazers_count}</span>` : ''}
+                        ${repo.forks_count > 0 ? `<span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-[#5b8c5a]" fill="currentColor" viewBox="0 0 20 20"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47A3 3 0 1015 16V8z"/></svg>${repo.forks_count}</span>` : ''}
                     </div>
-                    <time datetime="${repo.updated_at}">${new Date(repo.updated_at).toLocaleDateString(undefined, {month: 'short', day: 'numeric', year: 'numeric'})}</time>
+                    <span>${new Date(repo.updated_at).toLocaleDateString(undefined, {month: 'short', day: 'numeric', year: 'numeric'})}</span>
                 </div>
                 
-                <div class="flex items-center gap-2">
-                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="neon-btn flex-1 text-center text-xs uppercase tracking-widest border border-neon-cyan text-neon-cyan py-2.5 hover:bg-neon-cyan hover:text-black transition-all" onclick="event.stopPropagation();">GitHub ↗</a>
-                    ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" rel="noopener" class="neon-btn flex-1 text-center text-xs uppercase tracking-widest border border-neon-pink text-neon-pink py-2.5 hover:bg-neon-pink hover:text-black transition-all" onclick="event.stopPropagation();">Launch ↗</a>` : ''}
+                <div class="flex items-center gap-3">
+                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="ghibli-btn flex-1 text-center text-xs uppercase tracking-widest py-2.5 font-bold" onclick="event.stopPropagation();">GitHub</a>
+                    ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" rel="noopener" class="ghibli-btn-secondary flex-1 text-center text-xs uppercase tracking-widest py-2.5 font-bold" onclick="event.stopPropagation();">Launch</a>` : ''}
                 </div>
             </div>
         `;
-
-        // Card mouse follow glow effect
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-        });
 
         // Click card to go to GitHub
         card.addEventListener('click', () => window.open(repo.html_url, '_blank'));
@@ -163,19 +146,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 const nextBtn = document.getElementById('carousel-next');
                 if (prevBtn && nextBtn) {
                     prevBtn.addEventListener('click', () => {
-                        grid.scrollBy({ left: -400, behavior: 'smooth' });
+                        grid.scrollBy({ left: -260, behavior: 'smooth' }); // Scroll by approximately one card width offset
                     });
                     nextBtn.addEventListener('click', () => {
-                        grid.scrollBy({ left: 400, behavior: 'smooth' });
+                        grid.scrollBy({ left: 260, behavior: 'smooth' });
                     });
                 }
             })
             .catch(err => {
                 console.error('Failed to fetch repos:', err);
                 grid.innerHTML = `
-                    <div class="w-full glass-card p-8 text-center shrink-0">
-                        <p class="text-gray-400 mb-4">Failed to load projects from GitHub.</p>
-                        <a href="https://github.com/${GITHUB_USERNAME}" target="_blank" rel="noopener" class="text-neon-cyan hover:underline">View on GitHub →</a>
+                    <div class="w-full ghibli-card p-8 text-center shrink-0 flex flex-col justify-center">
+                        <p class="text-[#696156] mb-4">Failed to load projects from GitHub.</p>
+                        <a href="https://github.com/${GITHUB_USERNAME}" target="_blank" rel="noopener" class="text-[#d9745b] hover:underline font-bold">View on GitHub →</a>
                     </div>
                 `;
             });
