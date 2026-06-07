@@ -50,6 +50,20 @@ async function fetchGitHubRepos() {
     return filtered;
 }
 
+const jpLangs = {
+    'Python': 'パイソン',
+    'JavaScript': 'ジャバスクリプト',
+    'TypeScript': 'タイプスクリプト',
+    'C++': 'シープラスプラス',
+    'C': 'シー言語',
+    'HTML': 'エイチティーエムエル',
+    'CSS': 'シーエスエス',
+    'Java': 'ジャバ',
+    'Shell': 'シェル',
+    'Jupyter Notebook': 'ノートブック',
+    'Unknown': '不明'
+};
+
 function renderProjectCards(repos) {
     const grid = document.getElementById('projects-grid');
     if (!grid) return;
@@ -63,35 +77,71 @@ function renderProjectCards(repos) {
 
     repos.forEach((repo, index) => {
         const lang = repo.language || 'Unknown';
+        const jpLang = jpLangs[lang] || lang;
         const colors = langColors[lang] || defaultLang;
         const neonColor = neonColors[index % neonColors.length];
+        const themeClass = neonColor.replace('neon-', '') + '-neon';
 
         const card = document.createElement('article');
-        card.className = 'project-card glass-card group cursor-pointer hover-target flex flex-col h-full';
+        card.className = `anime-card shrink-0 snap-start flex flex-col justify-between p-6 h-[420px] w-[340px] md:w-[400px] cursor-pointer group hover-target ${themeClass}`;
         card.setAttribute('role', 'listitem');
         card.setAttribute('aria-label', `${repo.name} - ${repo.description || 'No description'}`);
 
         card.innerHTML = `
-            <div class="h-2 w-full" style="background: ${colors.gradient};"></div>
-            <div class="p-6 flex-1 flex flex-col">
-                <div class="flex justify-between items-start mb-3">
-                    <h3 class="font-display text-xl font-bold group-hover:text-${neonColor} transition-colors line-clamp-1">${repo.name}</h3>
-                    ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" rel="noopener" class="text-xs text-neon-cyan border border-neon-cyan px-2 py-1 rounded hover:bg-neon-cyan hover:text-black transition-all relative z-20" onclick="event.stopPropagation();">LIVE ↗</a>` : ''}
-                </div>
-                <p class="text-gray-400 text-sm mb-4 line-clamp-2 flex-1">${repo.description || 'No description available.'}</p>
-                <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/10">
-                    <div class="flex items-center gap-3">
-                        <span class="text-xs px-2 py-1 border rounded ${colors.text} ${colors.border}">${lang}</span>
-                        ${repo.stargazers_count > 0 ? `<span class="text-xs text-gray-400 flex items-center gap-1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>${repo.stargazers_count}</span>` : ''}
-                        ${repo.forks_count > 0 ? `<span class="text-xs text-gray-400 flex items-center gap-1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.707 3.293a1 1 0 010 1.414L5.414 7H11a7 7 0 017 7v2a1 1 0 11-2 0v-2a5 5 0 00-5-5H5.414l2.293 2.293a1 1 0 11-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>${repo.forks_count}</span>` : ''}
-                    </div>
-                    <time class="text-xs text-gray-500 font-mono" datetime="${repo.updated_at}">${new Date(repo.updated_at).toLocaleDateString()}</time>
-                </div>
+            <!-- Anime/Cyberpunk Visual Overlays -->
+            <div class="anime-card-grid"></div>
+            <div class="anime-card-hologram"></div>
+            <div class="anime-card-corner-top"></div>
+            <div class="anime-card-corner-bottom"></div>
+            <div class="anime-card-scanline-bar"></div>
+
+            <!-- Card HUD Header -->
+            <div class="flex justify-between items-center text-[10px] text-gray-500 font-mono tracking-widest relative z-10">
+                <span>SYSTEM CARD // 0${(index + 1).toString().slice(-2)}</span>
+                <span class="text-neon-cyan flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-neon-cyan animate-pulse"></span>ACTIVE</span>
             </div>
-            <div class="px-6 pb-6 relative z-20">
-                <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="text-xs uppercase tracking-widest border border-neon-cyan text-neon-cyan px-3 py-2 hover:bg-neon-cyan hover:text-black transition-all" onclick="event.stopPropagation();">View on GitHub</a>
+
+            <!-- Main Content Container -->
+            <div class="flex-1 flex flex-col justify-center my-4 relative z-10">
+                <!-- Project Name -->
+                <div class="mb-2">
+                    <h3 class="font-display text-2xl font-bold text-white group-hover:text-white transition-colors line-clamp-1">${repo.name}</h3>
+                    <!-- Language tag (English / Japanese) -->
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-[10px] tracking-wider text-neon-cyan font-mono">${lang}</span>
+                        <span class="text-[9px] text-gray-500 font-jp tracking-wider">${jpLang}</span>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <p class="text-gray-400 text-sm line-clamp-3 mb-4">${repo.description || 'System lacks description. No database entry found.'}</p>
+            </div>
+
+            <!-- Card Footer details and buttons -->
+            <div class="relative z-10 pt-4 border-t border-white/5 mt-auto">
+                <div class="flex justify-between items-center mb-4 text-xs text-gray-500 font-mono">
+                    <div class="flex items-center gap-3">
+                        ${repo.stargazers_count > 0 ? `<span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>${repo.stargazers_count}</span>` : ''}
+                        ${repo.forks_count > 0 ? `<span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7a3 3 0 100-6 3 3 0 000 6zM8 7v7a4 4 0 00.275 1.48L5.414 18M17 17v-4a4 4 0 00-.275-1.48L19.586 14M16 7a3 3 0 100-6 3 3 0 000 6z"/></svg>${repo.forks_count}</span>` : ''}
+                    </div>
+                    <time datetime="${repo.updated_at}">${new Date(repo.updated_at).toLocaleDateString(undefined, {month: 'short', day: 'numeric', year: 'numeric'})}</time>
+                </div>
+                
+                <div class="flex items-center gap-2">
+                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="neon-btn flex-1 text-center text-xs uppercase tracking-widest border border-neon-cyan text-neon-cyan py-2.5 hover:bg-neon-cyan hover:text-black transition-all" onclick="event.stopPropagation();">GitHub ↗</a>
+                    ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" rel="noopener" class="neon-btn flex-1 text-center text-xs uppercase tracking-widest border border-neon-pink text-neon-pink py-2.5 hover:bg-neon-pink hover:text-black transition-all" onclick="event.stopPropagation();">Launch ↗</a>` : ''}
+                </div>
             </div>
         `;
+
+        // Card mouse follow glow effect
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
 
         // Click card to go to GitHub
         card.addEventListener('click', () => window.open(repo.html_url, '_blank'));
@@ -105,11 +155,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('projects-grid');
     if (grid) {
         fetchGitHubRepos()
-            .then(repos => renderProjectCards(repos))
+            .then(repos => {
+                renderProjectCards(repos);
+
+                // Initialize carousel scroll buttons
+                const prevBtn = document.getElementById('carousel-prev');
+                const nextBtn = document.getElementById('carousel-next');
+                if (prevBtn && nextBtn) {
+                    prevBtn.addEventListener('click', () => {
+                        grid.scrollBy({ left: -400, behavior: 'smooth' });
+                    });
+                    nextBtn.addEventListener('click', () => {
+                        grid.scrollBy({ left: 400, behavior: 'smooth' });
+                    });
+                }
+            })
             .catch(err => {
                 console.error('Failed to fetch repos:', err);
                 grid.innerHTML = `
-                    <div class="col-span-full glass-card p-8 text-center">
+                    <div class="w-full glass-card p-8 text-center shrink-0">
                         <p class="text-gray-400 mb-4">Failed to load projects from GitHub.</p>
                         <a href="https://github.com/${GITHUB_USERNAME}" target="_blank" rel="noopener" class="text-neon-cyan hover:underline">View on GitHub →</a>
                     </div>

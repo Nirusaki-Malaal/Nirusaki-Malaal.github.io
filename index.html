@@ -361,41 +361,56 @@ og_type: profile
             <a href="https://github.com/nirusaki-malaal?tab=repositories" target="_blank" rel="noopener noreferrer" class="mt-6 md:mt-0 text-neon-pink hover:text-white transition-colors flex items-center gap-2">View All on GitHub <span class="text-xl">→</span></a>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid" role="list">
-            <!-- Skeleton loading cards -->
-            <div class="skeleton-card glass-card animate-pulse">
-                <div class="h-2 w-full bg-white/10"></div>
-                <div class="p-6">
-                    <div class="h-6 bg-white/10 rounded w-3/4 mb-4"></div>
-                    <div class="h-4 bg-white/5 rounded w-full mb-2"></div>
-                    <div class="h-4 bg-white/5 rounded w-5/6 mb-6"></div>
+        <div class="relative group/carousel px-4">
+            <!-- Left scroll button -->
+            <button id="carousel-prev" class="absolute left-[-10px] md:left-[-30px] top-1/2 -translate-y-1/2 z-10 w-12 h-12 border border-white/10 bg-black/80 backdrop-blur-md rounded-full text-white flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 transition-all hover:border-neon-cyan hover:text-neon-cyan duration-300" aria-label="Scroll left">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            
+            <!-- Right scroll button -->
+            <button id="carousel-next" class="absolute right-[-10px] md:right-[-30px] top-1/2 -translate-y-1/2 z-10 w-12 h-12 border border-white/10 bg-black/80 backdrop-blur-md rounded-full text-white flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 transition-all hover:border-neon-cyan hover:text-neon-cyan duration-300" aria-label="Scroll right">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
+
+            <div class="projects-carousel" id="projects-grid" role="list">
+                <!-- Skeleton loading cards -->
+                <div class="anime-card skeleton-card shrink-0 snap-start h-[420px] w-[340px] md:w-[400px] flex flex-col justify-between p-6">
+                    <div>
+                        <div class="h-4 bg-white/10 rounded w-1/4 mb-6"></div>
+                        <div class="h-8 bg-white/10 rounded w-3/4 mb-4"></div>
+                        <div class="h-4 bg-white/5 rounded w-full mb-2"></div>
+                        <div class="h-4 bg-white/5 rounded w-5/6 mb-2"></div>
+                        <div class="h-4 bg-white/5 rounded w-2/3"></div>
+                    </div>
                     <div class="flex justify-between items-center pt-4 border-t border-white/5">
-                        <div class="h-5 bg-white/10 rounded w-16"></div>
-                        <div class="h-4 bg-white/5 rounded w-20"></div>
+                        <div class="h-6 bg-white/10 rounded w-20"></div>
+                        <div class="h-6 bg-white/10 rounded w-16"></div>
                     </div>
                 </div>
-            </div>
-            <div class="skeleton-card glass-card animate-pulse">
-                <div class="h-2 w-full bg-white/10"></div>
-                <div class="p-6">
-                    <div class="h-6 bg-white/10 rounded w-3/4 mb-4"></div>
-                    <div class="h-4 bg-white/5 rounded w-full mb-2"></div>
-                    <div class="h-4 bg-white/5 rounded w-5/6 mb-6"></div>
+                <div class="anime-card skeleton-card shrink-0 snap-start h-[420px] w-[340px] md:w-[400px] flex flex-col justify-between p-6">
+                    <div>
+                        <div class="h-4 bg-white/10 rounded w-1/4 mb-6"></div>
+                        <div class="h-8 bg-white/10 rounded w-3/4 mb-4"></div>
+                        <div class="h-4 bg-white/5 rounded w-full mb-2"></div>
+                        <div class="h-4 bg-white/5 rounded w-5/6 mb-2"></div>
+                        <div class="h-4 bg-white/5 rounded w-2/3"></div>
+                    </div>
                     <div class="flex justify-between items-center pt-4 border-t border-white/5">
-                        <div class="h-5 bg-white/10 rounded w-16"></div>
-                        <div class="h-4 bg-white/5 rounded w-20"></div>
+                        <div class="h-6 bg-white/10 rounded w-20"></div>
+                        <div class="h-6 bg-white/10 rounded w-16"></div>
                     </div>
                 </div>
-            </div>
-            <div class="skeleton-card glass-card animate-pulse">
-                <div class="h-2 w-full bg-white/10"></div>
-                <div class="p-6">
-                    <div class="h-6 bg-white/10 rounded w-3/4 mb-4"></div>
-                    <div class="h-4 bg-white/5 rounded w-full mb-2"></div>
-                    <div class="h-4 bg-white/5 rounded w-5/6 mb-6"></div>
+                <div class="anime-card skeleton-card shrink-0 snap-start h-[420px] w-[340px] md:w-[400px] flex flex-col justify-between p-6">
+                    <div>
+                        <div class="h-4 bg-white/10 rounded w-1/4 mb-6"></div>
+                        <div class="h-8 bg-white/10 rounded w-3/4 mb-4"></div>
+                        <div class="h-4 bg-white/5 rounded w-full mb-2"></div>
+                        <div class="h-4 bg-white/5 rounded w-5/6 mb-2"></div>
+                        <div class="h-4 bg-white/5 rounded w-2/3"></div>
+                    </div>
                     <div class="flex justify-between items-center pt-4 border-t border-white/5">
-                        <div class="h-5 bg-white/10 rounded w-16"></div>
-                        <div class="h-4 bg-white/5 rounded w-20"></div>
+                        <div class="h-6 bg-white/10 rounded w-20"></div>
+                        <div class="h-6 bg-white/10 rounded w-16"></div>
                     </div>
                 </div>
             </div>
