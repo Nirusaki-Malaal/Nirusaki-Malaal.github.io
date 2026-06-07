@@ -273,7 +273,7 @@ if (canvas && window.THREE && !isBlogPage) {
 // ===== GSAP SCROLL ANIMATIONS =====
 if (window.gsap && window.ScrollTrigger) {
     gsap.registerPlugin(ScrollTrigger);
-    gsap.utils.toArray('section, article').forEach((section) => {
+    gsap.utils.toArray('section, article:not(.blog-post-card):not(.project-card):not(.post-content)').forEach((section) => {
         gsap.from(section.children, {
             scrollTrigger: { trigger: section, start: 'top 85%', toggleActions: 'play none none reverse' },
             y: 50, opacity: 0, duration: 1, stagger: 0.2, ease: 'power3.out'
