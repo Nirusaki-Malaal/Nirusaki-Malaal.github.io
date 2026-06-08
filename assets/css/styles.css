@@ -685,12 +685,27 @@ body.blog-page-bg ::-moz-selection {
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    gap: 2rem;
+    gap: 1.25rem;
     padding-bottom: 2.5rem;
     padding-top: 1rem;
     scrollbar-width: thin;
     scrollbar-color: #00f5ff rgba(255, 255, 255, 0.05);
-    scroll-padding: 24px;
+    /* Center the snap target on mobile */
+    scroll-padding-left: calc((100vw - (100vw - 48px)) / 2);
+    scroll-padding-right: calc((100vw - (100vw - 48px)) / 2);
+    /* Add horizontal padding so first/last cards center properly */
+    padding-left: calc((100vw - (100vw - 48px)) / 2);
+    padding-right: calc((100vw - (100vw - 48px)) / 2);
+}
+
+@media (min-width: 640px) {
+    .projects-carousel {
+        gap: 2rem;
+        scroll-padding-left: 0;
+        scroll-padding-right: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 .projects-carousel::-webkit-scrollbar {
@@ -717,22 +732,93 @@ body.blog-page-bg ::-moz-selection {
     backdrop-filter: blur(12px);
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     
-    /* Mobile-first centered snap layout */
+    /* Mobile: full-width card, one at a time snap */
     scroll-snap-align: center;
+    scroll-snap-stop: always;
     width: calc(100vw - 48px);
+    min-width: calc(100vw - 48px);
     max-width: 400px;
+    flex-shrink: 0;
 }
 
 @media (min-width: 640px) {
     .anime-card {
         width: 360px;
+        min-width: 360px;
         scroll-snap-align: start;
+        scroll-snap-stop: normal;
     }
 }
 
 @media (min-width: 768px) {
     .anime-card {
         width: 400px;
+        min-width: 400px;
+    }
+}
+
+/* ===== PROJECT MODAL ===== */
+#project-modal {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+#project-modal-content {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 245, 255, 0.3) rgba(255, 255, 255, 0.05);
+}
+
+#project-modal-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+#project-modal-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+#project-modal-content::-webkit-scrollbar-thumb {
+    background: rgba(0, 245, 255, 0.3);
+    border-radius: 4px;
+}
+
+/* Mobile-specific modal adjustments */
+@media (max-width: 639px) {
+    #project-modal-content {
+        max-height: 90vh;
+        max-height: 90dvh;
+        margin: 0;
+        border-radius: 16px 16px 0 0;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        padding: 1.5rem;
+        padding-top: 1rem;
+        animation: modal-slide-up 0.3s ease-out;
+    }
+    
+    #project-modal-content::before {
+        content: '';
+        display: block;
+        width: 36px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
+        margin: 0 auto 1rem;
+    }
+}
+
+@keyframes modal-slide-up {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
 
@@ -749,6 +835,36 @@ body.blog-page-bg ::-moz-selection {
 
 .anime-card:hover::before {
     opacity: 1;
+}
+
+/* Card Background Image & Dark Overlay for readability */
+.anime-card-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.35;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.4s;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.anime-card-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0.8) 0%, rgba(5, 5, 5, 0.95) 100%);
+    z-index: 0;
+    transition: background 0.4s;
+    pointer-events: none;
+}
+
+.anime-card:hover .anime-card-bg {
+    opacity: 0.55;
+    transform: scale(1.06);
+}
+
+.anime-card:hover .anime-card-bg-overlay {
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0.65) 0%, rgba(5, 5, 5, 0.85) 100%);
 }
 
 /* Cyber holographic grid background inside card */
@@ -881,6 +997,62 @@ body.blog-page-bg ::-moz-selection {
     5% { opacity: 0.8; }
     95% { opacity: 0.8; }
     100% { top: 102%; opacity: 0; }
+}
+
+/* ===== FREELANCE CARDS WITH SCREENSHOT BACKGROUNDS ===== */
+.freelance-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.freelance-card-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center top;
+    opacity: 0.22;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.4s;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.freelance-card-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0.82) 0%, rgba(5, 5, 5, 0.95) 100%);
+    z-index: 0;
+    transition: background 0.4s;
+    pointer-events: none;
+}
+
+.freelance-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+.freelance-card:hover .freelance-card-bg {
+    opacity: 0.4;
+    transform: scale(1.06);
+}
+
+.freelance-card:hover .freelance-card-bg-overlay {
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0.68) 0%, rgba(5, 5, 5, 0.88) 100%);
+}
+
+/* Individual Theme Hover Glows */
+.freelance-card.cyan-theme:hover {
+    border-color: #00f5ff;
+    box-shadow: 0 0 30px rgba(0, 245, 255, 0.25), inset 0 0 15px rgba(0, 245, 255, 0.1);
+}
+
+.freelance-card.pink-theme:hover {
+    border-color: #ff006e;
+    box-shadow: 0 0 30px rgba(255, 0, 110, 0.25), inset 0 0 15px rgba(255, 0, 110, 0.1);
+}
+
+.freelance-card.purple-theme:hover {
+    border-color: #b026ff;
+    box-shadow: 0 0 30px rgba(176, 38, 255, 0.25), inset 0 0 15px rgba(176, 38, 255, 0.1);
 }
 
 
