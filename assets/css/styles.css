@@ -678,6 +678,50 @@ body.blog-page-bg ::-moz-selection {
     color: #ffffff !important;
 }
 
+/* ===== KATEX MATH RENDERING ===== */
+
+/* Display math blocks ($$...$$) */
+.prose-content .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: 1.5rem 1.25rem;
+    margin: 2rem 0;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-left: 3px solid rgba(0, 245, 255, 0.4);
+    border-radius: 4px;
+}
+
+.prose-content .katex-display > .katex {
+    white-space: normal;
+}
+
+/* All KaTeX text color */
+.prose-content .katex {
+    color: #e2e8f0;
+    font-size: 1.1em;
+}
+
+/* Inline math ($...$) */
+.prose-content p > .katex,
+.prose-content li > .katex {
+    color: #00f5ff;
+    font-size: 1em;
+}
+
+/* Mobile math sizing */
+@media (max-width: 639px) {
+    .prose-content .katex-display {
+        padding: 1rem 0.75rem;
+        margin: 1.25rem -0.5rem;
+        font-size: 0.9em;
+    }
+    .prose-content .katex {
+        font-size: 1em;
+    }
+}
+
 /* ===== PROJECTS CAROUSEL & ANIME CARDS ===== */
 .projects-carousel {
     display: flex;

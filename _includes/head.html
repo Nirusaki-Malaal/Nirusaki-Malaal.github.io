@@ -81,4 +81,20 @@
 <!-- Stylesheet -->
 <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
 
+<!-- KaTeX LaTeX Rendering (loaded on pages with math: true) -->
+{% if page.math %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-sMigNimOj2D2EJEaEEBKMDsMgJLkMub0EEcMOEpneJKqsMpelgAWTZlrl0qEVfU3" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD3D2mNSsRJhRmhiXRrKCYVi/ZS7LjzfYAjiNUhJUEB6HCFU7HHdCOl1lY9" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrKUS1tv+gMVMIm8dMOBOYBgJzHIadM3EvMDqGdEgJDpRTcOlIFilKnAzF6WT" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: '\\\\(', right: '\\\\)', display: false},
+            {left: '\\\\[', right: '\\\\]', display: true}
+        ],
+        throwOnError: false
+    });"></script>
+{% endif %}
+
 {% if page.extra_head %}{{ page.extra_head }}{% endif %}

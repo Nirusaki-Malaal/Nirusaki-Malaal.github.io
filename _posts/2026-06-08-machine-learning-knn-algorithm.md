@@ -3,6 +3,7 @@ layout: post
 title: "Machine Learning: K-Nearest Neighbors (KNN) Explained"
 description: "A layman's guide to understanding the K-Nearest Neighbors algorithm, complete with Python code."
 tags: [Machine Learning, AI, Python, Data Science, Algorithms]
+math: true
 ---
 
 Today we are tackling one of the most classic Machine Learning algorithms out there: K-Nearest Neighbors, or KNN for short. We are going to break this down into plain English so you can actually understand what is happening under the hood.
@@ -40,7 +41,7 @@ When you give KNN a new, unknown data point, it grabs its tape measure and calcu
 
 It uses the **Minkowski Formula** to calculate how far apart points are:
 
-$$ d(x,x_{i}) = (\sum_{j=1}^{n} |x_{j} - x_{ij}|^{1/p} $$
+$$ d(x, x_{i}) = \left( \sum_{j=1}^{n} |x_{j} - x_{ij}|^{p} \right)^{1/p} $$
 
 ![Scary Math](https://i.giphy.com/jUwpNzg9IcyrK.webp)
 
