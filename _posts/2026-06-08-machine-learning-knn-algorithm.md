@@ -55,8 +55,8 @@ Don't let the math scare you. By changing the `P` parameter in that formula, you
 Not all neighbors are equal. A neighbor that is right next to you should have a louder voice than a neighbor who is barely inside the `K` radius. 
 
 We assign weights to the neighbors based on distance:
-*   **Inverse Weights:** `W = 1 / distance` (The simplest form)
-*   **Inverse Square Weights:** `W = 1 / (distance^2)` 
+*   **Inverse Weights:** $W = \frac{1}{d}$ (The simplest form)
+*   **Inverse Square Weights:** $W = \frac{1}{d^2}$
 *   **Gaussian Weights:** Pulled by a bell curve with a standard deviation.
 
 *Note: Taking all weights as exactly `1` (treating everyone equally) is usually a terrible idea because you might accidentally let an anomaly group hijack the final vote.* 🧠
