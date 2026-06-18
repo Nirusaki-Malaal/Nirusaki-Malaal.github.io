@@ -53,6 +53,10 @@ layout: default
             <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
             <span class="text-white/20">•</span>
             <span>{% assign words = content | number_of_words %}{{ words | divided_by: 200 | plus: 1 }} min read</span>
+            <span class="text-white/20" id="busuanzi_container_page_pv" style="display: none;">•</span>
+            <span id="busuanzi_container_page_pv" style="display: none;">
+                <span id="busuanzi_value_page_pv"></span> views
+            </span>
         </div>
 
         <!-- Solid Divider -->
@@ -63,8 +67,33 @@ layout: default
             {{ content }}
         </div>
 
+        <!-- Comments Section -->
+        {% if site.giscus and site.giscus.repo_id != "PUT_YOUR_REPO_ID_HERE" %}
+        <div class="h-px bg-white/10 mt-12 mb-12"></div>
+        <div class="giscus-comments">
+            <script src="https://giscus.app/client.js"
+                    data-repo="{{ site.giscus.repo }}"
+                    data-repo-id="{{ site.giscus.repo_id }}"
+                    data-category="{{ site.giscus.category }}"
+                    data-category-id="{{ site.giscus.category_id }}"
+                    data-mapping="pathname"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="bottom"
+                    data-theme="{{ site.giscus.theme | default: 'dark' }}"
+                    data-lang="en"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+        {% endif %}
+
         <!-- Bottom Divider -->
         <div class="h-px bg-white/10 mt-12 mb-12"></div>
+
+        <!-- Busuanzi Page View Counter Script -->
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
         <!-- Prev/Next Navigation -->
         <nav class="flex justify-between items-center font-body" aria-label="Post navigation">
