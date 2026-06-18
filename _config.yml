@@ -30,13 +30,11 @@ defaults:
     values:
       layout: "post"
 
-# Comments configuration (Giscus)
-giscus:
-  repo: "Nirusaki-Malaal/Nirusaki-Malaal.github.io"
-  repo_id: "R_kgDOQEDStg"
-  category: "Announcements"
-  category_id: "DIC_kwDOQEDSts4C_YJO"
-  theme: "transparent_dark"
+# Comments configuration (Cusdis)
+cusdis:
+  app_id: "c53ce524-edf0-4e1f-9621-05ef5181a8e0"
+  theme: "dark"
+
 
 
 
