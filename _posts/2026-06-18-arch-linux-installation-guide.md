@@ -11,7 +11,7 @@ As a Linux user, I really like Arch Linux because of its customization and how I
 
 In this guide, I am not only going to show you how to install Arch Linux, but also explain the reasoning behind each command. So setup a VM and follow these steps!
 
-![Homer Typing](https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif)
+![Homer Typing](https://i.giphy.com/13HgwGsXF0aiGY.webp)
 
 ---
 
@@ -63,7 +63,7 @@ rtt min/avg/max/mdev = 11.821/12.812/14.112/0.844 ms
 
 This is a very crucial step and dangerous as well. Be extremely careful about how you partition your system. If you are dual-booting, doing this wrong may end up leaving your system in a soft-brick state.
 
-![Here we go again](https://media.giphy.com/media/EldfUB6ptZ30KzQn2R/giphy.gif)
+![Here we go again](https://i.giphy.com/EldfUB6ptZ30KzQn2R.webp)
 
 Generally, we want to create three partitions:
 1. **Bootloader Partition (EFI):** Usually 512MB, formatted as FAT32. It stores the bootloader.
@@ -201,6 +201,8 @@ swapon /dev/nvme0n1p2
 
 Now we come to the main step: installing the operating system inside our root folder. We do this using a very simple command called `pacstrap`.
 
+![Big Smoke Ordering](https://i.giphy.com/1WqyCAvVDu6x57x9t5.webp)
+
 Run `pacstrap` to install the base system along with essential packages:
 ```bash
 pacstrap /mnt base linux linux-firmware linux-headers sof-firmware base-devel grub git man-db efibootmgr nano networkmanager sudo intel-ucode
@@ -264,6 +266,8 @@ hwclock --systohc
 ### Localization (Language and Keyboard)
 
 Now we need to configure our language (locale). Open `/etc/locale.gen` using nano:
+
+![Bart Chalkboard](https://i.giphy.com/3o6MbcV3ma4KBq7V6g.webp)
 ```bash
 nano /etc/locale.gen
 ```
@@ -334,7 +338,7 @@ This creates a user account with a home directory (`-m`) and adds them to the `w
 
 If you want to install programs or modify system settings later, you will need root access. Sudo gives you root access only for that specific command, which protects your system.
 
-![Panic Computer](https://media.giphy.com/media/xT5LMHxhOfscxPfIfm/giphy.gif)
+![Panic Computer](https://i.giphy.com/xT5LMHxhOfscxPfIfm.webp)
 
 Open the sudo configuration file:
 ```bash
@@ -443,7 +447,7 @@ systemctl enable gdm
 
 If GNOME and KDE are too boring or heavy for you, you can install lightweight desktop environments or tiling window managers. But first, let's enable the Arch User Repository (AUR), which is where all the cool community packages live.
 
-![Homer Backing Into Bush](https://media.giphy.com/media/l0GiJaD8A29hdT9tC/giphy.gif)
+![Homer Backing Into Bush](https://i.giphy.com/l0GiJaD8A29hdT9tC.webp)
 
 ### Enabling the AUR with yay
 
@@ -518,7 +522,7 @@ reboot
 
 If you ever get stuck or did not understand a step, you can always search for it on Google, check the legendary Arch Wiki, or ask an LLM.
 
-![Mission Passed](https://media.giphy.com/media/pDsCoECKh1pa8/giphy.gif)
+![Mission Passed](https://i.giphy.com/pDsCoECKh1pa8.webp)
 
 Thanks for reading!
 Seeyaaaa!
