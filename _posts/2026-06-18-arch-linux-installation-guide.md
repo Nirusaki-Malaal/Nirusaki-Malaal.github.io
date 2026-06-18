@@ -11,6 +11,8 @@ As a Linux user, I really like Arch Linux because of its customization and how I
 
 In this guide, I am not only going to show you how to install Arch Linux, but also explain the reasoning behind each command. So setup a VM and follow these steps!
 
+![Homer Typing](https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif)
+
 ---
 
 ## Connecting to Wi-Fi
@@ -60,6 +62,8 @@ rtt min/avg/max/mdev = 11.821/12.812/14.112/0.844 ms
 ## Partitioning: The Dangerous Zone
 
 This is a very crucial step and dangerous as well. Be extremely careful about how you partition your system. If you are dual-booting, doing this wrong may end up leaving your system in a soft-brick state.
+
+![Here we go again](https://media.giphy.com/media/EldfUB6ptZ30KzQn2R/giphy.gif)
 
 Generally, we want to create three partitions:
 1. **Bootloader Partition (EFI):** Usually 512MB, formatted as FAT32. It stores the bootloader.
@@ -330,6 +334,8 @@ This creates a user account with a home directory (`-m`) and adds them to the `w
 
 If you want to install programs or modify system settings later, you will need root access. Sudo gives you root access only for that specific command, which protects your system.
 
+![Panic Computer](https://media.giphy.com/media/xT5LMHxhOfscxPfIfm/giphy.gif)
+
 Open the sudo configuration file:
 ```bash
 EDITOR=nano visudo
@@ -437,6 +443,8 @@ systemctl enable gdm
 
 If GNOME and KDE are too boring or heavy for you, you can install lightweight desktop environments or tiling window managers. But first, let's enable the Arch User Repository (AUR), which is where all the cool community packages live.
 
+![Homer Backing Into Bush](https://media.giphy.com/media/l0GiJaD8A29hdT9tC/giphy.gif)
+
 ### Enabling the AUR with yay
 
 To enable the AUR, we will use a helper tool called `yay`. We need to clone it from the repository and build it. Run this as your normal user (not root, and you'll need to exit the chroot or run it once you've booted):
@@ -509,6 +517,8 @@ reboot
 ```
 
 If you ever get stuck or did not understand a step, you can always search for it on Google, check the legendary Arch Wiki, or ask an LLM.
+
+![Mission Passed](https://media.giphy.com/media/pDsCoECKh1pa8/giphy.gif)
 
 Thanks for reading!
 Seeyaaaa!
