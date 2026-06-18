@@ -33,8 +33,9 @@ defaults:
 # Comments configuration (Giscus)
 giscus:
   repo: "Nirusaki-Malaal/Nirusaki-Malaal.github.io"
-  repo_id: "PUT_YOUR_REPO_ID_HERE"
+  repo_id: "R_kgDOQEDStg"
   category: "Announcements"
-  category_id: "PUT_YOUR_CATEGORY_ID_HERE"
+  category_id: "DIC_kwDOQEDSts4C_YJO"
   theme: "dark"
+
 
