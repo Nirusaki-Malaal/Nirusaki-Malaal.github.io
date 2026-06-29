@@ -108,4 +108,20 @@
 </script>
 {% endif %}
 
+<!-- Mermaid JS Diagrams (loaded on pages with mermaid: true) -->
+{% if page.mermaid %}
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (typeof mermaid !== "undefined") {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'dark',
+                securityLevel: 'loose'
+            });
+        }
+    });
+</script>
+{% endif %}
+
 {% if page.extra_head %}{{ page.extra_head }}{% endif %}

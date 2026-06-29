@@ -67,25 +67,233 @@ layout: default
             {{ content }}
         </div>
 
-        <!-- Comments Section -->
-        {% if site.cusdis and site.cusdis.app_id != "PUT_YOUR_APP_ID_HERE" %}
-        <div class="h-px bg-white/10 mt-12 mb-12"></div>
-        <div class="cusdis-comments">
-            <div id="cusdis_thread"
-              data-host="https://cusdis.com"
-              data-app-id="{{ site.cusdis.app_id }}"
-              data-page-id="{{ page.url }}"
-              data-page-url="{{ page.url | absolute_url }}"
-              data-page-title="{{ page.title }}"
-              data-theme="{{ site.cusdis.theme | default: 'dark' }}"
-            ></div>
-            <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+        <!-- Native Firebase Comments Section -->
+        {% if site.firebase and site.firebase.database_url %}
+        <div class="h-px bg-white/10 mt-16 mb-16"></div>
+        <div class="comments-section">
+            <div class="comments-header">
+                <svg class="comments-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                </svg>
+                <h2 class="comments-title">Discussion (<span id="comments-count">0</span>)</h2>
+            </div>
+
+            <!-- Comments List -->
+            <div id="comments-list" class="comments-list">
+                <div class="comments-loading">
+                    <span class="loading-spinner"></span> Loading comments...
+                </div>
+            </div>
+
+            <!-- Add Comment Form -->
+            <div class="comment-form-container glass-panel">
+                <h3 class="form-title">Leave a Comment</h3>
+                <form id="comment-form" class="comment-form">
+                    <!-- Anti-spam Honeypot -->
+                    <div style="display:none;">
+                        <label for="honeypot_field">Keep this field empty</label>
+                        <input type="text" id="honeypot_field" name="honeypot_field" autocomplete="off">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="comment-name">Name / Nickname</label>
+                        <input type="text" id="comment-name" name="name" placeholder="Anonymous Shinobi" autocomplete="off" class="form-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="comment-text">Comment</label>
+                        <textarea id="comment-text" name="comment" rows="4" placeholder="Share your thoughts..." required class="form-textarea"></textarea>
+                    </div>
+                    
+                    <button type="submit" id="submit-btn" class="neon-btn submit-btn hover-target">
+                        <span class="btn-text">Submit Comment</span>
+                    </button>
+                    <div id="form-message" class="form-message"></div>
+                </form>
+            </div>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const databaseUrl = "{{ site.firebase.database_url }}".replace(/\/$/, "");
+                const rawPageId = "{{ page.url }}";
+                // Sanitize page ID for Firebase key safety
+                const pageId = rawPageId.replace(/[^a-zA-Z0-9_-]/g, '_');
+                
+                const commentsList = document.getElementById('comments-list');
+                const commentsCount = document.getElementById('comments-count');
+                const commentForm = document.getElementById('comment-form');
+                const submitBtn = document.getElementById('submit-btn');
+                const formMessage = document.getElementById('form-message');
+                const honeypot = document.getElementById('honeypot_field');
+
+                // relative time formatter
+                function timeAgo(timestamp) {
+                    const seconds = Math.floor((Date.now() - timestamp) / 1000);
+                    if (seconds < 5) return 'just now';
+                    
+                    let interval = Math.floor(seconds / 31536000);
+                    if (interval >= 1) return interval + ' year' + (interval > 1 ? 's' : '') + ' ago';
+                    
+                    interval = Math.floor(seconds / 2592000);
+                    if (interval >= 1) return interval + ' month' + (interval > 1 ? 's' : '') + ' ago';
+                    
+                    interval = Math.floor(seconds / 86400);
+                    if (interval >= 1) return interval + ' day' + (interval > 1 ? 's' : '') + ' ago';
+                    
+                    interval = Math.floor(seconds / 3600);
+                    if (interval >= 1) return interval + ' hour' + (interval > 1 ? 's' : '') + ' ago';
+                    
+                    interval = Math.floor(seconds / 60);
+                    if (interval >= 1) return interval + ' minute' + (interval > 1 ? 's' : '') + ' ago';
+                    
+                    return Math.floor(seconds) + ' second' + (seconds > 1 ? 's' : '') + ' ago';
+                }
+
+                // escape HTML to prevent XSS
+                function escapeHtml(unsafe) {
+                    return unsafe
+                         .replace(/&/g, "&amp;")
+                         .replace(/</g, "&lt;")
+                         .replace(/>/g, "&gt;")
+                         .replace(/"/g, "&quot;")
+                         .replace(/'/g, "&#039;");
+                }
+
+                // Fallback Monikers for Anonymous users
+                function getRandomShinobiMoniker() {
+                    const prefixes = ['Silent', 'Shadow', 'Ghost', 'Neo', 'Cyber', 'Iron', 'Dark', 'Hidden', 'Midnight', 'Crimson'];
+                    const suffixes = ['Shinobi', 'Ninja', 'Hacker', 'Samurai', 'Ronin', 'Operative', 'Wraith', 'Specter', 'Agent', 'Sentry'];
+                    const randP = prefixes[Math.floor(Math.random() * prefixes.length)];
+                    const randS = suffixes[Math.floor(Math.random() * suffixes.length)];
+                    const num = Math.floor(100 + Math.random() * 900);
+                    return `${randP} ${randS} #${num}`;
+                }
+
+                // Load Comments
+                function loadComments() {
+                    fetch(`${databaseUrl}/comments/${pageId}.json`)
+                        .then(response => {
+                            if (!response.ok) throw new Error('Network response was not ok');
+                            return response.json();
+                        })
+                        .then(data => {
+                            commentsList.innerHTML = '';
+                            if (!data) {
+                                commentsCount.textContent = '0';
+                                commentsList.innerHTML = '<div class="comments-empty">No comments yet. Be the first to share your thoughts!</div>';
+                                return;
+                            }
+
+                            // Convert object to array and sort by timestamp
+                            const list = Object.keys(data).map(key => ({
+                                id: key,
+                                ...data[key]
+                            })).sort((a, b) => a.timestamp - b.timestamp);
+
+                            commentsCount.textContent = list.length;
+
+                            list.forEach(c => {
+                                const card = document.createElement('div');
+                                card.className = 'comment-card glass-panel';
+                                card.innerHTML = `
+                                    <div class="comment-card-header">
+                                        <span class="comment-author">${escapeHtml(c.name)}</span>
+                                        <time class="comment-time" datetime="${new Date(c.timestamp).toISOString()}">${timeAgo(c.timestamp)}</time>
+                                    </div>
+                                    <div class="comment-card-body">${escapeHtml(c.content).split('\n').join('<br>')}</div>
+                                `;
+                                commentsList.appendChild(card);
+                            });
+                        })
+                        .catch(err => {
+                            console.error('Error loading comments:', err);
+                            commentsList.innerHTML = '<div class="comments-error">Failed to load comments. Please refresh the page.</div>';
+                        });
+                }
+
+                // Submit Comment
+                commentForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Honeypot check
+                    if (honeypot.value.trim() !== '') {
+                        // Pretend it was successful to trick simple bots
+                        formMessage.textContent = 'Comment submitted successfully!';
+                        formMessage.className = 'form-message success';
+                        commentForm.reset();
+                        return;
+                    }
+
+                    const nameInput = document.getElementById('comment-name');
+                    const textInput = document.getElementById('comment-text');
+
+                    const name = nameInput.value.trim() || getRandomShinobiMoniker();
+                    const content = textInput.value.trim();
+
+                    if (!content) return;
+
+                    // Disable button
+                    submitBtn.disabled = true;
+                    submitBtn.classList.add('loading');
+                    const originalBtnText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<span class="loading-spinner"></span> Submitting...';
+                    formMessage.textContent = '';
+                    formMessage.className = 'form-message';
+
+                    const newComment = {
+                        name: name,
+                        content: content,
+                        timestamp: Date.now()
+                    };
+
+                    fetch(`${databaseUrl}/comments/${pageId}.json`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(newComment)
+                    })
+                    .then(response => {
+                        if (!response.ok) throw new Error('Failed to submit comment');
+                        return response.json();
+                    })
+                    .then(() => {
+                        // Success UI
+                        formMessage.textContent = 'Comment posted successfully!';
+                        formMessage.className = 'form-message success';
+                        commentForm.reset();
+                        
+                        // Reload comments to show the new one
+                        loadComments();
+                        
+                        // Clear success message after 5 seconds
+                        setTimeout(() => {
+                            formMessage.textContent = '';
+                            formMessage.className = 'form-message';
+                        }, 5000);
+                    })
+                    .catch(err => {
+                        console.error('Error posting comment:', err);
+                        formMessage.textContent = 'Failed to post comment. Please try again.';
+                        formMessage.className = 'form-message error';
+                    })
+                    .finally(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.classList.remove('loading');
+                        submitBtn.innerHTML = originalBtnText;
+                    });
+                });
+
+                // Initial load
+                loadComments();
+            });
+        </script>
         {% endif %}
 
 
         <!-- Bottom Divider -->
-        <div class="h-px bg-white/10 mt-12 mb-12"></div>
+        <div class="h-px bg-white/10 mt-16 mb-16"></div>
 
         <!-- Busuanzi Page View Counter Script -->
         <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
