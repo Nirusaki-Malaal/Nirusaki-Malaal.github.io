@@ -222,7 +222,7 @@ for link in links:
 >  - pilot_records_main.pdf | URL: https://www.justice.gov/multimedia/pilot_records_main.pdf
 > ```
 
-![Thinking/Coding](https://c.tenor.com/DhmaIgAbevoAAAAC/tenor.gif)
+![Thinking/Coding](https://media.tenor.com/DhmaIgAbevoAAAAC/tenor.gif)
 
 ---
 
@@ -284,6 +284,6 @@ Overall, this was a wild project. I love building things from scratch and findin
 
 **TEAM SPACEX FROM NIT HAMIRPUR ISN'T HAPPY WITH THIS PARTICULAR POST LOL IF YKYK**
 
-![Sayonara](https://c.tenor.com/jeb6K5yMweoAAAAC/tenor.gif)
+![Sayonara](https://media.tenor.com/jeb6K5yMweoAAAAC/tenor.gif)
 
 Sayonara Signing Off Baa Byee...
