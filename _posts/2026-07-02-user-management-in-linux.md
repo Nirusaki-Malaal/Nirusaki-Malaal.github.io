@@ -46,7 +46,6 @@ Below is a structured notebook-like flow showing how to query your user identity
 
 ### Cell 1: Check Current User
 ```bash
-%%bash
 whoami
 ```
 > **Expected Output:**
@@ -56,7 +55,6 @@ whoami
 
 ### Cell 2: Create a New User
 ```bash
-%%bash
 # Add a new user with a home directory
 sudo useradd -m testuser
 ```
@@ -68,7 +66,6 @@ sudo useradd -m testuser
 
 ### Cell 3: Set User Password
 ```bash
-%%bash
 # Set a secure password for the new user
 sudo passwd testuser
 ```
@@ -82,7 +79,6 @@ sudo passwd testuser
 ### Cell 4: View Configured Users
 All users on a Linux system are listed inside `/etc/passwd`.
 ```bash
-%%bash
 # View the end of the user database file
 tail -n 3 /etc/passwd
 ```
@@ -123,7 +119,6 @@ Assigning permissions to individual users one-by-one is a massive pain in the as
 
 ### Cell 5: Create a Group and Add a User
 ```bash
-%%bash
 # Create a new group called devteam
 sudo groupadd devteam
 
@@ -135,7 +130,6 @@ sudo usermod -aG devteam testuser
 
 ### Cell 6: Verify User Groups
 ```bash
-%%bash
 # Print groups of testuser
 groups testuser
 ```
