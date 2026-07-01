@@ -216,8 +216,4 @@ The syntax is: `chmod <OwnerNum><GroupNum><OthersNum> file`
 
 ---
 
-**TEAM SPACEX FROM NIT HAMIRPUR ISN'T HAPPY WITH THIS PARTICULAR POST LOL IF YKYK**
-
-![Sayonara](https://media.tenor.com/jeb6K5yMweoAAAAC/tenor.gif)
-
 Sayonara Signing Off Baa Byee...
