@@ -6,21 +6,19 @@ tags: [Python, Internals, C, Memory Management]
 mermaid: true
 ---
 
-I have been thinking a lot about exploring Python internals lately. If you want to write highly optimized code, you have to stop treating the interpreter as a magic black box and actually understand how it is engineered. 
+I am thinking of exploring some of the python internals and how it is engineered to better understand its working.
 
-You have probably heard about the stack and the heap in terms of operating system memory. But how do they actually interact when you run your code? Let's explore this using C as a reference point first, and then dive deep into how Python handles the exact same concepts.
+So you might have heard about the concept of stack and heap in terms of the operating system.
 
 ![Mind Blown](https://media.tenor.com/A6mN1yq3C38AAAAM/mind-blown-brain-explode.gif)
 
 ---
 
-## 1. The Stack: Fast and Static (C Style)
+# Stack
 
-The stack is a contiguous region of memory managed strictly by the CPU. It stores temporary variables created by active functions. 
+We will first talk about C, then come to the Python reference.
 
-The stack is a LIFO (Last In, First Out) structure. Memory allocation is incredibly fast because it only requires moving the stack pointer. No complex memory searches, no fragmentation - just basic pointer arithmetic. However, the stack has a fixed size. If you allocate too much data on it (like a massive array or an infinite recursive function), the system will crash with a stack overflow.
-
-Every time a function is called, a new **stack frame** is pushed onto the stack. This frame stores the function's local variables and constants. Once the function returns, its stack frame is popped off, and that memory is instantly reclaimed by the operating system.
+The stack is a data structure which is used to hold variables like local variables and constants. The variables are automatically allocated and then deallocated by the compiler.
 
 ### Diagram: Stack Memory Allocation
 
@@ -34,7 +32,7 @@ graph TD
     end
 ```
 
-Here is a simple C program demonstrating stack allocation:
+For example:
 
 ### Cell 1: Stack Allocation in C
 ```c
@@ -42,31 +40,36 @@ Here is a simple C program demonstrating stack allocation:
 
 int main()
 {
-    int a = 300;
-    int b = 300;
-    int sum = a + b + 200; // sum = 800
-    return sum;
+  int a = 300;
+  int b = 300;
+  int sum = 800;
+  return sum;
 }
 ```
-> **Expected Output (Exit Status returned to OS):**
+> **Expected Output:**
 > ```text
 > 800
 > ```
 
-All three integers (`a`, `b`, and `sum`) are stored directly inside `main()`'s stack frame. When the program exits, the frame is cleared, and that memory disappears.
+Here is a simple C program for you to understand the stack and heap. When the program starts, the system stores these variables one by one in the stack and when they are no longer in use, it pops them out as well.
+
+The stack is incredibly fast since memory allocation is just moving a pointer, nothing more. No complex instructions, just pointer arithmetic.
+
+The stack has a fixed size; using too much stack memory may give you a stack overflow.
+
+## A stack frame is created whenever a function is called
+
+When you start the C executable, it first loads the executable into RAM. When `main()` is called, it creates a stack frame which pushes all the variables and constants into it. These things cannot be changed during the runtime, unlike the heap.
 
 ![Matrix Code](https://media.tenor.com/72Cg38bV_tYAAAAM/matrix-coding.gif)
 
 ---
 
-## 2. The Heap: Dynamic and Unmanaged
+# Heap: Dynamic Memory Allocation
 
-Unlike the stack, the heap is a large, unmanaged pool of memory used for dynamic allocations. The size of the heap is not fixed at compile time; you can request block allocations of arbitrary sizes during runtime. 
+Unlike the stack, the heap allows dynamic memory allocations.
 
-Because the heap is unmanaged, the programmer is fully responsible for it. In C, if you allocate memory on the heap using `malloc()`, you **must** release it using `free()`. If you forget, the memory stays allocated even after the pointer is destroyed, leading to a memory leak. 
-
-> [!CAUTION]
-> If you host a service with a memory leak, a malicious user can trigger a simple DDoS attack. By making repeated requests that leak just a few kilobytes of RAM, they can eventually deplete your system's memory and crash the entire server.
+The heap is another memory space. It is different from the stack; it is slow, and may be defined as a region of memory that is not automatically managed. We need to use `free()` at the end of the program, or it will cause a memory leak.
 
 ### Diagram: Stack Pointers referencing Heap Objects
 
@@ -87,41 +90,39 @@ graph TD
     PtrSum -->|points to| ValSum
 ```
 
-Here is how dynamic heap allocation looks in C:
+For example:
 
 ### Cell 2: Heap Allocation in C
 ```c
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h>  /* Required for malloc/free */
 
 int main(void)
 {
-    int *a;
-    int *b;
-    int *sum;
-
-    // Allocate 4 bytes on the heap for each integer
-    a = (int*)malloc(sizeof(int));
-    b = (int*)malloc(sizeof(int));
-    sum = (int*)malloc(sizeof(int));
-
-    if (a == NULL || b == NULL || sum == NULL) {
-        printf("Memory allocation failed\n");
-        return 1;
-    }
-
-    *a = 524;
-    *b = 500;
-    *sum = *a + *b;
-
-    printf("My sum: %d\n", *sum);
-
-    // Free the heap memory to prevent leaks
-    free(a);
-    free(b);
-    free(sum);
-
-    return 0;
+  int *a;
+  int *b;
+  int *sum;
+  
+  a = (int*)malloc(sizeof(int));
+  b = (int*)malloc(sizeof(int));
+  sum = (int*)malloc(sizeof(int));
+  
+  if (a == NULL || b == NULL || sum == NULL) {
+    printf("Memory allocation failed\n");
+    return 1;
+  }
+  
+  *a = 524;
+  *b = 500;
+  *sum = *a + *b;
+  
+  printf("My sum: %d\n", *sum);
+  
+  free(a);
+  free(b);
+  free(sum);
+  
+  return 0;
 }
 ```
 > **Expected Output:**
@@ -129,19 +130,19 @@ int main(void)
 > My sum: 1024
 > ```
 
-In the code above, the pointers (`a`, `b`, and `sum`) are stored on the **stack** (taking 8 bytes each on a 64-bit system), but the actual integer values they point to live on the **heap**. We use the reference operator `&` to grab memory addresses and the de-reference operator `*` to modify the values stored at those addresses.
+What this does is allocate 4 bytes of memory at a location in the heap. It then sends back the reference of the location to the system and stores it in `a`. The `int` pointer takes 8 bytes of storage in the stack, by the way.
+
+We use `&` as the reference operator and `*` as the de-reference operator. `malloc()` stands for memory allocate, and at the end of the program we deallocate the memory back again and give it back to the operating system.
+
+If we forget to use `free()`, this will cause a memory leak (unusable memory). If, let's take for example, you have remotely hosted a function with a memory leak, a DDoS attack can crash the system since running it each time increases the memory usage.
 
 ![Cat Typing](https://media.tenor.com/Z423qL2k24oAAAAM/cat-typing.gif)
 
 ---
 
-## 3. How Python Handles Memory Internals
+# Python
 
-Python does not require you to declare pointers or call `malloc` and `free`. Under the hood, however, Python leverages a similar stack and heap structure.
-
-In Python, **everything is an object**. Numbers, strings, functions, classes - they are all full-fledged objects. Because objects can grow dynamically at runtime (e.g., adding properties to a class instance or expanding a list), **all Python objects live on the heap**.
-
-The variable names you write (like `a` or `x`) are not the objects themselves; they are merely **references** (pointers) that point to the objects on the heap. These references live on the execution stack frame.
+We know that we can change anything in Python at runtime. Everything in Python is hence an object, and it lives on the heap. However, the reference to that pointer lives on the stack.
 
 ### Diagram: Python References and Objects
 
@@ -160,27 +161,19 @@ graph TD
     InstanceObj -->|instance of| ClassObj
 ```
 
-Here is a Python notebook cell showing this object instantiation and address mapping:
+For example:
 
 ### Cell 3: Python References and Objects
 ```python
 class A:
-    pass
+  pass
 
 a = A()
-print(f"Object variable 'a' points to heap address: {hex(id(a))}")
 ```
-> **Expected Output:**
-> ```text
-> Object variable 'a' points to heap address: 0x7f8a9b2c3d4e
-> ```
 
-When this runs:
-1. The class definition `A` is compiled into a class object and stored on the heap. Its reference `A` is pushed to the stack.
-2. When `A()` is invoked, Python allocates memory on the heap for the instance object. 
-3. The reference variable `a` is stored on the stack frame, pointing directly to that newly allocated heap space.
+Here, `A` is a blueprint of the object; it lives on the heap and the reference of `A` lives on the stack.
 
-Because Python abstracts this memory management, it runs a Garbage Collector in the background. It uses reference counting to track how many variables point to a heap object. Once the reference count hits zero, the memory is automatically reclaimed, saving you from manual C-style debugging nightmares.
+`a` is the actual object; it lives on the heap but again, the reference lives on the stack.
 
 ![Happy Coding](https://media.tenor.com/9nFk1uF6bAAAAAAM/happy-coding.gif)
 
