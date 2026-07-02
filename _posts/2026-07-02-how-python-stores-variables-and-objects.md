@@ -26,7 +26,7 @@ Every time a function is called, a new **stack frame** is pushed onto the stack.
 
 ```mermaid
 graph TD
-    subgraph Stack Memory (LIFO / High Speed)
+    subgraph StackMemory ["Stack Memory (LIFO / High Speed)"]
         Frame[main Function Stack Frame]
         Frame --> VarA[a = 300]
         Frame --> VarB[b = 300]
@@ -72,12 +72,12 @@ Because the heap is unmanaged, the programmer is fully responsible for it. In C,
 
 ```mermaid
 graph TD
-    subgraph Stack [Stack Memory]
+    subgraph Stack ["Stack Memory"]
         PtrA[a: Pointer to int <br/> 8 bytes]
         PtrB[b: Pointer to int <br/> 8 bytes]
         PtrSum[sum: Pointer to int <br/> 8 bytes]
     end
-    subgraph Heap [Heap Memory - Dynamic]
+    subgraph Heap ["Heap Memory - Dynamic"]
         ValA[Int Value: 524 <br/> 4 bytes]
         ValB[Int Value: 500 <br/> 4 bytes]
         ValSum[Int Value: 1024 <br/> 4 bytes]
@@ -147,11 +147,11 @@ The variable names you write (like `a` or `x`) are not the objects themselves; t
 
 ```mermaid
 graph TD
-    subgraph Stack [Stack Memory - Stack Frame]
+    subgraph Stack ["Stack Memory - Stack Frame"]
         ClassRef[Class reference 'A']
         ObjRef[Instance variable reference 'a']
     end
-    subgraph Heap [Heap Memory]
+    subgraph Heap ["Heap Memory"]
         ClassObj[Class Definition Object 'A']
         InstanceObj[Instance Object 'A instance']
     end
