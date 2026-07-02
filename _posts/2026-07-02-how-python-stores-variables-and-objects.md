@@ -10,7 +10,7 @@ I am thinking of exploring some of the python internals and how it is engineered
 
 So you might have heard about the concept of stack and heap in terms of the operating system.
 
-![Mind Blown](https://media.tenor.com/A6mN1yq3C38AAAAM/mind-blown-brain-explode.gif)
+![GIF 1](https://media.tenor.com/ZHVKcJip_ZMAAAAd/tenor.gif)
 
 ---
 
@@ -136,7 +136,7 @@ We use `&` as the reference operator and `*` as the de-reference operator. `mall
 
 If we forget to use `free()`, this will cause a memory leak (unusable memory). If, let's take for example, you have remotely hosted a function with a memory leak, a DDoS attack can crash the system since running it each time increases the memory usage.
 
-![Cat Typing](https://media.tenor.com/Z423qL2k24oAAAAM/cat-typing.gif)
+![Speed Laugh](https://media.tenor.com/2uEtX_KzydMAAAA1/ishowspeed-laugh.webp)
 
 ---
 
@@ -179,6 +179,6 @@ Here, `A` is a blueprint of the object; it lives on the heap and the reference o
 
 ---
 
-![Bye Bye](https://media.tenor.com/l45J-hM4t0AAAAAM/bye-wave.gif)
+![GIF 3](https://media.tenor.com/po1TbsY1hY4AAAAd/tenor.gif)
 
 byee.. signing out
