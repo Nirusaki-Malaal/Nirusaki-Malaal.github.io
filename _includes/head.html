@@ -128,54 +128,36 @@
         if (typeof mermaid !== "undefined") {
             mermaid.initialize({
                 startOnLoad: true,
-                theme: 'dark',
-                securityLevel: 'loose'
+                theme: 'base',
+                securityLevel: 'loose',
+                themeVariables: {
+                    background: '#0a0a0a',
+                    primaryColor: '#1a1a2e',
+                    primaryBorderColor: 'rgba(255,255,255,0.15)',
+                    primaryTextColor: '#e5e5e5',
+                    secondaryColor: '#16213e',
+                    secondaryBorderColor: 'rgba(255,255,255,0.1)',
+                    secondaryTextColor: '#e5e5e5',
+                    tertiaryColor: '#0f3460',
+                    tertiaryBorderColor: 'rgba(255,255,255,0.1)',
+                    tertiaryTextColor: '#e5e5e5',
+                    lineColor: 'rgba(255,255,255,0.4)',
+                    textColor: '#e5e5e5',
+                    mainBkg: '#1a1a2e',
+                    nodeBorder: 'rgba(255,255,255,0.15)',
+                    clusterBkg: 'rgba(255,255,255,0.04)',
+                    clusterBorder: 'rgba(255,255,255,0.1)',
+                    titleColor: '#e5e5e5',
+                    edgeLabelBackground: '#111111',
+                    nodeTextColor: '#e5e5e5'
+                }
             });
         }
     });
 </script>
 <style>
-    /* Premium Mermaid Dark Theme Overrides */
     .mermaid svg {
         background-color: transparent !important;
-    }
-    .mermaid .cluster rect, 
-    .mermaid .subgraphBorder {
-        fill: rgba(255, 255, 255, 0.03) !important;
-        stroke: rgba(255, 255, 255, 0.1) !important;
-        stroke-width: 1px !important;
-        rx: 8px !important;
-    }
-    .mermaid .node rect,
-    .mermaid .node circle,
-    .mermaid .node polygon,
-    .mermaid .node path {
-        fill: #111111 !important;
-        stroke: rgba(255, 255, 255, 0.15) !important;
-        stroke-width: 1px !important;
-    }
-    .mermaid .node .label, 
-    .mermaid .label text,
-    .mermaid text.titleText,
-    .mermaid .cluster-label text,
-    .mermaid .subgraph-title {
-        fill: #e5e5e5 !important;
-        color: #e5e5e5 !important;
-    }
-    .mermaid .edgePaths .edgePath .path {
-        stroke: rgba(255, 255, 255, 0.4) !important;
-        stroke-width: 1.5px !important;
-    }
-    .mermaid .marker {
-        fill: rgba(255, 255, 255, 0.4) !important;
-        stroke: none !important;
-    }
-    .mermaid .edgeLabel rect {
-        fill: #111111 !important;
-        stroke: rgba(255, 255, 255, 0.1) !important;
-    }
-    .mermaid .edgeLabel text {
-        fill: #888888 !important;
     }
 </style>
 {% endif %}
