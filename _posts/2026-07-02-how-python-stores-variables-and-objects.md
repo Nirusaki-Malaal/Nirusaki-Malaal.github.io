@@ -179,6 +179,6 @@ Here, `A` is a blueprint of the object; it lives on the heap and the reference o
 
 ---
 
-![GIF 3](https://media.tenor.com/po1TbsY1hY4AAAAd/tenor.gif)
+<img src="https://media.tenor.com/po1TbsY1hY4AAAAd/tenor.gif" alt="GIF 3" style="width: 280px; max-width: 100%; height: auto; border-radius: 8px;" />
 
 byee.. signing out

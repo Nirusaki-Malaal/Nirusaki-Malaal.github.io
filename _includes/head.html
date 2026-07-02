@@ -134,6 +134,50 @@
         }
     });
 </script>
+<style>
+    /* Premium Mermaid Dark Theme Overrides */
+    .mermaid svg {
+        background-color: transparent !important;
+    }
+    .mermaid .cluster rect, 
+    .mermaid .subgraphBorder {
+        fill: rgba(255, 255, 255, 0.03) !important;
+        stroke: rgba(255, 255, 255, 0.1) !important;
+        stroke-width: 1px !important;
+        rx: 8px !important;
+    }
+    .mermaid .node rect,
+    .mermaid .node circle,
+    .mermaid .node polygon,
+    .mermaid .node path {
+        fill: #111111 !important;
+        stroke: rgba(255, 255, 255, 0.15) !important;
+        stroke-width: 1px !important;
+    }
+    .mermaid .node .label, 
+    .mermaid .label text,
+    .mermaid text.titleText,
+    .mermaid .cluster-label text,
+    .mermaid .subgraph-title {
+        fill: #e5e5e5 !important;
+        color: #e5e5e5 !important;
+    }
+    .mermaid .edgePaths .edgePath .path {
+        stroke: rgba(255, 255, 255, 0.4) !important;
+        stroke-width: 1.5px !important;
+    }
+    .mermaid .marker {
+        fill: rgba(255, 255, 255, 0.4) !important;
+        stroke: none !important;
+    }
+    .mermaid .edgeLabel rect {
+        fill: #111111 !important;
+        stroke: rgba(255, 255, 255, 0.1) !important;
+    }
+    .mermaid .edgeLabel text {
+        fill: #888888 !important;
+    }
+</style>
 {% endif %}
 
 {% if page.extra_head %}{{ page.extra_head }}{% endif %}
