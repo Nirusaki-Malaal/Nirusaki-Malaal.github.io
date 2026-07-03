@@ -303,6 +303,26 @@ layout: default
         <!-- Bottom Divider -->
         <div class="h-px bg-white/10 mt-16 mb-16"></div>
 
+        <!-- Local Views Preview Script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "0.0.0.0") {
+                    setTimeout(function() {
+                        const containers = document.querySelectorAll("[id='busuanzi_container_page_pv']");
+                        const values = document.querySelectorAll("[id='busuanzi_value_page_pv']");
+                        containers.forEach(function(container) {
+                            container.style.display = "inline-flex";
+                        });
+                        values.forEach(function(value) {
+                            if (!value.textContent || value.textContent.trim() === "") {
+                                value.textContent = "137";
+                            }
+                        });
+                    }, 500);
+                }
+            });
+        </script>
+
         <!-- Busuanzi Page View Counter Script -->
         <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
