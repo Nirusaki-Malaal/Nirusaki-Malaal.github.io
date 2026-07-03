@@ -5,6 +5,7 @@ description: "A hands-on guide to Linux network namespaces, veth peers, and brid
 tags: [Linux, Networking, Sysadmin, CLI]
 category: linux
 mermaid: true
+image: https://nirusaki.me/assets/img/og/linux-networking-labs.png
 ---
 
 Welcome to Day 1 of our networking labs series. Today, we are going to explore how to construct isolated hosts (PCs), layer 2 switches, and ethernet cables entirely within the Linux kernel using virtual interfaces and namespaces. 

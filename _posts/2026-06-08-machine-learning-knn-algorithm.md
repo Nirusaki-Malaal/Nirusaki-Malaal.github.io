@@ -5,6 +5,7 @@ description: "A layman's guide to understanding the K-Nearest Neighbors algorith
 tags: [Machine Learning, AI, Python, Data Science, Algorithms]
 math: true
 category: machine-learning
+image: https://nirusaki.me/assets/img/og/machine-learning-knn-algorithm.png
 ---
 
 Today we are tackling one of the most classic Machine Learning algorithms out there: K-Nearest Neighbors, or KNN for short. We are going to break this down into plain English so you can actually understand what is happening under the hood.

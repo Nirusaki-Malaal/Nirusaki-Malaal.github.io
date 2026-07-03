@@ -5,6 +5,7 @@ description: "A deep dive into Python internals, comparing Stack vs Heap memory 
 tags: [Python, Internals, C, Memory Management]
 mermaid: true
 category: python
+image: https://nirusaki.me/assets/img/og/how-python-stores-variables-and-objects.png
 ---
 
 I am thinking of exploring some of the python internals and how it is engineered to better understand its working.
