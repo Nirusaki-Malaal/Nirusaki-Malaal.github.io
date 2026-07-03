@@ -16,7 +16,7 @@ description: "Technical blog posts, writeups, and notes by Nirusaki."
         <p class="text-gray-400 text-lg 2xl:text-xl max-w-3xl 2xl:max-w-4xl mb-12">Technical writeups, notes, and thoughts from the shadows of the terminal.</p>
 
         <!-- Topic Containers Dashboard -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12" id="category-containers">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12" id="category-containers">
             <!-- Linux Container -->
             <div class="glass-card p-5 cursor-pointer hover:border-blue-500/30 hover:shadow-[0_0_20px_rgba(59,130,246,0.05)] transition-all duration-300 relative group overflow-hidden" data-filter="linux" style="border: 1px solid rgba(255,255,255,0.05);">
                 <div class="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-blue-500/0 to-blue-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -76,6 +76,18 @@ description: "Technical blog posts, writeups, and notes by Nirusaki."
                 <p class="text-gray-500 text-xs leading-relaxed mb-3">Interpreter workings, memory allocation, references, and objects.</p>
                 <div class="text-xs text-gray-400 font-mono" id="count-python">0 posts</div>
             </div>
+
+            <!-- Projects Container -->
+            <div class="glass-card p-5 cursor-pointer hover:border-cyan-500/30 hover:shadow-[0_0_20px_rgba(6,182,212,0.05)] transition-all duration-300 relative group overflow-hidden" data-filter="projects" style="border: 1px solid rgba(255,255,255,0.05);">
+                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/0 via-cyan-500/0 to-cyan-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-3xl">🚀</span>
+                    <span class="text-xs text-cyan-400 border border-cyan-500/20 bg-cyan-500/5 px-2 py-0.5 rounded-full font-mono font-semibold uppercase">Projects</span>
+                </div>
+                <h3 class="font-display font-bold text-lg mb-1 group-hover:text-cyan-400 transition-colors">Projects</h3>
+                <p class="text-gray-500 text-xs leading-relaxed mb-3">Full-stack applications, bot builds, and API integrations.</p>
+                <div class="text-xs text-gray-400 font-mono" id="count-projects">0 posts</div>
+            </div>
         </div>
 
         <!-- Blog filter search input -->
@@ -126,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let activeCategory = null;
 
     // 1. Calculate post counts dynamically
-    const counts = { linux: 0, "machine-learning": 0, dsa: 0, security: 0, python: 0 };
+    const counts = { linux: 0, "machine-learning": 0, dsa: 0, security: 0, python: 0, projects: 0 };
     postCards.forEach(card => {
         const cat = card.getAttribute("data-category");
         if (cat in counts) {
@@ -146,7 +158,8 @@ document.addEventListener("DOMContentLoaded", function() {
         "machine-learning": ["border-emerald-500/50", "shadow-[0_0_20px_rgba(16,185,129,0.15)]"],
         dsa: ["border-amber-500/50", "shadow-[0_0_20px_rgba(245,158,11,0.15)]"],
         security: ["border-rose-500/50", "shadow-[0_0_20px_rgba(239,68,68,0.15)]"],
-        python: ["border-violet-500/50", "shadow-[0_0_20px_rgba(139,92,246,0.15)]"]
+        python: ["border-violet-500/50", "shadow-[0_0_20px_rgba(139,92,246,0.15)]"],
+        projects: ["border-cyan-500/50", "shadow-[0_0_20px_rgba(6,182,212,0.15)]"]
     };
 
     function updateFilters() {

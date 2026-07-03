@@ -3,7 +3,7 @@ title: "Reversing the API Behind the Jeffrey Epstein Files and Building a RAG Bo
 description: "A deep dive into reverse engineering the U.S. Government's Epstein files database API, bypassing cookie verification, and building a JIT (Just-In-Time) RAG Bot to query terabytes of document data."
 tags: [Reverse Engineering, Python, RAG, AI, API]
 mermaid: true
-category: python
+category: projects
 ---
 
 So I had this fucking crazy idea on my mind: building a federal Jeffrey Epstein RAG Bot. Sounds cool, right? But the very first problem is: how the hell do I get the API for this database? 
