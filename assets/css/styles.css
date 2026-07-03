@@ -1350,7 +1350,11 @@ body.blog-page-bg ::-moz-selection {
         width: 100%;
         justify-content: center;
     }
+}/* Custom Scrollbar Hiding Utility */
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
 }
-
-
-
+.scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

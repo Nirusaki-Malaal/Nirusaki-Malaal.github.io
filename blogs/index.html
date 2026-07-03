@@ -16,9 +16,9 @@ description: "Technical blog posts, writeups, and notes by Nirusaki."
         <p class="text-gray-400 text-lg 2xl:text-xl max-w-3xl 2xl:max-w-4xl mb-12">Technical writeups, notes, and thoughts from the shadows of the terminal.</p>
 
         <!-- Topic Containers Dashboard -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12" id="category-containers">
+        <div class="flex flex-row overflow-x-auto pb-4 gap-4 mb-12 flex-nowrap scrollbar-none sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 sm:pb-0 sm:overflow-visible" id="category-containers">
             <!-- Linux Container -->
-            <div class="glass-card p-5 cursor-pointer hover:border-blue-500/30 hover:shadow-[0_0_20px_rgba(59,130,246,0.05)] transition-all duration-300 relative group overflow-hidden" data-filter="linux" style="border: 1px solid rgba(255,255,255,0.05);">
+            <div class="glass-card p-5 cursor-pointer hover:border-blue-500/30 hover:shadow-[0_0_20px_rgba(59,130,246,0.05)] transition-all duration-300 relative group overflow-hidden flex-shrink-0 w-[240px] sm:w-auto" data-filter="linux" style="border: 1px solid rgba(255,255,255,0.05);">
                 <div class="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-blue-500/0 to-blue-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <div class="flex justify-between items-start mb-4">
                     <span class="text-3xl">🐧</span>
@@ -30,7 +30,7 @@ description: "Technical blog posts, writeups, and notes by Nirusaki."
             </div>
 
             <!-- Machine Learning Container -->
-            <div class="glass-card p-5 cursor-pointer hover:border-emerald-500/30 hover:shadow-[0_0_20px_rgba(16,185,129,0.05)] transition-all duration-300 relative group overflow-hidden" data-filter="machine-learning" style="border: 1px solid rgba(255,255,255,0.05);">
+            <div class="glass-card p-5 cursor-pointer hover:border-emerald-500/30 hover:shadow-[0_0_20px_rgba(16,185,129,0.05)] transition-all duration-300 relative group overflow-hidden flex-shrink-0 w-[240px] sm:w-auto" data-filter="machine-learning" style="border: 1px solid rgba(255,255,255,0.05);">
                 <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/0 via-emerald-500/0 to-emerald-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <div class="flex justify-between items-start mb-4">
                     <span class="text-3xl">🤖</span>
@@ -42,7 +42,7 @@ description: "Technical blog posts, writeups, and notes by Nirusaki."
             </div>
 
             <!-- DSA Container -->
-            <div class="glass-card p-5 cursor-pointer hover:border-amber-500/30 hover:shadow-[0_0_20px_rgba(245,158,11,0.05)] transition-all duration-300 relative group overflow-hidden" data-filter="dsa" style="border: 1px solid rgba(255,255,255,0.05);">
+            <div class="glass-card p-5 cursor-pointer hover:border-amber-500/30 hover:shadow-[0_0_20px_rgba(245,158,11,0.05)] transition-all duration-300 relative group overflow-hidden flex-shrink-0 w-[240px] sm:w-auto" data-filter="dsa" style="border: 1px solid rgba(255,255,255,0.05);">
                 <div class="absolute inset-0 bg-gradient-to-br from-amber-500/0 via-amber-500/0 to-amber-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <div class="flex justify-between items-start mb-4">
                     <span class="text-3xl">📊</span>
@@ -54,7 +54,7 @@ description: "Technical blog posts, writeups, and notes by Nirusaki."
             </div>
 
             <!-- Security Container -->
-            <div class="glass-card p-5 cursor-pointer hover:border-rose-500/30 hover:shadow-[0_0_20px_rgba(239,68,68,0.05)] transition-all duration-300 relative group overflow-hidden" data-filter="security" style="border: 1px solid rgba(255,255,255,0.05);">
+            <div class="glass-card p-5 cursor-pointer hover:border-rose-500/30 hover:shadow-[0_0_20px_rgba(239,68,68,0.05)] transition-all duration-300 relative group overflow-hidden flex-shrink-0 w-[240px] sm:w-auto" data-filter="security" style="border: 1px solid rgba(255,255,255,0.05);">
                 <div class="absolute inset-0 bg-gradient-to-br from-rose-500/0 via-rose-500/0 to-rose-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <div class="flex justify-between items-start mb-4">
                     <span class="text-3xl">🛡️</span>
@@ -66,7 +66,7 @@ description: "Technical blog posts, writeups, and notes by Nirusaki."
             </div>
 
             <!-- Python Container -->
-            <div class="glass-card p-5 cursor-pointer hover:border-violet-500/30 hover:shadow-[0_0_20px_rgba(139,92,246,0.05)] transition-all duration-300 relative group overflow-hidden" data-filter="python" style="border: 1px solid rgba(255,255,255,0.05);">
+            <div class="glass-card p-5 cursor-pointer hover:border-violet-500/30 hover:shadow-[0_0_20px_rgba(139,92,246,0.05)] transition-all duration-300 relative group overflow-hidden flex-shrink-0 w-[240px] sm:w-auto" data-filter="python" style="border: 1px solid rgba(255,255,255,0.05);">
                 <div class="absolute inset-0 bg-gradient-to-br from-violet-500/0 via-violet-500/0 to-violet-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <div class="flex justify-between items-start mb-4">
                     <span class="text-3xl">🐍</span>
@@ -78,7 +78,7 @@ description: "Technical blog posts, writeups, and notes by Nirusaki."
             </div>
 
             <!-- Projects Container -->
-            <div class="glass-card p-5 cursor-pointer hover:border-cyan-500/30 hover:shadow-[0_0_20px_rgba(6,182,212,0.05)] transition-all duration-300 relative group overflow-hidden" data-filter="projects" style="border: 1px solid rgba(255,255,255,0.05);">
+            <div class="glass-card p-5 cursor-pointer hover:border-cyan-500/30 hover:shadow-[0_0_20px_rgba(6,182,212,0.05)] transition-all duration-300 relative group overflow-hidden flex-shrink-0 w-[240px] sm:w-auto" data-filter="projects" style="border: 1px solid rgba(255,255,255,0.05);">
                 <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/0 via-cyan-500/0 to-cyan-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <div class="flex justify-between items-start mb-4">
                     <span class="text-3xl">🚀</span>
