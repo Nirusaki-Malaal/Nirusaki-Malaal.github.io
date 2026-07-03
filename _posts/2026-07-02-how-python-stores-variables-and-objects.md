@@ -1,4 +1,5 @@
----layout: post
+---
+layout: post
 title: "How Python Stores Variables and Objects"
 description: "A deep dive into Python internals, comparing Stack vs Heap memory allocation to C, and understanding how objects and references are managed in memory."
 tags: [Python, Internals, C, Memory Management]

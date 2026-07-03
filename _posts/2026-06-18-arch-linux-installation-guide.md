@@ -1,4 +1,5 @@
----layout: post
+---
+layout: post
 title: "I Use Arch BTW: The Ultimate Arch Linux Installation Guide"
 description: "A complete step-by-step walkthrough on installing Arch Linux, setting up audio, Bluetooth, graphics, XFCE, Hyprland, Niri, Noctalia dots, and enabling the AUR."
 tags: [Linux, Arch Linux, Installation, Guide, Hyprland, Niri]

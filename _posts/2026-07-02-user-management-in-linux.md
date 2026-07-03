@@ -1,4 +1,5 @@
----layout: post
+---
+layout: post
 title: "User Management in Linux"
 description: "An edgy, comprehensive guide to Linux user accounts, permissions, groups, and understanding useradd, passwd, su, and chmod."
 tags: [Linux, Sysadmin, Security, CLI]

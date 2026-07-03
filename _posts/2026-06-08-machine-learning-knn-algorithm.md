@@ -1,4 +1,5 @@
----layout: post
+---
+layout: post
 title: "Machine Learning: K-Nearest Neighbors (KNN) Explained"
 description: "A layman's guide to understanding the K-Nearest Neighbors algorithm, complete with Python code."
 tags: [Machine Learning, AI, Python, Data Science, Algorithms]

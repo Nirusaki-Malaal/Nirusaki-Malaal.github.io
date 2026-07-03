@@ -1,4 +1,5 @@
----layout: post
+---
+layout: post
 title: "DSA Chronicles - Linked List"
 description: "Exploring the fundamentals of linked lists in Data Structures and Algorithms."
 tags: [DSA, C++, Linked List, Data Structures, Algorithms]

@@ -1,4 +1,5 @@
----layout: post
+---
+layout: post
 title: "Reversing the API Behind the Jeffrey Epstein Files and Building a RAG Bot"
 description: "A deep dive into reverse engineering the U.S. Government's Epstein files database API, bypassing cookie verification, and building a JIT (Just-In-Time) RAG Bot to query terabytes of document data."
 tags: [Reverse Engineering, Python, RAG, AI, API]

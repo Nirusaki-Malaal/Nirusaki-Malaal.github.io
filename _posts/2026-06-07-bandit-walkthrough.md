@@ -1,4 +1,5 @@
----layout: post
+---
+layout: post
 title: "Cracking OverTheWire: Bandit Walkthrough (Full Run 0-33)"
 description: "A sick speedrun walkthrough of the ENTIRE OverTheWire Bandit wargame. Levels 0 to 33 baby."
 tags: [Cyber Security, CTF, OverTheWire, Bandit, Linux, Bash, Ethical Hacking, Penetration Testing]
