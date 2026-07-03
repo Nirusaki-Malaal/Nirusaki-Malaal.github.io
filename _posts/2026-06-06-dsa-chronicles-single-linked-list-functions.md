@@ -1,8 +1,8 @@
----
-layout: post
+---layout: post
 title: "DSA Chronicles - Single Linked List Functions"
 description: "Breaking down the core functions of a Single Linked List in C++."
 tags: [DSA, C++, Linked List, Data Structures, Algorithms]
+category: dsa
 ---
 
 Today we are going to fuckin crack linked list functions! Let's get right into it.

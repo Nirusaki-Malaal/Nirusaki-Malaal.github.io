@@ -1,8 +1,8 @@
----
-layout: post
+---layout: post
 title: "I Use Arch BTW: The Ultimate Arch Linux Installation Guide"
 description: "A complete step-by-step walkthrough on installing Arch Linux, setting up audio, Bluetooth, graphics, XFCE, Hyprland, Niri, Noctalia dots, and enabling the AUR."
 tags: [Linux, Arch Linux, Installation, Guide, Hyprland, Niri]
+category: linux
 ---
 
 So, you may have heard about the legendary meme "I USE ARCH BTW". Why is this even a meme? Well, the reason actually hides behind the complexity of installing and setting up the operating system.

@@ -15,7 +15,70 @@ description: "Technical blog posts, writeups, and notes by Nirusaki."
         </h1>
         <p class="text-gray-400 text-lg 2xl:text-xl max-w-3xl 2xl:max-w-4xl mb-12">Technical writeups, notes, and thoughts from the shadows of the terminal.</p>
 
-        <!-- Blog filter -->
+        <!-- Topic Containers Dashboard -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12" id="category-containers">
+            <!-- Linux Container -->
+            <div class="glass-card p-5 cursor-pointer hover:border-blue-500/30 hover:shadow-[0_0_20px_rgba(59,130,246,0.05)] transition-all duration-300 relative group overflow-hidden" data-filter="linux" style="border: 1px solid rgba(255,255,255,0.05);">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-blue-500/0 to-blue-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-3xl">🐧</span>
+                    <span class="text-xs text-blue-400 border border-blue-500/20 bg-blue-500/5 px-2 py-0.5 rounded-full font-mono font-semibold uppercase">Linux</span>
+                </div>
+                <h3 class="font-display font-bold text-lg mb-1 group-hover:text-blue-400 transition-colors">Linux & OS</h3>
+                <p class="text-gray-500 text-xs leading-relaxed mb-3">Installations, kernel setups, system configuration & scripting.</p>
+                <div class="text-xs text-gray-400 font-mono" id="count-linux">0 posts</div>
+            </div>
+
+            <!-- Machine Learning Container -->
+            <div class="glass-card p-5 cursor-pointer hover:border-emerald-500/30 hover:shadow-[0_0_20px_rgba(16,185,129,0.05)] transition-all duration-300 relative group overflow-hidden" data-filter="machine-learning" style="border: 1px solid rgba(255,255,255,0.05);">
+                <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/0 via-emerald-500/0 to-emerald-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-3xl">🤖</span>
+                    <span class="text-xs text-emerald-400 border border-emerald-500/20 bg-emerald-500/5 px-2 py-0.5 rounded-full font-mono font-semibold uppercase">ML</span>
+                </div>
+                <h3 class="font-display font-bold text-lg mb-1 group-hover:text-emerald-400 transition-colors">Machine Learning</h3>
+                <p class="text-gray-500 text-xs leading-relaxed mb-3">Algorithms, model internals, RAG bots, and artificial intelligence.</p>
+                <div class="text-xs text-gray-400 font-mono" id="count-machine-learning">0 posts</div>
+            </div>
+
+            <!-- DSA Container -->
+            <div class="glass-card p-5 cursor-pointer hover:border-amber-500/30 hover:shadow-[0_0_20px_rgba(245,158,11,0.05)] transition-all duration-300 relative group overflow-hidden" data-filter="dsa" style="border: 1px solid rgba(255,255,255,0.05);">
+                <div class="absolute inset-0 bg-gradient-to-br from-amber-500/0 via-amber-500/0 to-amber-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-3xl">📊</span>
+                    <span class="text-xs text-amber-400 border border-amber-500/20 bg-amber-500/5 px-2 py-0.5 rounded-full font-mono font-semibold uppercase">DSA</span>
+                </div>
+                <h3 class="font-display font-bold text-lg mb-1 group-hover:text-amber-400 transition-colors">DSA Chronicles</h3>
+                <p class="text-gray-500 text-xs leading-relaxed mb-3">Data structures, logic, memory nodes, and complexity walkthroughs.</p>
+                <div class="text-xs text-gray-400 font-mono" id="count-dsa">0 posts</div>
+            </div>
+
+            <!-- Security Container -->
+            <div class="glass-card p-5 cursor-pointer hover:border-rose-500/30 hover:shadow-[0_0_20px_rgba(239,68,68,0.05)] transition-all duration-300 relative group overflow-hidden" data-filter="security" style="border: 1px solid rgba(255,255,255,0.05);">
+                <div class="absolute inset-0 bg-gradient-to-br from-rose-500/0 via-rose-500/0 to-rose-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-3xl">🛡️</span>
+                    <span class="text-xs text-rose-400 border border-rose-500/20 bg-rose-500/5 px-2 py-0.5 rounded-full font-mono font-semibold uppercase">Security</span>
+                </div>
+                <h3 class="font-display font-bold text-lg mb-1 group-hover:text-rose-400 transition-colors">Security & CTFs</h3>
+                <p class="text-gray-500 text-xs leading-relaxed mb-3">Walkthroughs, capture the flags, hacks, and pen testing.</p>
+                <div class="text-xs text-gray-400 font-mono" id="count-security">0 posts</div>
+            </div>
+
+            <!-- Python Container -->
+            <div class="glass-card p-5 cursor-pointer hover:border-violet-500/30 hover:shadow-[0_0_20px_rgba(139,92,246,0.05)] transition-all duration-300 relative group overflow-hidden" data-filter="python" style="border: 1px solid rgba(255,255,255,0.05);">
+                <div class="absolute inset-0 bg-gradient-to-br from-violet-500/0 via-violet-500/0 to-violet-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-3xl">🐍</span>
+                    <span class="text-xs text-violet-400 border border-violet-500/20 bg-violet-500/5 px-2 py-0.5 rounded-full font-mono font-semibold uppercase">Python</span>
+                </div>
+                <h3 class="font-display font-bold text-lg mb-1 group-hover:text-violet-400 transition-colors">Python Internals</h3>
+                <p class="text-gray-500 text-xs leading-relaxed mb-3">Interpreter workings, memory allocation, references, and objects.</p>
+                <div class="text-xs text-gray-400 font-mono" id="count-python">0 posts</div>
+            </div>
+        </div>
+
+        <!-- Blog filter search input -->
         <div class="mb-12">
             <div class="glass-panel p-4 flex items-center gap-4 focus-within:border-white/20 focus-within:shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-all duration-300">
                 <svg class="w-5 h-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
@@ -26,7 +89,7 @@ description: "Technical blog posts, writeups, and notes by Nirusaki."
         <!-- Posts list -->
         <div id="blog-posts" class="space-y-6">
             {% for post in site.posts %}
-            <article class="blog-post-card glass-card p-6 hover:border-white/20 transition-all" data-title="{{ post.title | downcase }}" data-tags="{{ post.tags | join: ' ' | downcase }}">
+            <article class="blog-post-card glass-card p-6 hover:border-white/20 transition-all" data-title="{{ post.title | downcase }}" data-tags="{{ post.tags | join: ' ' | downcase }}" data-category="{{ post.category | downcase }}" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
                 <div class="flex flex-wrap items-center gap-3 mb-3">
                     <time datetime="{{ post.date | date_to_xmlschema }}" class="text-xs text-gray-500 font-mono">{{ post.date | date: "%b %d, %Y" }}</time>
                     {% for tag in post.tags %}
@@ -54,3 +117,92 @@ description: "Technical blog posts, writeups, and notes by Nirusaki."
         </div>
     </div>
 </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("blog-search");
+    const containerCards = document.querySelectorAll("#category-containers > div");
+    const postCards = document.querySelectorAll(".blog-post-card");
+    let activeCategory = null;
+
+    // 1. Calculate post counts dynamically
+    const counts = { linux: 0, "machine-learning": 0, dsa: 0, security: 0, python: 0 };
+    postCards.forEach(card => {
+        const cat = card.getAttribute("data-category");
+        if (cat in counts) {
+            counts[cat]++;
+        }
+    });
+    for (const [cat, count] of Object.entries(counts)) {
+        const countEl = document.getElementById(`count-${cat}`);
+        if (countEl) {
+            countEl.textContent = `${count} ${count === 1 ? 'post' : 'posts'}`;
+        }
+    }
+
+    // Category border and shadow colors mapping
+    const activeBorderClasses = {
+        linux: ["border-blue-500/50", "shadow-[0_0_20px_rgba(59,130,246,0.15)]"],
+        "machine-learning": ["border-emerald-500/50", "shadow-[0_0_20px_rgba(16,185,129,0.15)]"],
+        dsa: ["border-amber-500/50", "shadow-[0_0_20px_rgba(245,158,11,0.15)]"],
+        security: ["border-rose-500/50", "shadow-[0_0_20px_rgba(239,68,68,0.15)]"],
+        python: ["border-violet-500/50", "shadow-[0_0_20px_rgba(139,92,246,0.15)]"]
+    };
+
+    function updateFilters() {
+        const query = searchInput.value.toLowerCase().trim();
+
+        postCards.forEach(card => {
+            const title = card.getAttribute("data-title") || "";
+            const tags = card.getAttribute("data-tags") || "";
+            const cat = card.getAttribute("data-category") || "";
+
+            const matchesQuery = !query || title.includes(query) || tags.includes(query);
+            const matchesCategory = !activeCategory || cat === activeCategory;
+
+            if (matchesQuery && matchesCategory) {
+                card.style.display = "block";
+                setTimeout(() => {
+                    card.style.opacity = "1";
+                    card.style.transform = "scale(1)";
+                }, 50);
+            } else {
+                card.style.opacity = "0";
+                card.style.transform = "scale(0.97)";
+                setTimeout(() => {
+                    if (card.style.opacity === "0") {
+                        card.style.display = "none";
+                    }
+                }, 300);
+            }
+        });
+    }
+
+    containerCards.forEach(card => {
+        card.addEventListener("click", () => {
+            const category = card.getAttribute("data-filter");
+
+            // Reset all card styles first
+            containerCards.forEach(c => {
+                const cat = c.getAttribute("data-filter");
+                c.classList.remove(...activeBorderClasses[cat]);
+                c.style.borderColor = "rgba(255, 255, 255, 0.05)";
+            });
+
+            if (activeCategory === category) {
+                activeCategory = null;
+            } else {
+                activeCategory = category;
+                card.classList.add(...activeBorderClasses[category]);
+                card.style.borderColor = "transparent";
+            }
+
+            updateFilters();
+        });
+    });
+
+    if (searchInput) {
+        searchInput.addEventListener("input", updateFilters);
+    }
+});
+</script>

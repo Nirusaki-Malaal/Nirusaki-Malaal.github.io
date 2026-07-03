@@ -1,9 +1,9 @@
----
-layout: post
+---layout: post
 title: "User Management in Linux"
 description: "An edgy, comprehensive guide to Linux user accounts, permissions, groups, and understanding useradd, passwd, su, and chmod."
 tags: [Linux, Sysadmin, Security, CLI]
 mermaid: true
+category: linux
 ---
 
 Every operating system needs to know who the fuck is logged in and what they are allowed to touch. In Linux, user management is the core of security. If you screw this up, you might give a random database daemon the rights to overwrite your entire root partition. Let's break down how Linux user accounts, groups, and permissions actually work, without the boring textbook fluff.
