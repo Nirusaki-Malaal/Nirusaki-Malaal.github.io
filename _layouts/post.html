@@ -48,15 +48,23 @@ layout: default
         <!-- Title -->
         <h1 class="font-display font-bold text-4xl md:text-6xl tracking-tighter mb-6">{{ page.title }}</h1>
 
-        <!-- Meta -->
-        <div class="flex items-center gap-4 text-gray-500 text-sm mb-8">
-            <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
-            <span class="text-white/20">•</span>
-            <span>{% assign words = content | number_of_words %}{{ words | divided_by: 200 | plus: 1 }} min read</span>
-            <span class="text-white/20" id="busuanzi_container_page_pv" style="display: none;">•</span>
-            <span id="busuanzi_container_page_pv" style="display: none;">
-                <span id="busuanzi_value_page_pv"></span> views
-            </span>
+        <!-- Meta Badges -->
+        <div class="flex flex-wrap items-center gap-3 mb-8 font-body">
+            <!-- Date Badge -->
+            <div class="flex items-center gap-2 px-3 py-1.5 bg-white/[0.02] border border-white/5 rounded-full text-xs text-gray-400">
+                <svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
+            </div>
+            <!-- Read Time Badge -->
+            <div class="flex items-center gap-2 px-3 py-1.5 bg-white/[0.02] border border-white/5 rounded-full text-xs text-gray-400">
+                <svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span>{% assign words = content | number_of_words %}{{ words | divided_by: 200 | plus: 1 }} min read</span>
+            </div>
+            <!-- Views Badge -->
+            <div class="flex items-center gap-2 px-3 py-1.5 bg-neon-cyan/5 border border-neon-cyan/20 rounded-full text-xs text-neon-cyan transition-all duration-300" id="busuanzi_container_page_pv" style="display: none;">
+                <svg class="w-3.5 h-3.5 text-neon-cyan animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <span class="font-bold font-mono" id="busuanzi_value_page_pv"></span> <span class="text-neon-cyan/80">views</span>
+            </div>
         </div>
 
         <!-- Solid Divider -->
