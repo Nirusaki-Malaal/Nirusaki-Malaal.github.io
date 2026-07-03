@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Linux Networking Labs: Virtual Switches, Cables, and Namespaces"
+title: "Lab - 1: Linux Networking Labs — Virtual Switches, Cables, and Namespaces"
 description: "A hands-on guide to Linux network namespaces, veth peers, and bridge devices for constructing virtual LAN environments."
 tags: [Linux, Networking, Sysadmin, CLI]
 category: linux
@@ -94,6 +94,8 @@ sudo ip netns exec pc1 ip link show
 
 By default, the namespace is completely isolated. It only has a loopback interface (`lo`) which is turned off (`DOWN`). You can think of `pc1` as an isolated machine with no physical network cards or network connection whatsoever.
 
+![Isolated Machine](https://i.giphy.com/media/143v0b4767WdgY/giphy.webp)
+
 ---
 
 ### 3. Creating a Layer 2 Switch
@@ -110,6 +112,8 @@ sudo ip link set sw1 up
 
 Bringing the interface state to `UP` is equivalent to plugging the switch into a power outlet and turning it on so devices can connect.
 
+![Switch Active](https://i.giphy.com/media/xT9Igp5fFezs0vBSn6/giphy.webp)
+
 ---
 
 ### 4. Creating Virtual Ethernet Cables
@@ -125,6 +129,8 @@ sudo ip link add veth-pc1 type veth peer name veth-pc1-br
 
 *   `type veth` specifies that this link is a virtual ethernet pair.
 *   `peer name <name>` links the opposite end of the pipe to the specified interface card name.
+
+![Plugging in Cables](https://i.giphy.com/media/3o7btQ8FPZy64a3R0U/giphy.webp)
 
 ---
 
@@ -220,6 +226,8 @@ rtt min/avg/max/mdev = 0.036/0.039/0.045/0.003 ms
 ```
 
 It works! We have established an isolated local network (VLAN) on the host computer.
+
+![Ping Successful](https://i.giphy.com/media/3knK1WZBHMFhy/giphy.webp)
 
 ---
 
