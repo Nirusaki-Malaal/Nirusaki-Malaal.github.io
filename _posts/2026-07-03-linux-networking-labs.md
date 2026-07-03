@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Lab - 1: Linux Networking Labs — Virtual Switches, Cables, and Namespaces"
+title: "Lab - 1: Linux Networking Labs - Virtual Switches, Cables, and Namespaces"
 description: "A hands-on guide to Linux network namespaces, veth peers, and bridge devices for constructing virtual LAN environments."
 tags: [Linux, Networking, Sysadmin, CLI]
 category: linux
