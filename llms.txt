@@ -16,7 +16,7 @@ Nirusaki (ニルサキ) is a Python developer, software engineer, and automation
 - **Frontend Frameworks & UI**: React, HTML5, CSS3, TailwindCSS
 - **Backend & APIs**: FastAPI, Flask, Node.js, Express
 - **Databases & Cache**: MongoDB, PostgreSQL, Redis, MySQL
-- **AI & Data Science**: NumPy, Pandas, Matplotlib, Scikit-Learn, TensorFlow
+- **AI & Data Science**: NumPy, Pandas, Matplotlib, Scikit-Learn, PyTorch
 - **DevOps & Deployments**: Docker, Vercel, Heroku, Railway, Netlify, Google Cloud
 - **Tools & Core Utilities**: Git, GitHub, Arch Linux, Ubuntu Server, Zsh, FFmpeg, VSCode
 
