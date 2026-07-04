@@ -544,134 +544,54 @@ if (hasCustomCursor && !isBlogPage) {
     });
 }
 
-// ===== THREE.JS BACKGROUND =====
+// ===== THREE.JS BACKGROUND (Rotational Neon Particle Field) =====
 const canvas = document.getElementById('bg-canvas');
 if (canvas && window.THREE && !isBlogPage) {
     try {
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
+        
         const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 250;
+        const particlesCount = 1500;
+        const posArray = new Float32Array(particlesCount * 3);
         
-        const positions = new Float32Array(particlesCount * 3);
-        const baseX = new Float32Array(particlesCount);
-        const baseY = new Float32Array(particlesCount);
-        const baseZ = new Float32Array(particlesCount);
-        const speeds = new Float32Array(particlesCount);
-        const phases = new Float32Array(particlesCount);
-        
-        // Initialize particles scattered in 3D box
-        for (let i = 0; i < particlesCount; i++) {
-            baseX[i] = (Math.random() - 0.5) * 35;
-            baseY[i] = (Math.random() - 0.5) * 22; // y
-            baseZ[i] = (Math.random() - 0.5) * 20;
-            
-            positions[i * 3] = baseX[i];
-            positions[i * 3 + 1] = baseY[i];
-            positions[i * 3 + 2] = baseZ[i];
-            
-            speeds[i] = 0.01 + Math.random() * 0.015; // upward drift speed
-            phases[i] = Math.random() * Math.PI * 2; // phase for swing oscillation
+        for (let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 50;
         }
         
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-        // Monochrome white particles for minimalist aesthetic
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        
         const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.045,
-            color: 0xffffff,
+            size: 0.025,
+            color: 0x00f5ff, // Cyberpunk Cyan
             transparent: true,
-            opacity: 0.35,
+            opacity: 0.6,
             blending: THREE.AdditiveBlending
         });
         
         const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
         scene.add(particlesMesh);
+        camera.position.z = 5;
         
-        camera.position.z = 10;
-
         let rafId;
-        let clock = new THREE.Clock();
-        
         function animate() {
             rafId = requestAnimationFrame(animate);
-            
-            const elapsedTime = clock.getElapsedTime();
-            const posAttr = particlesGeometry.attributes.position.array;
-            
-            // Project mouse coordinates to 3D space targets (camera at z=10)
-            const mouse3D = new THREE.Vector3(mouseX * 12, mouseY * 8, 0);
-            
-            for (let i = 0; i < particlesCount; i++) {
-                const idx = i * 3;
-                
-                // 1. Slow upward drift on base coordinate
-                baseY[i] += speeds[i];
-                
-                // 2. Horizontal sine wave drift
-                const swingX = Math.sin(elapsedTime * 0.4 + phases[i]) * 0.4;
-                const swingZ = Math.cos(elapsedTime * 0.4 + phases[i]) * 0.4;
-                const targetX = baseX[i] + swingX;
-                const targetY = baseY[i];
-                const targetZ = baseZ[i] + swingZ;
-                
-                // 3. Mouse repulsion physics (push away in XY plane)
-                const dx = targetX - mouse3D.x;
-                const dy = targetY - mouse3D.y;
-                const dz = targetZ - mouse3D.z;
-                const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-                
-                let offsetX = 0;
-                let offsetY = 0;
-                if (dist < 4.5) {
-                    const force = (4.5 - dist) / 4.5;
-                    const repelPower = force * force * 2.0; // quadratic falloff for smoother push
-                    offsetX = (dx / dist) * repelPower;
-                    offsetY = (dy / dist) * repelPower;
-                }
-                
-                // 4. Elastic return towards their base flow lanes (smooth easing)
-                const destX = targetX + offsetX;
-                const destY = targetY + offsetY;
-                const destZ = targetZ;
-                
-                posAttr[idx] += (destX - posAttr[idx]) * 0.08;
-                posAttr[idx + 1] += (destY - posAttr[idx + 1]) * 0.08;
-                posAttr[idx + 2] += (destZ - posAttr[idx + 2]) * 0.08;
-                
-                // 5. Boundary reset: wrap from top to bottom
-                if (baseY[i] > 11) {
-                    baseY[i] = -11;
-                    baseX[i] = (Math.random() - 0.5) * 35;
-                    baseZ[i] = (Math.random() - 0.5) * 20;
-                    // Reset current position instantly to avoid lag trails
-                    posAttr[idx] = baseX[i];
-                    posAttr[idx + 1] = baseY[i];
-                    posAttr[idx + 2] = baseZ[i];
-                }
-            }
-            
-            particlesGeometry.attributes.position.needsUpdate = true;
-            
-            // Subtle overall camera drift based on mouse coordinates (parallax)
-            camera.position.x = mouseX * 0.5;
-            camera.position.y = mouseY * 0.5;
-            camera.lookAt(scene.position);
-            
+            // Continuous rotation drift influenced by mouse position
+            particlesMesh.rotation.x += 0.0005 + (mouseY * 0.0008);
+            particlesMesh.rotation.y += 0.0005 + (mouseX * 0.0008);
             renderer.render(scene, camera);
         }
         animate();
-
+        
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
-
+        
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) cancelAnimationFrame(rafId);
             else animate();
