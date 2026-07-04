@@ -3,6 +3,7 @@ layout: post
 title: "TCP-IP and OSI Model"
 description: "A raw, unfiltered breakdown of network protocols, layers, and the encapsulation process."
 tags: [Linux, Networking, Sysadmin, CLI]
+math: true
 category: linux
 image: https://nirusaki.me/assets/img/og/tcp-ip-and-osi-model.png
 ---
@@ -44,11 +45,17 @@ Here is how data changes at each stage:
 
 1.  **Data** (Level 5 or 7): Raw application data.
 2.  **Segment** (Layer 4): The Transport Layer adds an L4 Header (TCP/UDP port information).
-    $$\text{Segment} = \text{L4 Header} + \text{Data}$$
+
+$$ \text{Segment} = \text{L4 Header} + \text{Data} $$
+
 3.  **Packet** (Layer 3): The Internet Layer adds an L3 Header (IP address).
-    $$\text{Packet} = \text{L3 Header} + \text{Segment}$$
+
+$$ \text{Packet} = \text{L3 Header} + \text{Segment} $$
+
 4.  **Frame** (Layer 2): The Local Network Layer adds an L2 Header (MAC addresses) and an L2 Trailer.
-    $$\text{Frame} = \text{L2 Header} + \text{Packet} + \text{L2 Trailer}$$
+
+$$ \text{Frame} = \text{L2 Header} + \text{Packet} + \text{L2 Trailer} $$
+
 5.  **Electrical Bits** (Layer 1): The Physical Layer converts the frame into electrical bits to transfer over the wire.
 
 Segment, packet, and frame are collectively called **PDUs** (Protocol Data Units) of Layer X.
