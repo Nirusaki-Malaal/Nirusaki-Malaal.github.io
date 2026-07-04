@@ -63,15 +63,27 @@ In two systems, each layer logically interacts with its own equivalent. The tran
 
 ### 5. The 7-Layer OSI Model
 
-While TCP-IP is the most widely used model, the academic **7-Layer OSI Model** is still reference:
+While TCP-IP is the most widely used model, the academic **7-Layer OSI Model** is still used for reference:
 
 1.  **Application**
-2.  **Presentation**
-3.  **Session**
+2.  **Presentation** (Extra)
+3.  **Session** (Extra)
 4.  **Transport**
 5.  **Network**
 6.  **Data Link**
 7.  **Physical**
+
+---
+
+### The Extra OSI Layers Explained
+
+If you compare the two, the OSI model has two extra layers sandwiched between the Transport and Application layers. Here is what the fuck they actually do:
+
+*   **Presentation Layer (Layer 6):** This layer acts as a data translator. It takes care of formatting, compressing, and encrypting data so that the Application layer can actually read it. Think of it as translating raw EBCDIC to ASCII, compressing JPEGs, or wrapping raw payloads in SSL/TLS encryption.
+*   **Session Layer (Layer 5):** This layer handles setting up, managing, and tearing down communication sessions between applications on different systems. It coordinates the dialog control (half-duplex or full-duplex) and handles checkpoints so that if a massive download fails mid-transit, it can resume from the last checkpoint instead of starting the whole shit over again.
+
+#### Why did TCP/IP collapse them?
+In the real world, developers wanted to handle data compression, encryption (like TLS/SSL), and session state logic directly inside the applications they write, instead of forcing the operating system's kernel network stack to deal with it. So, the TCP/IP designers collapsed Session, Presentation, and Application into one big, flexible **Application Layer**.
 
 ---
 
