@@ -348,6 +348,7 @@ function openModal(projectKey, repoData) {
 
     modal.classList.remove('hidden');
     modal.classList.add('flex');
+    modal.scrollTop = 0;
     document.body.style.overflow = 'hidden';
 
     const content = document.getElementById('project-modal-content');
