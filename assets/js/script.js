@@ -351,55 +351,12 @@ function openModal(projectKey, repoData) {
     document.body.style.overflow = 'hidden';
 
     const content = document.getElementById('project-modal-content');
-    const isMobile = window.innerWidth < 640;
     
     if (window.gsap) {
         gsap.to(modal, { opacity: 1, duration: 0.3 });
-        if (isMobile) {
-            gsap.fromTo(content, { y: '100%', opacity: 0 }, { y: '0%', opacity: 1, duration: 0.35, ease: 'power3.out' });
-        } else {
-            gsap.fromTo(content, { scale: 0.92, opacity: 0, y: 30 }, { scale: 1, opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' });
-        }
+        gsap.fromTo(content, { scale: 0.92, opacity: 0, y: 30 }, { scale: 1, opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' });
     } else {
         modal.style.opacity = '1';
-    }
-
-    // Swipe-to-dismiss on mobile
-    if (isMobile && content) {
-        let startY = 0;
-        let currentY = 0;
-        let isDragging = false;
-
-        const onTouchStart = (e) => {
-            if (content.scrollTop <= 0) {
-                startY = e.touches[0].clientY;
-                isDragging = true;
-            }
-        };
-        const onTouchMove = (e) => {
-            if (!isDragging) return;
-            currentY = e.touches[0].clientY - startY;
-            if (currentY > 0) {
-                content.style.transform = `translateY(${currentY}px)`;
-                content.style.transition = 'none';
-            }
-        };
-        const onTouchEnd = () => {
-            if (!isDragging) return;
-            isDragging = false;
-            if (currentY > 100) {
-                closeModal();
-            } else {
-                content.style.transform = '';
-                content.style.transition = '';
-            }
-            currentY = 0;
-        };
-
-        content._swipeHandlers = { onTouchStart, onTouchMove, onTouchEnd };
-        content.addEventListener('touchstart', onTouchStart, { passive: true });
-        content.addEventListener('touchmove', onTouchMove, { passive: true });
-        content.addEventListener('touchend', onTouchEnd, { passive: true });
     }
 }
 
@@ -408,15 +365,6 @@ function closeModal() {
     if (!modal) return;
 
     const content = document.getElementById('project-modal-content');
-    const isMobile = window.innerWidth < 640;
-
-    // Clean up swipe handlers
-    if (content && content._swipeHandlers) {
-        content.removeEventListener('touchstart', content._swipeHandlers.onTouchStart);
-        content.removeEventListener('touchmove', content._swipeHandlers.onTouchMove);
-        content.removeEventListener('touchend', content._swipeHandlers.onTouchEnd);
-        delete content._swipeHandlers;
-    }
 
     const finalize = () => {
         modal.classList.add('hidden');
@@ -429,12 +377,10 @@ function closeModal() {
     };
     
     if (window.gsap) {
-        if (isMobile && content) {
-            gsap.to(content, { y: '100%', opacity: 0, duration: 0.25, ease: 'power2.in' });
-            gsap.to(modal, { opacity: 0, duration: 0.25, delay: 0.05, onComplete: finalize });
-        } else {
-            gsap.to(modal, { opacity: 0, duration: 0.2, onComplete: finalize });
+        if (content) {
+            gsap.to(content, { scale: 0.92, opacity: 0, y: 30, duration: 0.2, ease: 'power2.in' });
         }
+        gsap.to(modal, { opacity: 0, duration: 0.2, delay: 0.05, onComplete: finalize });
     } else {
         modal.style.opacity = '0';
         finalize();
