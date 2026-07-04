@@ -7,9 +7,9 @@ category: linux
 image: https://nirusaki.me/assets/img/og/linux-networking-labs-day-3-packet-analysis.png
 ---
 
-### Day - 3 Lab: TCP-IP / OSI Model
+Welcome to Day 3. Today, we are going to see the encapsulation and decapsulation of the TCP/IP model in action. We'll use the exact same network topology we built on Day 1: 2 PCs and one switch in Linux. Let's dig in.
 
-Our goal today is to see the encapsulation and decapsulation of the TCP/IP model using the last network we made: 2 PCs and one switch in Linux only.
+![Switch Active](https://media.tenor.com/OQF2CQfjiG8AAAAC/mr-robot.gif)
 
 First, we need to learn how to tap the ethernet wire so that we can look inside the frames. We're going to use ping again. Make sure you are using the same topology:
 *   `pc1` -> Network Namespace 1 (IP: `192.168.1.1`)

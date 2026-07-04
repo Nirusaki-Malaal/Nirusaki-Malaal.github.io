@@ -9,16 +9,20 @@ image: https://nirusaki.me/assets/img/og/tcp-ip-and-osi-model.png
 
 Have you ever wondered how the fuck this internet works? Yeah, let me tell you, it is pretty damn complex, but we are going to break it down without the boring textbook bullshit.
 
-### Protocols and Standards
+![Network Pepe](https://media.tenor.com/No9Xk16W9HIAAAAM/pepe-internet.gif)
+
+---
+
+### 1. Protocols and Standards
 
 In any network, communication relies on two main things:
 
-*   **Protocols** are just a set of rules about how data should be formatted and communicated in a network.
+*   **Protocols** are just a set of rules about how data should be formatted and communicated.
 *   **Standards** are the agreed-upon specifications that describe how a protocol should work. This is the fucking reason why Apple devices can communicate with Linux servers without throwing a fit.
 
 ---
 
-### The TCP-IP Layer Model
+### 2. The TCP-IP Layer Model
 
 The TCP-IP stack divides networking responsibilities into five layers. Here is the breakdown:
 
@@ -32,7 +36,7 @@ The TCP-IP stack divides networking responsibilities into five layers. Here is t
 
 ---
 
-### Encapsulation and Decapsulation
+### 3. Encapsulation and Decapsulation
 
 As data travels down the stack from the sender, each layer wraps the payload with control headers. This is **Encapsulation** (packing a box inside a box inside another fucking box). When the recipient receives the data, it reverses the process, stripping the headers as it goes up the stack, which is **Decapsulation**.
 
@@ -51,13 +55,13 @@ Segment, packet, and frame are collectively called **PDUs** (Protocol Data Units
 
 ---
 
-### Peer-to-Peer Interaction
+### 4. Peer-to-Peer Interaction
 
 In two systems, each layer logically interacts with its own equivalent. The transport layer on System A communicates only with the transport layer on System B, relying on the lower layers to handle the actual transit.
 
 ---
 
-### The 7-Layer OSI Model
+### 5. The 7-Layer OSI Model
 
 While TCP-IP is the most widely used model, the academic **7-Layer OSI Model** is still reference:
 
@@ -69,6 +73,8 @@ While TCP-IP is the most widely used model, the academic **7-Layer OSI Model** i
 6.  **Data Link**
 7.  **Physical**
 
-![Data Transmission](https://media.tenor.com/No9Xk16W9HIAAAAM/pepe-internet.gif)
+---
+
+That's all for today's lesson. Go grab a coffee or something.
 
 sayonara... signing out
