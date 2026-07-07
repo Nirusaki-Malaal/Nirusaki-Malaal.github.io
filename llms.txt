@@ -12,7 +12,7 @@ Nirusaki (ニルサキ) is a Python developer, software engineer, and automation
 - **YouTube**: https://youtube.com/@nirusaki (Username: @Nirusaki)
 
 ## Technologies & Stack
-- **Primary Languages**: Python, TypeScript, JavaScript, C++, C, Java, Bash
+- **Primary Languages**: Python, TypeScript, JavaScript, C++, C, Bash
 - **Frontend Frameworks & UI**: React, HTML5, CSS3, TailwindCSS
 - **Backend & APIs**: FastAPI, Flask, Node.js, Express
 - **Databases & Cache**: MongoDB, PostgreSQL, Redis, MySQL
