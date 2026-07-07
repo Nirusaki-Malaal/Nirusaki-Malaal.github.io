@@ -1,15 +1,15 @@
-# Nirusaki — Code Shinobi
+# Nirusaki -- Code Shinobi
 
-Nirusaki (ニルサキ) is a Python developer, software engineer, and automation specialist focusing on Telegram bots, web scraping, video encoding pipelines, and custom Linux environments.
+Nirusaki (nirusaki) is a Python developer, software engineer, and automation specialist focusing on Telegram bots, web scraping, video encoding pipelines, and custom Linux environments.
 
 ## Information & Profiles
-- **Website**: https://nirusaki.me
-- **Email**: nirusakimalaal@gmail.com
-- **GitHub**: https://github.com/nirusaki-malaal
-- **Instagram**: https://instagram.com/nirusaki (Username: @Nirusaki)
-- **LinkedIn**: https://linkedin.com/in/nirusaki (Username: @Nirusaki)
-- **Telegram**: https://t.me/nirusaki (Username: @Nirusaki)
-- **YouTube**: https://youtube.com/@nirusaki (Username: @Nirusaki)
+- **Website**: [nirusaki.me](https://nirusaki.me)
+- **Email**: [nirusakimalaal@gmail.com](mailto:nirusakimalaal@gmail.com)
+- **GitHub**: [github.com/nirusaki-malaal](https://github.com/nirusaki-malaal)
+- **Instagram**: [instagram.com/nirusaki](https://instagram.com/nirusaki) (Username: @Nirusaki)
+- **LinkedIn**: [linkedin.com/in/nirusaki](https://linkedin.com/in/nirusaki) (Username: @Nirusaki)
+- **Telegram**: [t.me/nirusaki](https://t.me/nirusaki) (Username: @Nirusaki)
+- **YouTube**: [youtube.com/@nirusaki](https://youtube.com/@nirusaki) (Username: @Nirusaki)
 
 ## Technologies & Stack
 - **Primary Languages**: Python, TypeScript, JavaScript, C++, C, Bash
@@ -21,9 +21,9 @@ Nirusaki (ニルサキ) is a Python developer, software engineer, and automation
 - **Tools & Core Utilities**: Git, GitHub, Arch Linux, Ubuntu Server, Zsh, FFmpeg
 
 ## Freelance Work
-- **ADM News Bharat** (https://admnewsbharat.com): Built DevOps infrastructure, high-performance database design, frontend, and backend.
-- **Ghoomne Chalo Adventures** (https://ghoomnechaloadventures.com): Designed and developed an adventure tourism travel platform.
-- **Hola Thrift** (https://holathrift.in): Curated thrift clothing e-commerce platform with checkouts and filters.
+- **ADM News Bharat** ([admnewsbharat.com](https://admnewsbharat.com)): Built DevOps infrastructure, high-performance database design, frontend, and backend.
+- **Ghoomne Chalo Adventures** ([ghoomnechaloadventures.com](https://ghoomnechaloadventures.com)): Designed and developed an adventure tourism travel platform.
+- **Hola Thrift** ([holathrift.in](https://holathrift.in)): Curated thrift clothing e-commerce platform with checkouts and filters.
 
 ## Honors & Awards
 - **Google DeepMind Award**: Top 10 Best Gemini Use Case.

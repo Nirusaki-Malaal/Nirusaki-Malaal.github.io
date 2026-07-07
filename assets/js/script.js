@@ -226,7 +226,7 @@ function renderProjectCards(repos) {
         const neonColor = neonColors[index % neonColors.length];
         const themeClass = neonColor.replace('neon-', '') + '-neon';
 
-        const card = document.createElement('article');
+        const card = document.createElement('div');
         card.className = `anime-card shrink-0 snap-center flex flex-col justify-between p-6 h-[420px] cursor-pointer group hover-target ${themeClass}`;
         card.setAttribute('role', 'listitem');
         card.setAttribute('aria-label', `${details.name} - ${details.description}`);
