@@ -18,7 +18,7 @@ Nirusaki (ニルサキ) is a Python developer, software engineer, and automation
 - **Databases & Cache**: MongoDB, PostgreSQL, Redis, MySQL
 - **AI & Data Science**: NumPy, Pandas, Matplotlib, Scikit-Learn, PyTorch
 - **DevOps & Deployments**: Docker, Vercel, Heroku, Railway, Netlify, Google Cloud
-- **Tools & Core Utilities**: Git, GitHub, Arch Linux, Ubuntu Server, Zsh, FFmpeg, VSCode
+- **Tools & Core Utilities**: Git, GitHub, Arch Linux, Ubuntu Server, Zsh, FFmpeg
 
 ## Freelance Work
 - **ADM News Bharat** (https://admnewsbharat.com): Built DevOps infrastructure, high-performance database design, frontend, and backend.
