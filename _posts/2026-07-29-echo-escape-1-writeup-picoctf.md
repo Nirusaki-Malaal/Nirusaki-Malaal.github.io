@@ -15,7 +15,7 @@ Hello guys! So today I am going to explore a new topic named **Buffer Overflow**
 
 ### What is a Buffer Overflow?
 
-**Buffer overflow** is when you allow more than $X$ amount of bytes to some variable.
+**Buffer overflow** is when you allow more than X amount of bytes to some variable.
 
 For example:
 ```c
