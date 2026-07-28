@@ -239,10 +239,10 @@ To solve this, I designed a custom architecture: **JIT RAG (Just-in-Time Retriev
 > 1. The user inputs a long, complex prompt.
 > 2. The preprocessor extracts key search phrases (1-2 words).
 > 3. The script queries the Justice.gov Search API and returns file metadata.
-> 4. The top $X$ most relevant PDFs are downloaded asynchronously.
+> 4. The top X most relevant PDFs are downloaded asynchronously.
 > 5. The PDFs are parsed, split into text chunks, and stored in a temporary, memory-resident vector store.
 > 6. The system calculates cosine similarity against the query embedding.
-> 7. The top $Y$ chunks are extracted, injected into the LLM prompt context, and sent to the model to generate the final answer.
+> 7. The top Y chunks are extracted, injected into the LLM prompt context, and sent to the model to generate the final answer.
 
 ### JIT RAG Bot Architecture Diagram
 
