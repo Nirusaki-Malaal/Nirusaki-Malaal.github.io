@@ -55,10 +55,13 @@ const targetRepos = [
     "auto-airing-animes",
     "learning-ml",
     "Learning-DL",
+    "neutronix",
     "gdrive-uploader-bot",
     "shingaku",
     "AetherScan",
     "JefferyEpsteinRag",
+    "CHIP-8-EMU",
+    "AlexNetWebApp",
     "image-compressor-website",
     "nith-results-website"
 ];
@@ -116,6 +119,19 @@ const projectDetails = {
             "<strong>Logistic Regression Foundations</strong>: Features foundational classification architectures built entirely on NumPy vector mathematics."
         ]
     },
+    "neutronix": {
+        name: "Neutronix ML Library",
+        lang: "Python",
+        jpLang: "機械学習ライブラリ",
+        github_url: "https://github.com/Nirusaki-Malaal/neutronix",
+        homepage: "",
+        description: "A modular, scratch-built Machine Learning python package implementing CS229 algorithms using pure NumPy vector mathematics.",
+        bullets: [
+            "<strong>Supervised & Unsupervised Suite</strong>: Modular implementations of GDA, LWLR, Naive Bayes, Softmax, K-Means, GMM, PCA, and Factor Analysis.",
+            "<strong>Custom Optimizers</strong>: Built-in optimization modules including Batch Gradient Descent and Gradient Ascent engines.",
+            "<strong>CS229 Architecture</strong>: Restructured package design with clean subpackages (<code>supervised</code>, <code>unsupervised</code>, <code>optimizers</code>) for local editable installation."
+        ]
+    },
     "gdrive-uploader-bot": {
         name: "GDrive Uploader Bot",
         lang: "Python",
@@ -168,6 +184,32 @@ const projectDetails = {
             "<strong>Multi-Provider LLM RAG</strong>: Searches court PDFs (scanned FBI records, flight logs, witness reports) and live web links simultaneously. Users configure Gemini, Groq, or local Ollama directly in the Start Menu control panel."
         ]
     },
+    "chip-8-emu": {
+        name: "CHIP-8 Emulator",
+        lang: "C",
+        jpLang: "エミュレータ",
+        github_url: "https://github.com/Nirusaki-Malaal/CHIP-8-EMU",
+        homepage: "",
+        description: "A modular, cross-platform CHIP-8 emulator written in C11 using SDL3 for graphics rendering and square-wave audio synthesis.",
+        bullets: [
+            "<strong>35 CHIP-8 Opcodes & Timers</strong>: Full accurate instruction set execution with independent 60Hz delay and sound timers.",
+            "<strong>SDL3 Audio & Visuals</strong>: Real-time square wave audio tone synthesis and modern PC display translation powered by SDL3 Audio Streams.",
+            "<strong>Multi-Platform & Dynamic ROMs</strong>: Native precompiled Linux/Windows binaries with dynamic ROM loading via <code>config.txt</code> and QWERTY keypad mapping."
+        ]
+    },
+    "alexnetwebapp": {
+        name: "AlexNet Classifier App",
+        lang: "Python",
+        jpLang: "画像分類ウェブアプリ",
+        github_url: "https://github.com/Nirusaki-Malaal/AlexNetWebApp",
+        homepage: "",
+        description: "A retro cyberpunk web application for real-time CIFAR-10 image classification powered by PyTorch AlexNet and FastAPI.",
+        bullets: [
+            "<strong>Classic AlexNet Architecture</strong>: PyTorch model trained on CIFAR-10 achieving ~90% accuracy with serialized weight evaluation.",
+            "<strong>FastAPI Web Server</strong>: Asynchronous inference server delivering instant predictions on user-uploaded images.",
+            "<strong>Retro Cyberpunk Interface</strong>: Dark retro mecha aesthetic web interface with live prediction visualizers and inference logs."
+        ]
+    },
     "image-compressor-website": {
         name: "Image Compressor",
         lang: "Python",
@@ -205,7 +247,7 @@ function renderProjectCards(repos) {
 
     // Update repo count in hero
     const repoCount = document.getElementById('repo-count');
-    if (repoCount) repoCount.textContent = '10';
+    if (repoCount) repoCount.textContent = targetRepos.length.toString();
 
     // Map fetched repo stats to target repos in the correct order
     const renderedRepos = targetRepos.map(targetName => {

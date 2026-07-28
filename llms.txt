@@ -17,7 +17,7 @@ Nirusaki (nirusaki) is a Python developer, software engineer, and automation spe
 - **Backend & APIs**: FastAPI, Flask, Node.js, Express
 - **Databases & Cache**: MongoDB, PostgreSQL, Redis, MySQL
 - **AI & Data Science**: NumPy, Pandas, Matplotlib, Scikit-Learn, PyTorch
-- **DevOps & Deployments**: Docker, Vercel, Heroku, Railway, Netlify, Google Cloud
+- **Cybersecurity & Pentesting**: Nmap, Metasploit, Gobuster, Hydra, Wireshark, Burp Suite, SQLmap
 - **Tools & Core Utilities**: Git, GitHub, Arch Linux, Ubuntu Server, Zsh, FFmpeg
 
 ## Freelance Work
