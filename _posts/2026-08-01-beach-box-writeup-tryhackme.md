@@ -9,7 +9,7 @@ image: https://nirusaki.me/assets/img/og/home.png
 
 I have been trying to upskill my pentesting skills by solving a lot of CTFs recently, whether it is binary exploitation, web pentesting, etc. So fuck yeah, lets get right into it!
 
-![Pentesting Hype](https://c.tenor.com/lZ8VWcg6hl4AAAAd/tenor.gif)
+![Pentesting Hype](/assets/img/posts/beach-box-hype.gif)
 
 ---
 
@@ -118,7 +118,7 @@ cat user.txt
 
 This bitch is pwned!
 
-![User Flag Pwned](https://c.tenor.com/0coAuU0hhzUAAAAC/tenor.gif)
+![User Flag Pwned](/assets/img/posts/beach-box-pwned.gif)
 
 ---
 
@@ -178,4 +178,4 @@ We pwned this bitch to the root!
 
 Bye Byeee Guysss... See you later....
 
-![Good Bye GIF](https://c.tenor.com/XBWh-szFwDQAAAAC/tenor.gif)
+![Good Bye GIF](/assets/img/posts/beach-box-goodbye.gif)
