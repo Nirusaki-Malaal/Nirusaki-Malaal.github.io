@@ -31,4 +31,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://nirusaki.me/sitemap.xml
+Sitemap: https://nirusaki.me/sitemap.xml 
