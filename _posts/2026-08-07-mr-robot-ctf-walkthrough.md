@@ -4,7 +4,7 @@ title: "Mr Robot CTF Walkthrough"
 description: "A complete step-by-step writeup for the Mr Robot CTF: port scanning, decoding hidden base64 credentials, uploading a simplified PHP reverse shell, cracking MD5 user hashes, and abusing SUID Nmap interactive mode for root access."
 tags: [CTF, TryHackMe, VulnHub, Mr Robot, Web Pentesting, WordPress, SUID, Reverse Shell, Privilege Escalation, Linux]
 category: security
-image: https://nirusaki.me/assets/img/og/home.png
+image: https://nirusaki.me/assets/img/og/mr-robot-ctf-walkthrough.png
 ---
 
 Yo, welcome back to another badass CTF writeup! Today we are pwning the **Mr Robot CTF** machine. Inspired by the legendary Mr. Robot show, this box is a fun ride from start to finish. We are gonna enumerate open ports, decode hidden base64 credentials, pop a quick reverse shell, crack some MD5 hashes, and abuse a vulnerable SUID binary to grab root.
