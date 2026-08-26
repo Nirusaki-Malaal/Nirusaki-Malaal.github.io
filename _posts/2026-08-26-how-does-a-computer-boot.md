@@ -248,7 +248,9 @@ The 512-byte MBR sector consists of:
 #### Why is MBR limited to 2 TiB and 4 Primary Partitions?
 MBR uses 32-bit Logical Block Addressing (LBA), capping maximum addressable sectors at `2^32`. With standard 512-byte sector sizes:
 
-$$\text{Max Capacity} = 2^{32} \times 512 \text{ bytes} = 2,199,023,255,552 \text{ bytes} \approx 2 \text{ TiB}$$
+```text
+Max Capacity = 2^32 * 512 bytes = 2,199,023,255,552 bytes (~2 TiB)
+```
 
 Because only 64 bytes are allocated for the partition table, MBR can hold a maximum of 4 primary partitions (16 bytes per entry).
 
