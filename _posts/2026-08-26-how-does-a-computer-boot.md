@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How Does a Computer Boot?"
-description: "An exhaustive technical breakdown of the computer boot sequence, elaborating on POST verification assembly, BIOS interrupts, MBR vs GPT partitioning, 16-bit Real Mode, UEFI architecture, and Secure Boot key hierarchies."
+description: "An exhaustive technical breakdown of the computer boot sequence, featuring multi-stage architectural flowcharts, POST verification assembly, BIOS interrupts, MBR vs GPT partitioning, 16-bit Real Mode, UEFI architecture, and Secure Boot key hierarchies."
 tags: [Linux, Operating Systems, Computer Architecture, BIOS, UEFI, MBR, GPT, Hardware, Bootloader]
 category: linux
 image: https://nirusaki.me/assets/img/og/home.png
@@ -12,6 +12,73 @@ image: https://nirusaki.me/assets/img/og/home.png
 Booting a computer is a low-level handoff across hardware, firmware, bootloader sectors, and kernel initialization routines. 
 
 This post elaborates on every phase of the boot sequence, answering the key questions surrounding hardware diagnostics, BIOS software interrupts, MBR sector limitations, memory address offsets, UEFI architecture, and Secure Boot key hierarchies.
+
+---
+
+### Boot Process Architecture Flowchart
+
+Here is the high-level architectural flowchart showing the entire end-to-end computer boot pipeline from power button press to kernel execution:
+
+```text
++---------------------------------------------------------------------------------------------------+
+|                                COMPUTER BOOT SEQUENCE FLOWCHART                                   |
++---------------------------------------------------------------------------------------------------+
+|                                                                                                   |
+|  [Power Button Pressed]                                                                           |
+|         |                                                                                         |
+|         v                                                                                         |
+|  [PSU Output Stabilizes] -> Sends "Power Good" Signal to Motherboard                              |
+|         |                                                                                         |
+|         v                                                                                         |
+|  [CPU Reset State Released] -> Executes Reset Vector JMP F000:E05B                                |
+|         |                                                                                         |
+|         v                                                                                         |
+|  [Northbridge Address Routing]                                                                    |
+|         |                                                                                         |
+|         +---> (Cold Boot) ---> Fetch Instructions from SPI Flash ROM                              |
+|         |                                                                                         |
+|         +---> (Warm Boot) ---> Fetch Cached Firmware Code from RAM                                |
+|         |                                                                                         |
+|         v                                                                                         |
+|  [POST Diagnostics] -> Register Checks (0xAAAA / 0x5555), Timer, DMA, RAM Initialization             |
+|         |                                                                                         |
+|         +---> (Hardware Fail) ---> Output Hex Port 0x80 / Beep Codes                              |
+|         |                                                                                         |
+|         v                                                                                         |
+|  [Keyboard IRQ 1 Check]                                                                           |
+|         |                                                                                         |
+|         +---> (Key Pressed: F12/DEL) ---> Jump to Firmware Setup Menu                             |
+|         |                                                                                         |
+|         +---> (No Key Pressed) ---> Execute INT 19h (Boot Loader Discovery)                       |
+|                                                     |                                             |
+|                                                     v                                             |
+|                                     +-------------------------------+                             |
+|                                     |    FIRMWARE SELECTION MODE    |                             |
+|                                     +-------------------------------+                             |
+|                                                     |                                             |
+|                    +--------------------------------+--------------------------------+            |
+|                    |                                                                 |            |
+|                    v                                                                 v            |
+|       [Legacy BIOS / MBR Mode]                                          [Modern UEFI / GPT Mode]  |
+|                    |                                                                 |            |
+|                    v                                                                 v            |
+|       [Read Drive Sector 0 into 0x0000:0x7C00]                          [Read NVRAM efibootmgr]   |
+|                    |                                                                 |            |
+|                    v                                                                 v            |
+|       [Verify MBR Boot Signature 0x55AA]                                [Mount FAT32 ESP Partition|
+|                    |                                                                 |            |
+|                    v                                                                 v            |
+|       [Parse MBR 446B Code & 64B Partition Table]                       [Verify Secure Boot Sign] |
+|                    |                                                    (PK -> KEK -> db vs dbx)  |
+|                    v                                                                 |            |
+|       [Load Active Partition VBR]                                                    v            |
+|                    |                                                    [Execute .efi Binary]     |
+|                    +--------------------------------+--------------------------------+            |
+|                                                     |                                             |
+|                                                     v                                             |
+|                                      [OS Kernel Execution & Init]                                 |
++---------------------------------------------------------------------------------------------------+
+```
 
 ---
 
@@ -110,6 +177,59 @@ IRQ 1 interrupts CPU execution and jumps to the BIOS interrupt handler. If the s
 
 ### 3. Master Boot Record (MBR) & Legacy Partitioning
 
+#### MBR Sector & Bootstrap Flowchart
+
+The following flowchart illustrates the sector parsing, memory loading, and VBR execution sequence during MBR booting:
+
+```text
++---------------------------------------------------------------------------------------------------+
+|                                 MBR SECTOR & BOOTSTRAP FLOWCHART                                  |
++---------------------------------------------------------------------------------------------------+
+|                                                                                                   |
+|  [BIOS INT 19h Execution]                                                                         |
+|         |                                                                                         |
+|         v                                                                                         |
+|  [Read Sector 0 (512 Bytes) from CMOS Boot Drive]                                                 |
+|         |                                                                                         |
+|         v                                                                                         |
+|  [Load MBR Sector into Physical RAM Address 0x0000:0x7C00]                                        |
+|         |                                                                                         |
+|         v                                                                                         |
+|  [Check Magic Boot Signature at Offset 0x1FE (Bytes 510-511)]                                     |
+|         |                                                                                         |
+|         +---> (Bytes != 0x55AA) ---> Non-Bootable Disk -> Check Next Boot Drive                    |
+|         |                                                                                         |
+|         +---> (Bytes == 0x55AA) ---> Valid MBR Found                                              |
+|                                            |                                                      |
+|                                            v                                                      |
+|                             +------------------------------+                                      |
+|                             |    MBR 512-BYTE STRUCTURE    |                                      |
+|                             +------------------------------+                                      |
+|                             |  1. Bootstrap Code (446 B)   |                                      |
+|                             |  2. Partition Table (64 B)   |                                      |
+|                             |  3. Boot Signature (2 B)     |                                      |
+|                             +------------------------------+                                      |
+|                                            |                                                      |
+|                                            v                                                      |
+|                             [Bootstrap Code Execution]                                            |
+|                                            |                                                      |
+|                                            v                                                      |
+|                             [Scan 64-Byte Partition Table]                                        |
+|                                            |                                                      |
+|                                            v                                                      |
+|                             [Locate Active Partition Entry]                                       |
+|                                            |                                                      |
+|                                            v                                                      |
+|                             [Pass Disk ID (DL Register) to VBR]                                   |
+|                                            |                                                      |
+|                                            v                                                      |
+|                             [Execute Volume Boot Record (VBR)]                                    |
+|                                            |                                                      |
+|                                            v                                                      |
+|                             [Load OS Kernel / GRUB Stage 2]                                       |
++---------------------------------------------------------------------------------------------------+
+```
+
 #### What happens during Interrupt 19h?
 After POST finishes, BIOS executes interrupt `INT 19h` to start the boot process. It attempts to locate a bootloader by checking devices in the configured CMOS boot order.
 
@@ -172,7 +292,54 @@ GPT is the modern disk partitioning standard introduced as part of the UEFI spec
 
 ---
 
-### 5. Unified Extensible Firmware Interface (UEFI)
+### 5. Unified Extensible Firmware Interface (UEFI) & Secure Boot Pipeline
+
+#### UEFI & Secure Boot Pipeline Flowchart
+
+The following flowchart details how UEFI mounts the ESP partition, checks NVRAM paths, and executes the Secure Boot cryptographic signature check:
+
+```text
++---------------------------------------------------------------------------------------------------+
+|                            UEFI & SECURE BOOT VERIFICATION PIPELINE                               |
++---------------------------------------------------------------------------------------------------+
+|                                                                                                   |
+|  [UEFI Firmware Power On]                                                                         |
+|         |                                                                                         |
+|         v                                                                                         |
+|  [Initialize 32-bit / 64-bit CPU Execution Environment]                                           |
+|         |                                                                                         |
+|         v                                                                                         |
+|  [Read Non-Volatile RAM (NVRAM) Boot Variables]                                                   |
+|         |                                                                                         |
+|         +---> (NVRAM Found) ------> Load Path (e.g. \EFI\archlinux\grubx64.efi)                   |
+|         |                                                                                         |
+|         +---> (NVRAM Wiped/USB) -> Fallback Path (\EFI\BOOT\BOOTX64.EFI)                          |
+|                                           |                                                       |
+|                                           v                                                       |
+|                             [Mount FAT32 EFI System Partition (ESP)]                              |
+|                                           |                                                       |
+|                                           v                                                       |
+|                             [Locate Target .efi PE32+ Binary]                                     |
+|                                           |                                                       |
+|                                           v                                                       |
+|                             [Check Secure Boot Status]                                            |
+|                                           |                                                       |
+|                    +----------------------+----------------------+                                |
+|                    |                                             |                                |
+|                    v (Disabled)                                  v (Enabled)                      |
+|          [Execute .efi Directly]                        [Verify Cryptographic Signature]          |
+|                    |                                             |                                |
+|                    |                         +-------------------+-------------------+            |
+|                    |                         |                                       |            |
+|                    |                         v (Hash in dbx)                         v (Valid db) |
+|                    |                [Block Execution / Red Error]          [Execute .efi Binary]  |
+|                    |                                                                 |            |
+|                    +--------------------------------+--------------------------------+            |
+|                                                     |                                             |
+|                                                     v                                             |
+|                                      [Pass Control to OS Bootloader]                              |
++---------------------------------------------------------------------------------------------------+
+```
 
 #### What is UEFI and how does it differ from BIOS?
 UEFI (Unified Extensible Firmware Interface) is modern motherboard firmware that operates like a mini operating system in 32-bit or 64-bit mode, replacing legacy 16-bit BIOS.
@@ -210,7 +377,7 @@ If NVRAM is cleared or a system boots from a removable USB drive, UEFI searches 
 
 ---
 
-### 6. Secure Boot Architecture
+### 6. Secure Boot Key Hierarchy
 
 #### How does Secure Boot work?
 Secure Boot verifies the digital signature of `.efi` bootloaders before execution to prevent rootkits and bootkits from running.
